@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import RegisterForm from './components/Register/RegisterForm';
-import Test from './components/Test/Test';
+import LoginForm from './components/LoginForm/LoginForm';
+import Test from './components/Map/Map';
 import PrivateRoute from './components/Router/PrivateRoute';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={RegisterForm} />
+        <Route exact path="/" component={LoginForm} />
         <PrivateRoute path="/hello" component={Test} />
       </Switch>
     </Router>

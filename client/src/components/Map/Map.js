@@ -8,6 +8,7 @@ import {
   MapContainer, TileLayer,
 } from 'react-leaflet';
 import MarkerComponent from './Marker/Marker';
+import PlaceForm from './PlaceForm/PlaceForm';
 
 class MapComponent extends Component {
   state = {
@@ -19,13 +20,16 @@ class MapComponent extends Component {
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
-      <MapContainer className="map" center={position} zoom={13} scrollWheelZoom>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <MarkerComponent />
-      </MapContainer>
+      <>
+        <MapContainer className="map" center={position} zoom={13} scrollWheelZoom>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <MarkerComponent />
+        </MapContainer>
+        <PlaceForm />
+      </>
     );
   }
 }

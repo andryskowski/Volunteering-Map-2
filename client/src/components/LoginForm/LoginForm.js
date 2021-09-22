@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../scss/base/_register-form.scss';
 
-export default class RegisterForm extends React.Component {
+export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
