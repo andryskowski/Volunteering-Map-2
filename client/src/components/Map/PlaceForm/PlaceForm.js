@@ -12,13 +12,13 @@ function PlaceForm() {
   const [phone, setPhone] = useState('phone');
   const [email, setEmail] = useState('email');
   const [webPage, setWebPage] = useState('webpage');
-  const [city, setCity] = useState('Łódź');
-  const [street, setStreet] = useState('Wierzbowa');
+  const [city, setCity] = useState('city');
+  const [street, setStreet] = useState('street');
   const [postalCode, setPostalCode] = useState('91-410');
   const [houseNo, setHouseNo] = useState('20');
   const [description, setDescription] = useState('Lorem ipsum');
   const [category, setCategory] = useState('inne');
-  const [logo, setLogo] = useState('logo');
+  const [logo, setLogo] = useState(0);
   const [district, setDistrict] = useState('district');
   const infoAboutCurretPlace = {
     placeName, phone, email, webPage, city, street, postalCode, houseNo, description, category, logo,
@@ -53,6 +53,12 @@ function PlaceForm() {
     event.preventDefault();
     getPlaceCoordinates();
   }
+
+  const modules = {
+    toolbar: [
+      'link', 'image', 'video', 'bold', 'italic',
+    ],
+  };
 
   return (
     <>
@@ -117,7 +123,7 @@ function PlaceForm() {
         </label>
         <label htmlFor="description">
           Opis:
-          <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} />
+          <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} modules={modules} />
         </label>
         <input
           id="send"
