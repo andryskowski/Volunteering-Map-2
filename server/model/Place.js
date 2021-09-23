@@ -4,10 +4,24 @@ const PlaceSchema = mongoose.Schema(
     {
         name: String,
         img: String,
-        address: String,
         description: String,
         category: String,
-        position: Array,
+        position: Object,
+        phone: String,
+        email: String,
+        webPage: String,
+        city: String,
+        street: String,
+        postalCode: String,
+        houseNo: String,
+        district: String,
+        smallMapOfPlace: String,
+        statusPlace: String,
+        addedBy: String,
+        date: {
+            type: Date,
+            default: Date.now
+        }
     }
 );
 

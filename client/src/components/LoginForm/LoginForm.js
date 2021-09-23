@@ -32,8 +32,9 @@ export default class LoginForm extends React.Component {
         password: passwordUser,
       }),
     });
-    const USERNAME = await response.text();
-    localStorage.setItem('Username', USERNAME);
+    const USER_INFO = await response.text();
+    localStorage.setItem('CURRENT_USER', USER_INFO);
+    window.location = '/';
   }
 
   render() {

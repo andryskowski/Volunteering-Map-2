@@ -12,21 +12,25 @@ function PlaceForm() {
   const [phone, setPhone] = useState('phone');
   const [email, setEmail] = useState('email');
   const [webPage, setWebPage] = useState('webpage');
-  const [city, setCity] = useState('city');
-  const [street, setStreet] = useState('street');
+  const [city, setCity] = useState('Łódź');
+  const [street, setStreet] = useState('Wierzbowa');
   const [postalCode, setPostalCode] = useState('91-410');
-  const [houseNo, setHouseNo] = useState('20');
+  const [houseNo, setHouseNo] = useState('6c');
   const [description, setDescription] = useState('Lorem ipsum');
   const [category, setCategory] = useState('inne');
   const [logo, setLogo] = useState(0);
   const [district, setDistrict] = useState('district');
+  const [latLng, setLatLng] = useState({ lat: 0, lng: 0 });
+  const [smallMapOfPlace, setSmallMapOfPlace] = useState('Nie znaleziono lub wprowadzono nieprawidłowy adres');
+  const [statusPlace, setStatusPlace] = useState('draft');
   const infoAboutCurretPlace = {
-    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, category, logo,
+    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, category, logo, district, latLng, smallMapOfPlace, statusPlace,
   };
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
     const apiRES = await fetch(URL).then((res) => res.json());
-    console.log(apiRES);
+    setSmallMapOfPlace(apiRES.results[0].locations[0].mapUrl);
+    setLatLng(apiRES.results[0].locations[0].latLng);
   }
 
   useEffect(() => {
@@ -52,11 +56,25 @@ function PlaceForm() {
   function handleSubmit(event) {
     event.preventDefault();
     getPlaceCoordinates();
+    setStatusPlace('pending');
   }
+
+  const formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video', 'color',
+  ];
 
   const modules = {
     toolbar: [
-      'link', 'image', 'video', 'bold', 'italic',
+      'bold', 'italic', 'underline', 'strike', 'blockquote', 'link', 'image', 'video', 'background', 'header', [{
+        color: ['#FF0000', '#001F3F', '#0074D9', '#7FDBFF',
+          '#39CCCC', '#3D9970', '#2ECC40', '#01FF70',
+          '#FFDC00', '#FF851B', '#FF4136', '#85144B',
+          '#F012BE', '#B10DC9', '#111111', '#AAAAAA',
+        ],
+      }],
     ],
   };
 
@@ -123,7 +141,7 @@ function PlaceForm() {
         </label>
         <label htmlFor="description">
           Opis:
-          <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} modules={modules} />
+          <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} modules={modules} formats={formats} />
         </label>
         <input
           id="send"

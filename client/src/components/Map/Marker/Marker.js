@@ -17,54 +17,9 @@ const MyIcon = L.icon({
   popupAnchor: [0, -41],
 });
 
-// async function getPlaces() {
-//   await fetch('http://localhost:8000/places')
-//     .then((response) => response.json())
-//     .then((response) => {
-//       this.setState(response);
-//     })
-//   // .then(window.scrollTo(0,document.body.scrollHeight))
-//     .catch((error) => {
-//       console.error(`${error.name}: ${error.message}`);
-//       alert('Error retrieving data!');
-//     });
-// }
-
 class MarkerComponent extends Component {
   state = {
     data: [
-      // {
-      //   name: 'Fundacja Dom w Lodzi',
-      //   img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnNvCkdmcJ3OCsR2I_BSrAkv1oqJ8tZQ3WXQ&usqp=CAU',
-      //   address: 'Wierzbowa 13, 91-426 Łódź',
-      //   description: '',
-      //   category: 'children',
-      //   position: [51.77, 19.46],
-      // },
-      // {
-      //   name: 'Fundacja Gajusz',
-      //   img: 'https://gajusz.org.pl/timthumb.php?src=admin/wgrane_pliki/big_file-logogajuszflamingfullcolorrgb-434.jpg&h=640&w=800&zc=1&f=0',
-      //   address: 'Gen. Jarosława Dąbrowskiego 87, 93-271 Łódź',
-      //   description: '',
-      //   category: 'children',
-      //   position: [51.78, 19.47],
-      // },
-      // {
-      //   name: 'Fundacja Gajusz',
-      //   img: 'https://gajusz.org.pl/timthumb.php?src=admin/wgrane_pliki/big_file-logogajuszflamingfullcolorrgb-434.jpg&h=640&w=800&zc=1&f=0',
-      //   address: 'Gen. Jarosława Dąbrowskiego 87, 93-271 Łódź',
-      //   description: '',
-      //   category: 'children',
-      //   position: [51.785, 19.475],
-      // },
-      // {
-      //   name: 'Fundacja Gajusz',
-      //   img: 'https://gajusz.org.pl/timthumb.php?src=admin/wgrane_pliki/big_file-logogajuszflamingfullcolorrgb-434.jpg&h=640&w=800&zc=1&f=0',
-      //   address: 'Gen. Jarosława Dąbrowskiego 87, 93-271 Łódź',
-      //   description: '',
-      //   category: 'children',
-      //   position: [51.79, 19.47],
-      // },
     ],
   }
 

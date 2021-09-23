@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Place = require('../model/Place');
 
-
 //get back all the places
 router.get('/', async (req, res) => {
     try {
@@ -15,14 +14,24 @@ router.get('/', async (req, res) => {
 });
 
 //submits a places
-router.post('/', async (req, res) => {
+router.post('/post', async (req, res) => {
     const place = new Place({
         name: req.body.name,
         img: req.body.img,
-        address: req.body.address,
         description: req.body.description,
         category: req.body.category,
         position: req.body.position,
+        phone: req.body.phone,
+        email: req.body.email,
+        webPage: req.body.webPage,
+        city: req.body.city,
+        street: req.body.street,
+        postalCode: req.body.postalCode,
+        houseNo: req.body.houseNo,
+        district: req.body.district,
+        smallMapOfPlace: req.body.smallMapOfPlace,
+        statusPlace: req.body.statusPlace,
+        addedBy: req.body.addedBy,
     });
         try {
             const savedPlace = await place.save();
