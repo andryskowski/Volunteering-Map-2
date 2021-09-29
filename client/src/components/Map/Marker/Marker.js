@@ -44,7 +44,18 @@ class MarkerComponent extends Component {
             <br />
             <b>{place.name}</b>
             <br />
-            {place.address}
+            <p>
+              {place.city}
+              ,
+              {' '}
+              {place.street}
+              ,
+              {' '}
+              {place.houseNo}
+              ,
+              {' '}
+              {place.postalCode}
+            </p>
           </Popup>
         </Marker>
       </>

@@ -29,6 +29,7 @@ function PlaceForm() {
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
     const apiRES = await fetch(URL).then((res) => res.json());
+    console.log(apiRES);
     setSmallMapOfPlace(apiRES.results[0].locations[0].mapUrl);
     setLatLng(apiRES.results[0].locations[0].latLng);
   }

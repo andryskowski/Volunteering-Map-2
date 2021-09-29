@@ -5,10 +5,14 @@ const mongoose = require('mongoose');
 //Import Routes
 const authRoute = require('./routes/auth');
 const placesRoute = require('./routes/places');
+const bodyParser = require('body-parser');
 var cors = require('cors');
+app.use(bodyParser.json());
 
 dotenv.config();
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 app.use('/places', placesRoute);
 
 //Connect to DB

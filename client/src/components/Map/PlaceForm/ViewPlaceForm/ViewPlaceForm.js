@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/button-has-type */
 /* eslint-disable max-len */
@@ -9,8 +10,8 @@ import Parser from 'html-react-parser';
 
 function ViewPlaceForm(props) {
   const CURRENT_USER_USERNAME = JSON.parse(window.localStorage.getItem('CURRENT_USER'))._id;
-  async function sendPlaceToDB() {
-    console.log('VIEWPLACEFORM FUNKCJA');
+  async function sendPlaceToDB(event) {
+    event.preventDefault();
     await fetch('http://localhost:8000/places/post', {
       method: 'POST',
       headers: {
@@ -35,9 +36,9 @@ function ViewPlaceForm(props) {
         statusPlace: props.info.statusPlace,
         addedBy: CURRENT_USER_USERNAME,
       }),
-    })
-      .then((resp) => resp.json());
+    });
   }
+
   return (
     <>
       <h2>Podgląd: </h2>
