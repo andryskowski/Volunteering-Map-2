@@ -16,6 +16,7 @@ function PlaceForm() {
   const [street, setStreet] = useState('Wierzbowa');
   const [postalCode, setPostalCode] = useState('91-410');
   const [houseNo, setHouseNo] = useState('6c');
+  const [shortDescription, setShortDescription] = useState('');
   const [description, setDescription] = useState('Lorem ipsum');
   const [category, setCategory] = useState('inne');
   const [logo, setLogo] = useState(0);
@@ -24,7 +25,7 @@ function PlaceForm() {
   const [smallMapOfPlace, setSmallMapOfPlace] = useState('Nie znaleziono lub wprowadzono nieprawidłowy adres');
   const [statusPlace, setStatusPlace] = useState('draft');
   const infoAboutCurretPlace = {
-    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, category, logo, district, latLng, smallMapOfPlace, statusPlace,
+    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, latLng, smallMapOfPlace, statusPlace,
   };
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
@@ -51,6 +52,7 @@ function PlaceForm() {
     else if (name === 'logo') setLogo(event.target.value);
     else if (name === 'category') setCategory(event.target.value);
     else if (name === 'district') setDistrict(event.target.value);
+    else if (name === 'shortDescription') setShortDescription(event.target.value);
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -116,7 +118,7 @@ function PlaceForm() {
         </label>
         <label htmlFor="district">
           Dzielnica:
-          <select id="district" onChange={handleChange}>
+          <select id="district" name="district" onChange={handleChange}>
             <option value="baluty">Bałuty</option>
             <option value="srodmiescie">Śródmieście</option>
             <option value="widzew">Widzew</option>
@@ -131,14 +133,18 @@ function PlaceForm() {
         </label>
         <label htmlFor="category">
           Kategoria:
-          <select id="category" onChange={handleChange}>
-            <option value="children">dzieci</option>
-            <option value="animals">zwierzeta</option>
-            <option value="invalids">invalids</option>
-            <option selected value="addictions">uzaleznienia</option>
+          <select id="category" name="category" onChange={handleChange}>
+            <option value="dzieci">dzieci</option>
+            <option value="zwierzeta">zwierzeta</option>
+            <option value="inwalidzi">inwalidzi</option>
+            <option selected value="uzaleznienia">uzaleznienia</option>
             <option value="emeryci">emeryci</option>
             <option value="inne">inne</option>
           </select>
+        </label>
+        <label htmlFor="shortDescription">
+          Krótki opis fundacji/miejsca pomocy:
+          <input id="shortDescription" type="text" name="shortDescription" onChange={handleChange} />
         </label>
         <label htmlFor="description">
           Opis:

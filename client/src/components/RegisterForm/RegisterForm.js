@@ -1,12 +1,15 @@
 /* eslint-disable no-alert */
+/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 import React from 'react';
-import '../../scss/base/_login-form.scss';
+import '../../scss/base/_register-form.scss';
 
-export default class LoginForm extends React.Component {
+export default class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      nameUser: '',
       emailUser: '',
       passwordUser: '',
     };
@@ -22,14 +25,15 @@ export default class LoginForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const { emailUser, passwordUser } = this.state;
-    await fetch('http://localhost:8000/api/user/login', {
+    const { nameUser, emailUser, passwordUser } = this.state;
+    await fetch('http://localhost:8000/api/user/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
+        name: nameUser,
         email: emailUser,
         password: passwordUser,
       }),
@@ -51,8 +55,12 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <>
-        <h3>Logowanie</h3>
+        <h3>Rejestracja</h3>
         <form onSubmit={this.handleSubmit} className="form">
+          <label htmlFor="name">
+            Login/Nazwa użytkownika:
+            <input id="name" type="text" name="nameUser" onChange={this.handleChange} />
+          </label>
           <label htmlFor="email">
             Email:
             <input id="email" type="email" name="emailUser" onChange={this.handleChange} />

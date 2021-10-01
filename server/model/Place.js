@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const placeSchema = new mongoose.Schema({
     name: String,
     img: String,
+    shortDescription: String,
     description: String,
     category: String,
     position: Object,

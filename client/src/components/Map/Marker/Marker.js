@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/state-in-constructor */
@@ -8,6 +9,7 @@ import {
   Popup,
   Marker,
 } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 import leafShadow from '../../../assets/gps.svg';
 
 const MyIcon = L.icon({
@@ -28,6 +30,7 @@ class MarkerComponent extends Component {
       .then((response) => response.json())
       .then((response) => {
         this.setState({ data: response });
+        localStorage.setItem('PLACES', JSON.stringify(response));
       })
       .catch((error) => {
         console.error(`${error.name}: ${error.message}`);
@@ -42,7 +45,7 @@ class MarkerComponent extends Component {
           <Popup>
             <img src={place.img} width="190px" height="190px" alt="Logo" />
             <br />
-            <b>{place.name}</b>
+            <Link to={place._id}><b>{place.name}</b></Link>
             <br />
             <p>
               {place.city}

@@ -9,21 +9,23 @@ function UserPanel() {
   const [currentUser, setCurrentUser] = useState(JSON.parse(window.localStorage.getItem('CURRENT_USER')));
   return (
     <>
-      <h2>Panel użytkownika</h2>
-      <p>
-        <b>Nazwa użytkownika: </b>
-        {currentUser.name}
-      </p>
-      <p>
-        <b>Dołączył dnia </b>
-        {currentUser.date.substring(0, 10)}
-        <b>, o gdzinie </b>
-        {currentUser.date.substring(11, 16)}
-      </p>
-      <p>
-        <b>Email użytkownika: </b>
-        {currentUser.email}
-      </p>
+      <div>
+        <h2>Panel użytkownika</h2>
+        <p>
+          <b>Nazwa użytkownika: </b>
+          {currentUser.name}
+        </p>
+        <p>
+          <b>Dołączył dnia </b>
+          {currentUser.date.substring(0, 10)}
+          <b>, o gdzinie </b>
+          {currentUser.date.substring(11, 16)}
+        </p>
+        <p>
+          <b>Email użytkownika: </b>
+          {currentUser.email}
+        </p>
+      </div>
     </>
   );
 }

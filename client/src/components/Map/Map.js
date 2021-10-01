@@ -8,7 +8,6 @@ import {
   MapContainer, TileLayer,
 } from 'react-leaflet';
 import MarkerComponent from './Marker/Marker';
-import PlaceForm from './PlaceForm/PlaceForm';
 
 class MapComponent extends Component {
   state = {
@@ -28,7 +27,6 @@ class MapComponent extends Component {
           />
           <MarkerComponent />
         </MapContainer>
-        <PlaceForm />
       </>
     );
   }

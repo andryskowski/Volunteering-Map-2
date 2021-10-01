@@ -21,6 +21,7 @@ function ViewPlaceForm(props) {
       body: JSON.stringify({
         name: props.info.placeName,
         img: props.info.logo,
+        shortDescription: props.info.shortDescription,
         description: props.info.description,
         category: props.info.category,
         position: props.info.latLng,

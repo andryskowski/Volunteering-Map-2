@@ -18,6 +18,7 @@ router.post('/post', async (req, res) => {
     const place = new Place({
         name: req.body.name,
         img: req.body.img,
+        shortDescription: req.body.shortDescription,
         description: req.body.description,
         category: req.body.category,
         position: req.body.position,
