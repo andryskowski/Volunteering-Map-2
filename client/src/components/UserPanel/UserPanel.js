@@ -3,14 +3,19 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import UpdateUser from './UpdateUser';
 
 function UserPanel() {
   const [currentUser, setCurrentUser] = useState(JSON.parse(window.localStorage.getItem('CURRENT_USER')));
+
   return (
     <>
       <div>
         <h2>Panel użytkownika</h2>
+        <div>
+          <img src={currentUser.profilePhoto} width="150" height="150" alt="Error no profile phot" />
+        </div>
         <p>
           <b>Nazwa użytkownika: </b>
           {currentUser.name}
@@ -25,6 +30,7 @@ function UserPanel() {
           <b>Email użytkownika: </b>
           {currentUser.email}
         </p>
+        <UpdateUser />
       </div>
     </>
   );

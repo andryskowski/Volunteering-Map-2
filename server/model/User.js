@@ -22,7 +22,11 @@ const userSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },  
+    profilePhoto: {
+        type: String,
+        default: 'https://cambodiaict.net/wp-content/uploads/2019/12/computer-icons-user-profile-google-account-photos-icon-account.jpg'
+    },
 });
 
 module.exports = mongoose.model('User', userSchema);

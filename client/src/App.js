@@ -12,8 +12,9 @@ import MainPage from './components/MainPage/MainPage';
 import Navbar from './components/Navbar/Navbar';
 import UserPanel from './components/UserPanel/UserPanel';
 
-const CURRENT_USER_ID = window.localStorage.getItem('CURRENT_USER')
-  ? JSON.parse(window.localStorage.getItem('CURRENT_USER'))._id
+const CURRENT_USER = JSON.parse(window.localStorage.getItem('CURRENT_USER'));
+const CURRENT_USER_ID = CURRENT_USER
+  ? CURRENT_USER._id
   : false;
 const PLACES = JSON.parse(window.localStorage.getItem('PLACES'));
 
@@ -21,7 +22,7 @@ function App() {
   return (
     <>
       <Router>
-        <PrivateRoute path="/" component={Navbar} />
+        {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false }
         <Switch>
           {CURRENT_USER_ID ? <PrivateRoute exact path="/" component={MainPage} /> : <Route exact path="/" component={LandingPage} /> }
           <PrivateRoute exact path={`/${CURRENT_USER_ID}`} component={UserPanel} />

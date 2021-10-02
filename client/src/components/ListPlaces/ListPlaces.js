@@ -9,15 +9,44 @@ import '../../scss/base/list-places.scss';
 
 function ListPlaces() {
   const [places, setPlaces] = useState(JSON.parse(window.localStorage.getItem('PLACES')));
+  const [filteredDistrict, setFilteredDistrict] = useState('');
 
-  useEffect(() => {
+  function handleChange(event) {
+    if (event.target.name === 'district') {
+      setFilteredDistrict(event.target.value);
+    }
+  }
 
-  });
+  function changeFiltres() {
+    if (filteredDistrict !== '' && filteredDistrict !== 'Wszystkie') {
+      return ((place) => place.district === filteredDistrict);
+    }
+    if (filteredDistrict === 'Wszystkie') {
+      return ((place) => place);
+    }
+    return ((place) => place);
+  }
 
   return (
     <>
+      <div className="filter">
+        <form>
+          <label htmlFor="district">
+            Dzielnica:
+            <select id="district" name="district" onChange={handleChange}>
+              <option value="Wszystkie">Wszystkie</option>
+              <option value="Bałuty">Bałuty</option>
+              <option value="Śródmieście">Śródmieście</option>
+              <option value="Widzew">Widzew</option>
+              <option value="Polesie">Polesie</option>
+              <option value="Górna">Górna</option>
+              <option value="inna">inna</option>
+            </select>
+          </label>
+        </form>
+      </div>
       <h1>Lista fundacji:</h1>
-      {places.map((place) => (
+      {places.filter(changeFiltres()).map((place) => (
         <div className="place-list-item">
           <div className="place-img">
             <h4><img src={place.img} alt="place-img" width="100" height="100" /></h4>
