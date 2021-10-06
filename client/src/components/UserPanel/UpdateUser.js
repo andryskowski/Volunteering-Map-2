@@ -1,82 +1,68 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { updateUser } from '../../actions/FetchData';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function UserPanel() {
-  const [currentUser, setCurrentUser] = useState(JSON.parse(window.localStorage.getItem('CURRENT_USER')));
-  const [newProfilePhoto, setNewProfilePhoto] = useState(currentUser.profilePhoto);
-  const [newUsername, setNewUsername] = useState(currentUser.name);
-  const [newEmail, setNewEmail] = useState(currentUser.email);
-  const [newPassword, setNewPassword] = useState(currentUser.password);
-  console.log(currentUser._id);
-
+  const CURRENT_USER = useContext(CurrentUserContext);
+  const [newProfilePhoto, setNewProfilePhoto] = useState(CURRENT_USER.userInfo.profilePhoto);
+  const [newUsername, setNewUsername] = useState(CURRENT_USER.userInfo.name);
+  const [newEmail, setNewEmail] = useState(CURRENT_USER.userInfo.email);
+  
   function handleChange(event) {
-    console.log(event.target.value);
     if (event.target.name === 'profilePhoto') {
-      setNewProfilePhoto(event.target.value); 
+      setNewProfilePhoto(event.target.value);
     } else if (event.target.name === 'username') {
-      setNewUsername(event.target.value); 
+      setNewUsername(event.target.value);
     } else if (event.target.name === 'email') {
-      setNewEmail(event.target.value); 
-    } else if (event.target.name === 'password') {
-      setNewPassword(event.target.value); 
+      setNewEmail(event.target.value);
     }
+    console.log(newProfilePhoto, newUsername, newEmail);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await fetch(`http://localhost:8000/users/patch/${currentUser._id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        profilePhoto: newProfilePhoto,
-        name: newUsername,
-        email: newEmail,
-        password: newPassword,
-      }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.text();
-      }
-      return response.text().then((text) => { throw Error(text); });
-    })
-      .then((responseText) => {
-        localStorage.setItem('CURRENT_USER', responseText);
-        window.location.reload(true);
-      })
-      .catch((response) => {
-        alert(response);
-      });
+    updateUser(newProfilePhoto, newUsername, newEmail, CURRENT_USER.userInfo._id);
   }
-
-  useEffect(() => {
-
-  });
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <h3>Edytuj profil</h3>
+      <form onSubmit={handleSubmit} className="form">
         <label htmlFor="profilephoto-update">
-          Link do nowego zdjęcia profilowego:
-          <input id="profilephoto-update" defaultValue={currentUser.profilePhoto} type="text" name="profilePhoto" onChange={handleChange} />
+          <b>Link do nowego zdjęcia profilowego:</b>
+          <input
+            id="profilephoto-update"
+            defaultValue={CURRENT_USER.userInfo.profilePhoto}
+            type="text"
+            name="profilePhoto"
+            onChange={handleChange}
+          />
         </label>
         <label htmlFor="username-update">
-          Nowa nazwa użytkownika:
-          <input id="username-update" defaultValue={currentUser.name} type="text" name="username" onChange={handleChange} />
+          <b>Nowa nazwa użytkownika:</b>
+          <input
+            id="username-update"
+            defaultValue={CURRENT_USER.userInfo.name}
+            type="text"
+            name="username"
+            onChange={handleChange}
+          />
         </label>
         <label htmlFor="username-email">
-          Nowy email:
-          <input id="username-email" defaultValue={currentUser.email} type="text" name="email" onChange={handleChange} />
-        </label>
-        <label htmlFor="username-password">
-          Nowe hasło:
-          <input id="username-password" type="password" name="password" onChange={handleChange} />
+          <b>Nowy email:</b>
+          <input
+            id="username-email"
+            defaultValue={CURRENT_USER.userInfo.email}
+            type="text"
+            name="email"
+            onChange={handleChange}
+          />
         </label>
         <input
           key="profilephoto-input"

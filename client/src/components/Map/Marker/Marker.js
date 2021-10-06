@@ -3,14 +3,12 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable react/no-unused-state */
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import L from 'leaflet';
-import {
-  Popup,
-  Marker,
-} from 'react-leaflet';
+import { Popup, Marker } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import leafShadow from '../../../assets/gps.svg';
+import { PlacesContext } from '../../../contexts/PlacesContext';
 
 const MyIcon = L.icon({
   iconUrl: leafShadow,
@@ -19,28 +17,12 @@ const MyIcon = L.icon({
   popupAnchor: [0, -41],
 });
 
-class MarkerComponent extends Component {
-  state = {
-    data: [
-    ],
-  }
+function MarkerComponent(props) {
+  const PLACES = useContext(PlacesContext);
 
-  async componentDidMount() {
-    const RESPONSE_FROM_DB = await fetch('http://localhost:8000/places')
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ data: response });
-        localStorage.setItem('PLACES', JSON.stringify(response));
-      })
-      .catch((error) => {
-        console.error(`${error.name}: ${error.message}`);
-        alert('Error retrieving data!');
-      });
-  }
-
-  render() {
-    const PLACE = this.state.data.map((place) => (
-      <>
+  return (
+    <>
+      {PLACES.map((place) => (
         <Marker position={place.position} icon={MyIcon}>
           <Popup>
             <img src={place.img} width="190px" height="190px" alt="Logo" />
@@ -61,13 +43,10 @@ class MarkerComponent extends Component {
             </p>
           </Popup>
         </Marker>
-      </>
-    ));
-    const position = [51.77, 19.46];
-    return (
-      PLACE
-    );
-  }
+      ))}
+      ;
+    </>
+  );
 }
 
 export default MarkerComponent;

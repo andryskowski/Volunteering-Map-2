@@ -5,41 +5,19 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useContext } from 'react';
 import Parser from 'html-react-parser';
+import { postPlaces } from '../../../actions/FetchData';
+import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
 function ViewPlaceForm(props) {
-  const CURRENT_USER_USERNAME = JSON.parse(window.localStorage.getItem('CURRENT_USER'))._id;
+  const CURRENT_USER = useContext(CurrentUserContext);
   async function sendPlaceToDB(event) {
     event.preventDefault();
-    await fetch('http://localhost:8000/places/post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        name: props.info.placeName,
-        img: props.info.logo,
-        shortDescription: props.info.shortDescription,
-        description: props.info.description,
-        category: props.info.category,
-        position: props.info.latLng,
-        phone: props.info.phone,
-        email: props.info.email,
-        webPage: props.info.webPage,
-        city: props.info.city,
-        street: props.info.street,
-        postalCode: props.info.postalCode,
-        houseNo: props.info.houseNo,
-        district: props.info.district,
-        smallMapOfPlace: props.info.smallMapOfPlace,
-        statusPlace: props.info.statusPlace,
-        addedBy: CURRENT_USER_USERNAME,
-      }),
-    });
+    const NEW_PLACE = props.info;
+    postPlaces(NEW_PLACE, CURRENT_USER.userInfo._id);
   }
-
+  
   return (
     <>
       <h2>Podgląd: </h2>
@@ -81,7 +59,7 @@ function ViewPlaceForm(props) {
       <div>
         {Parser(props.info.description)}
       </div>
-      <button onClick={sendPlaceToDB}>Wyślij</button>
+      <input type="submit" onClick={sendPlaceToDB} value="Wyślij" />
       <p>
         <b>Uwaga! </b>
         Pamiętaj, że dodane przez Ciebie miejsce nie będzie od razu widoczne na mapie. Najpierw musi zostać zaakceptowane przez moderatora.

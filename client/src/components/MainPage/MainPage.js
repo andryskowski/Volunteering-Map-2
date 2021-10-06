@@ -1,26 +1,30 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-cycle */
-import React from 'react';
+import React, { useContext } from 'react';
 import Map from '../Map/Map';
-import ListPlaces from '../ListPlaces/ListPlaces';
-import PlaceForm from '../PlaceForm/PlaceForm';
-import PrivateRoute from '../Router/PrivateRoute';
-import UserPanel from '../UserPanel/UserPanel';
-
-const CURRENT_USER_ID = window.localStorage.getItem('CURRENT_USER')
-  ? JSON.parse(window.localStorage.getItem('CURRENT_USER'))._id
-  : false;
+import '../../scss/base/_main-page.scss';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+// import PrivateRoute from '../Router/PrivateRoute';
+// import PlacePage from '../PlacePage/PlacePage';
+import { PlacesContext } from '../../contexts/PlacesContext';
+// import Contact from '../Contact/Contact';
 
 function MainPage() {
+  const USER = useContext(CurrentUserContext);
+  const PLACES = useContext(PlacesContext);
   return (
     <>
-      <h1>Main Page</h1>
-      <div>
-        <Map />
-        <ListPlaces />
-        <PlaceForm />
-        <PrivateRoute exact path={`/${CURRENT_USER_ID}`} component={UserPanel} />
+      <div className="main-page">
+        <h1 className="hello-header">
+          Witaj
+          {' '}
+          {USER.userInfo.name}
+        </h1>
+        <div>
+          <Map />
+        </div>
       </div>
+      {console.log(PLACES)}
     </>
   );
 }

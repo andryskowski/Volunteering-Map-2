@@ -8,11 +8,12 @@ import {
   MapContainer, TileLayer,
 } from 'react-leaflet';
 import MarkerComponent from './Marker/Marker';
+import '../../scss/base/_map.scss';
 
 class MapComponent extends Component {
   state = {
-    lat: 51.77,
-    lng: 19.46,
+    lat: 51.765,
+    lng: 19.47,
     zoom: 13,
   }
 
@@ -20,7 +21,7 @@ class MapComponent extends Component {
     const position = [this.state.lat, this.state.lng];
     return (
       <>
-        <MapContainer className="map" center={position} zoom={13} scrollWheelZoom>
+        <MapContainer className="map" center={position} zoom={12} scrollWheelZoom>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

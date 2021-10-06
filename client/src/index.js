@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'leaflet/dist/leaflet.css';
+import { PlacesContextProvider } from './contexts/PlacesContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PlacesContextProvider>
+      <App />
+    </PlacesContextProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

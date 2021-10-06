@@ -4,6 +4,7 @@
 /* eslint-disable no-shadow */
 import React from 'react';
 import '../../scss/base/_register-form.scss';
+import { authRegister } from '../../actions/FetchData';
 
 export default class RegisterForm extends React.Component {
   constructor(props) {
@@ -26,30 +27,7 @@ export default class RegisterForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { nameUser, emailUser, passwordUser } = this.state;
-    await fetch('http://localhost:8000/api/user/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        name: nameUser,
-        email: emailUser,
-        password: passwordUser,
-      }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.text();
-      }
-      return response.text().then((text) => { throw Error(text); });
-    })
-      .then((responseText) => {
-        localStorage.setItem('CURRENT_USER', responseText);
-        window.location = '/';
-      })
-      .catch((response) => {
-        alert(response);
-      });
+    authRegister(nameUser, emailUser, passwordUser);
   }
 
   render() {

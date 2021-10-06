@@ -20,7 +20,7 @@ function PlaceForm() {
   const [description, setDescription] = useState('Lorem ipsum');
   const [category, setCategory] = useState('inne');
   const [logo, setLogo] = useState(0);
-  const [district, setDistrict] = useState('district');
+  const [district, setDistrict] = useState('inna');
   const [latLng, setLatLng] = useState({ lat: 0, lng: 0 });
   const [smallMapOfPlace, setSmallMapOfPlace] = useState('Nie znaleziono lub wprowadzono nieprawidłowy adres');
   const [statusPlace, setStatusPlace] = useState('draft');
@@ -82,7 +82,8 @@ function PlaceForm() {
   };
 
   return (
-    <>
+    <div className="page-container">
+      <h1 className="page-header">Dodaj miejsce</h1>
       <form onSubmit={handleSubmit} className="form">
         <label htmlFor="place-name">
           Nazwa fundacji (lub miejsca pomocy):
@@ -119,12 +120,12 @@ function PlaceForm() {
         <label htmlFor="district">
           Dzielnica:
           <select id="district" name="district" onChange={handleChange}>
-            <option value="baluty">Bałuty</option>
-            <option value="srodmiescie">Śródmieście</option>
-            <option value="widzew">Widzew</option>
-            <option value="polesie">Polesie</option>
-            <option value="gorna">Górna</option>
-            <option value="inna">inna</option>
+            <option value="Bałuty">Bałuty</option>
+            <option value="Śródmieście">Śródmieście</option>
+            <option value="Widzew">Widzew</option>
+            <option value="Polesie">Polesie</option>
+            <option value="Górna">Górna</option>
+            <option selected value="inna">inna</option>
           </select>
         </label>
         <label htmlFor="logo">
@@ -137,9 +138,9 @@ function PlaceForm() {
             <option value="dzieci">dzieci</option>
             <option value="zwierzeta">zwierzeta</option>
             <option value="inwalidzi">inwalidzi</option>
-            <option selected value="uzaleznienia">uzaleznienia</option>
+            <option value="uzaleznienia">uzaleznienia</option>
             <option value="emeryci">emeryci</option>
-            <option value="inne">inne</option>
+            <option selected value="inne">inne</option>
           </select>
         </label>
         <label htmlFor="shortDescription">
@@ -159,7 +160,7 @@ function PlaceForm() {
         />
       </form>
       <ViewPlaceForm info={infoAboutCurretPlace} />
-    </>
+    </div>
   );
 }
 

@@ -2,18 +2,22 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import PlacePage from '../PlacePage/PlacePage';
 import '../../scss/base/list-places.scss';
+import { PlacesContext } from '../../contexts/PlacesContext';
 
 function ListPlaces() {
-  const [places, setPlaces] = useState(JSON.parse(window.localStorage.getItem('PLACES')));
   const [filteredDistrict, setFilteredDistrict] = useState('');
+  const [filteredCategory, setFilteredCategory] = useState('');
+  const PLACES = useContext(PlacesContext);
 
   function handleChange(event) {
     if (event.target.name === 'district') {
       setFilteredDistrict(event.target.value);
+    }
+    if (event.target.name === 'category') {
+      setFilteredCategory(event.target.value);
     }
   }
 
@@ -21,14 +25,21 @@ function ListPlaces() {
     if (filteredDistrict !== '' && filteredDistrict !== 'Wszystkie') {
       return ((place) => place.district === filteredDistrict);
     }
-    if (filteredDistrict === 'Wszystkie') {
+    if (filteredDistrict === 'Wszystkie' && filteredCategory !== 'Wszystkie') {
+      return ((place) => place);
+    }
+    if (filteredCategory !== '' && filteredCategory !== 'Wszystkie') {
+      return ((place) => place.category === filteredCategory);
+    }
+    if (filteredCategory === 'Wszystkie' && filteredDistrict !== 'Wszystkie') {
       return ((place) => place);
     }
     return ((place) => place);
   }
 
   return (
-    <>
+    <div className="page-container">
+      <h1 className="page-header">Lista miejsc</h1>
       <div className="filter">
         <form>
           <label htmlFor="district">
@@ -43,13 +54,24 @@ function ListPlaces() {
               <option value="inna">inna</option>
             </select>
           </label>
+          <label htmlFor="category">
+            Kategoria:
+            <select id="category" name="category" onChange={handleChange}>
+              <option selected value="Wszystkie">Wszystkie</option>
+              <option value="dzieci">dzieci</option>
+              <option value="zwierzęta">zwierzęta</option>
+              <option value="inwalidzi">inwalidzi</option>
+              <option value="uzależnienia">uzależnienia</option>
+              <option value="emeryci">emeryci</option>
+              <option value="inne">inne</option>
+            </select>
+          </label>
         </form>
       </div>
-      <h1>Lista fundacji:</h1>
-      {places.filter(changeFiltres()).map((place) => (
+      {PLACES.filter(changeFiltres()).map((place) => (
         <div className="place-list-item">
-          <div className="place-img">
-            <h4><img src={place.img} alt="place-img" width="100" height="100" /></h4>
+          <div>
+            <Link to={place._id}><img className="place-img" src={place.img} alt="place-img" width="100" height="100" /></Link>
           </div>
           <div className="place-name">
             <h4><Link to={place._id}>{place.name}</Link></h4>
@@ -82,7 +104,7 @@ function ListPlaces() {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,65 @@
+body{
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,700&display=swap');
+font-family: 'Lato', sans-serif;
+font-size: 1.3em;
+}
+
+.form{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    .submit{
+        width: 200px;
+    }
+    & > * {
+        padding: 5px 0;
+    }
+    label{
+        display: flex;
+        flex-direction: column;
+
+        input{
+            width: 450px;
+            height: 30px;
+            background-color: rgb(223, 231, 255);
+            border: 1px solid royalblue;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-size: 1em;
+        }
+        select{
+            width: 450px;
+            height: 30px;
+            background-color: rgb(223, 231, 255);
+            border-radius: 8px;
+            border: 1px solid royalblue;
+        }
+    }
+}
+
+.page-container{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding: 50px 50px 50px 50px;
+    margin: 25px 50px 25px 50px;
+}
+
+input[type=submit]{
+    display: inline-block;
+    padding: 0.35em, 1.2em;
+    border: 0.1em solid royalblue;
+    margin: 0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: royalblue;
+    text-align: center;
+    transition: all 0.2s;
+    background-color: white;
+    width: 160px;
+    cursor: pointer;
+    
+    &:hover,
+    &:focus {
+      background-color: royalblue;
+      color: white;
+    }
+}

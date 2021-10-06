@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-shadow */
 import React from 'react';
+import { authLogin } from '../../actions/FetchData';
 import '../../scss/base/_login-form.scss';
 
 export default class LoginForm extends React.Component {
@@ -23,29 +24,7 @@ export default class LoginForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { emailUser, passwordUser } = this.state;
-    await fetch('http://localhost:8000/api/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        email: emailUser,
-        password: passwordUser,
-      }),
-    }).then((response) => {
-      if (response.ok) {
-        return response.text();
-      }
-      return response.text().then((text) => { throw Error(text); });
-    })
-      .then((responseText) => {
-        localStorage.setItem('CURRENT_USER', responseText);
-        window.location = '/';
-      })
-      .catch((response) => {
-        alert(response);
-      });
+    authLogin(emailUser, passwordUser);
   }
 
   render() {

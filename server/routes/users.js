@@ -30,16 +30,13 @@ router.get("/get", async (req, res) => {
 
 router.patch("/patch/:userId", async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    const updatedUser = await User.updateOne(
+    await User.updateOne(
       { _id: req.params.userId },
       {
         $set: {
           profilePhoto: req.body.profilePhoto,
           name: req.body.name,
           email: req.body.email,
-          password: hashedPassword,
         },
       }
     );
