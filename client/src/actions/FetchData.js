@@ -3,7 +3,7 @@
 /* eslint-disable no-alert */
 
 // PLACES:
-export async function getDataFromDb() {
+export async function getPlaces() {
   const response = await fetch('http://localhost:8000/places')
     .then((resp) => resp.json())
     .catch((error) => {
@@ -129,5 +129,25 @@ export async function updateUser(newProfilePhoto, newUsername, newEmail, current
     .catch((resp) => {
       console.error(resp);
     });
+  return response;
+}
+
+export async function getUsers() {
+  const response = await fetch('http://localhost:8000/users/get')
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}
+
+export async function removeUser(userId) {
+  console.log(userId);
+  const response = await fetch(`http://localhost:8000/users/delete/${userId}`, {
+    method: 'DELETE',
+  })
+    .then((res) => res.text()) // or res.json()
+    .then((res) => console.log(res));
   return response;
 }

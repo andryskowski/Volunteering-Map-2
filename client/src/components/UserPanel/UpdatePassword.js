@@ -4,7 +4,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function UpdatePassword() {
   const [currentUser, setCurrentUser] = useState(
@@ -44,8 +44,6 @@ function UpdatePassword() {
         alert(response);
       });
   }
-
-  useEffect(() => {});
 
   return (
     <>

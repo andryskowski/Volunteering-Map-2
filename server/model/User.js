@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },  
+    role: {
+        type: String,
+        default: 'user'
+    },  
     profilePhoto: {
         type: String,
         default: 'https://cambodiaict.net/wp-content/uploads/2019/12/computer-icons-user-profile-google-account-photos-icon-account.jpg'

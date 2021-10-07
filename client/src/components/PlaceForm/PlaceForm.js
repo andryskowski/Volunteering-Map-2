@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import './sass/place-form.scss';
+import '../../scss/base/_common.scss';
 import ViewPlaceForm from './ViewPlaceForm/ViewPlaceForm';
 
 function PlaceForm() {
@@ -27,17 +27,13 @@ function PlaceForm() {
   const infoAboutCurretPlace = {
     placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, latLng, smallMapOfPlace, statusPlace,
   };
+
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
     const apiRES = await fetch(URL).then((res) => res.json());
-    console.log(apiRES);
     setSmallMapOfPlace(apiRES.results[0].locations[0].mapUrl);
     setLatLng(apiRES.results[0].locations[0].latLng);
   }
-
-  useEffect(() => {
-
-  });
 
   function handleChange(event) {
     const { name } = event.target;

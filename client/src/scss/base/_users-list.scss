@@ -1,0 +1,27 @@
+.users-container{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    & > * {
+        padding: 3px 0;
+    }
+    select{
+        width: 100px;
+    }
+}
+
+.profile-photo{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.remove-user-button{
+    color: red;
+    font-weight: bold;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    cursor: pointer;
+}

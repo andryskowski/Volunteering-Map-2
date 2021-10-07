@@ -4,7 +4,7 @@
 import React, {
   useState, useEffect, createContext,
 } from 'react';
-import { getDataFromDb } from '../actions/FetchData';
+import { getPlaces } from '../actions/FetchData';
 
 export const PlacesContext = createContext();
 
@@ -15,7 +15,7 @@ const PlacesContextProvider = ({ children }) => {
   // Fetch data
   useEffect(() => {
     const fetchMyData = async () => {
-      const response = await getDataFromDb();
+      const response = await getPlaces();
       setData(response);
     };
     fetchMyData();

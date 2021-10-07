@@ -14,19 +14,16 @@ router.get("/get", async (req, res) => {
   }
 });
 
-//update profile photo
-// router.patch("/patch/:userId", async (req, res) => {
-//   try {
-//     const updatedUser = await User.updateOne(
-//       { _id: req.params.userId },
-//       { $set: { profilePhoto: req.body.profilePhoto } }
-//     );
-//     const user = await User.findOne({ _id: req.params.userId });
-//     res.json(user);
-//   } catch (err) {
-//     res.json({ message: err });
-//   }
-// });
+//delete selected user
+router.delete('/delete/:userId', async (req, res) => {
+  try{
+      const removedUser = await User.remove({ _id: req.params.userId });
+      res.json(removedUser);
+  }
+  catch (err){
+      res.json({message: err});
+  }
+});
 
 router.patch("/patch/:userId", async (req, res) => {
   try {
@@ -37,6 +34,7 @@ router.patch("/patch/:userId", async (req, res) => {
           profilePhoto: req.body.profilePhoto,
           name: req.body.name,
           email: req.body.email,
+          role: req.body.role,
         },
       }
     );
