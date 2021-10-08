@@ -22,18 +22,10 @@ function ListPlaces() {
   }
 
   function changeFiltres() {
-    if (filteredDistrict !== '' && filteredDistrict !== 'Wszystkie') {
-      return ((place) => place.district === filteredDistrict);
-    }
-    if (filteredDistrict === 'Wszystkie' && filteredCategory !== 'Wszystkie') {
-      return ((place) => place);
-    }
-    if (filteredCategory !== '' && filteredCategory !== 'Wszystkie') {
-      return ((place) => place.category === filteredCategory);
-    }
-    if (filteredCategory === 'Wszystkie' && filteredDistrict !== 'Wszystkie') {
-      return ((place) => place);
-    }
+    if (filteredCategory === '' && filteredDistrict === '') return ((place) => place);
+    if (filteredCategory && filteredDistrict) return ((place) => place.district === filteredDistrict && place.category === filteredCategory);
+    if (filteredDistrict) return ((place) => place.district === filteredDistrict);
+    if (filteredCategory) return ((place) => place.category === filteredCategory);
     return ((place) => place);
   }
 
@@ -45,7 +37,7 @@ function ListPlaces() {
           <label htmlFor="district">
             Dzielnica:
             <select id="district" name="district" onChange={handleChange}>
-              <option value="Wszystkie">Wszystkie</option>
+              <option value="">Wszystkie</option>
               <option value="Bałuty">Bałuty</option>
               <option value="Śródmieście">Śródmieście</option>
               <option value="Widzew">Widzew</option>
@@ -57,7 +49,7 @@ function ListPlaces() {
           <label htmlFor="category">
             Kategoria:
             <select id="category" name="category" onChange={handleChange}>
-              <option selected value="Wszystkie">Wszystkie</option>
+              <option value="">Wszystkie</option>
               <option value="dzieci">dzieci</option>
               <option value="zwierzęta">zwierzęta</option>
               <option value="inwalidzi">inwalidzi</option>

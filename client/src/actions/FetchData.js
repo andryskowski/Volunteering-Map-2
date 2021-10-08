@@ -101,6 +101,27 @@ export async function authRegister(nameUser, emailUser, passwordUser) {
 }
 
 // USERS
+
+export async function getUsers() {
+  const response = await fetch('http://localhost:8000/users/get')
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}
+
+export async function removeUser(userId) {
+  console.log(userId);
+  const response = await fetch(`http://localhost:8000/users/delete/${userId}`, {
+    method: 'DELETE',
+  })
+    .then((res) => res.text()) // or res.json()
+    .then((res) => console.log(res));
+  return response;
+}
+
 export async function updateUser(newProfilePhoto, newUsername, newEmail, currentUserId) {
   const response = await fetch(`http://localhost:8000/users/patch/${currentUserId}`, {
     method: 'PATCH',
@@ -132,22 +153,30 @@ export async function updateUser(newProfilePhoto, newUsername, newEmail, current
   return response;
 }
 
-export async function getUsers() {
-  const response = await fetch('http://localhost:8000/users/get')
-    .then((resp) => resp.json())
-    .catch((error) => {
-      console.error(`${error.name}: ${error.message}`);
-      alert('Error retrieving data!');
-    });
-  return response;
-}
-
-export async function removeUser(userId) {
-  console.log(userId);
-  const response = await fetch(`http://localhost:8000/users/delete/${userId}`, {
-    method: 'DELETE',
+export async function updateUserRole(currentUserId, newRole) {
+  const response = await fetch(`http://localhost:8000/users/patch/changeRole/${currentUserId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      role: newRole,
+    }),
   })
-    .then((res) => res.text()) // or res.json()
-    .then((res) => console.log(res));
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      }
+      return resp.text().then((text) => {
+        throw Error(text);
+      });
+    })
+    .then(() => {
+      window.location.reload(true);
+    })
+    .catch((resp) => {
+      console.error(resp);
+    });
   return response;
 }

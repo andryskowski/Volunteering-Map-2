@@ -24,4 +24,11 @@
     background-color: transparent;
     font-size: 1em;
     cursor: pointer;
+    width: 20px;
+}
+
+.role-container{
+    display: flex;
+    justify-content: space-between;
+    width: 240px;
 }

@@ -10,4 +10,7 @@
     .small-profilephoto-container{
         margin-top: 5px;
     }
+    & > * {
+        cursor: pointer;
+    }
 }

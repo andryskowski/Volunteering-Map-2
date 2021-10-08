@@ -34,6 +34,22 @@ router.patch("/patch/:userId", async (req, res) => {
           profilePhoto: req.body.profilePhoto,
           name: req.body.name,
           email: req.body.email,
+        },
+      }
+    );
+    const user = await User.findOne({ _id: req.params.userId });
+    res.json(user);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+router.patch("/patch/changeRole/:userId", async (req, res) => {
+  try {
+    await User.updateOne(
+      { _id: req.params.userId },
+      {
+        $set: {
           role: req.body.role,
         },
       }

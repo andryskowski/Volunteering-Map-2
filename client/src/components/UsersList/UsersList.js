@@ -4,14 +4,15 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, {
+  Children,
   useContext, useEffect, useState,  
 } from 'react';
-import { getUsers, removeUser } from '../../actions/FetchData';
+import { getUsers, removeUser, updateUserRole } from '../../actions/FetchData';
 import '../../scss/base/_users-list.scss';
 
 function UsersList() {
   const [users, setUsers] = useState([]);
-  const [roleToChange, setRoleToChange] = useState('user');
+
   useEffect(() => {
     const fetchMyData = async () => {
       const response = await getUsers();
@@ -38,9 +39,14 @@ function UsersList() {
     const changedRole = event.target.value;
     const changedUserId = event.target.id;
     console.log(event.target.id, changedRole);
-    // const fetchMyData = async () => {
-    //   await updateUser(changedUserId, changedRole);
-    // };
+    updateUserRole(changedUserId, changedRole);
+  };
+
+  const setRoleStyle = (role) => {
+    if (role === 'moderator') return { color: 'blue' };
+    if (role === 'admin') return { color: 'red' };
+    if (role === 'user') return { color: 'green' };
+    return { color: 'black' };
   };
 
   return (
@@ -50,16 +56,20 @@ function UsersList() {
         {users.map((user) => (
           <div className="users-container">
             <button className="remove-user-button" value={user._id} type="submit" onClick={removeSelectedUser}>X</button>
-            <select onChange={handleChangeRole} id={user._id}>
-              <option value="admin">admin</option>
-              <option value="moderator">moderator</option>
-              <option selected value="user">user</option>
-            </select>
+            <div className="role-container">
+              <p>Zmień rolę na: </p>
+              <select onChange={handleChangeRole} id={user._id}>
+                <option selected value=""> </option>
+                <option value="admin">admin</option>
+                <option value="moderator">moderator</option>
+                <option value="user">user</option>
+              </select>
+            </div>
             <img src={user.profilePhoto} className="profile-photo" alt="no user img" width="100px" height="100px" />
             <p>
               <b>role:</b> 
               {' '}
-              {user.role}
+              <span style={setRoleStyle(user.role)}>{user.role}</span>
             </p>
             <p>
               <b>login:</b> 

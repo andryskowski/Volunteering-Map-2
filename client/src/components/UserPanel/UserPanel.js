@@ -10,6 +10,13 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 function UserPanel() {
   const CURRENT_USER = useContext(CurrentUserContext);
 
+  const setRoleStyle = (role) => {
+    if (role === 'moderator') return { color: 'blue' };
+    if (role === 'admin') return { color: 'red' };
+    if (role === 'user') return { color: 'green' };
+    return { color: 'black' };
+  };
+
   return (
     <>
       <div className="page-container">
@@ -17,6 +24,10 @@ function UserPanel() {
         <div>
           <img src={CURRENT_USER.userInfo.profilePhoto} width="150" height="150" alt="Error no profile phot" />
         </div>
+        <p>
+          <b>Rola: </b>
+          <span style={setRoleStyle(CURRENT_USER.userInfo.role)}>{CURRENT_USER.userInfo.role}</span>
+        </p>
         <p>
           <b>Nazwa użytkownika: </b>
           {CURRENT_USER.userInfo.name}
