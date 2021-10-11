@@ -1,0 +1,15 @@
+.comment-form{
+    display: flex;
+    flex-direction: column;
+    & > * {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        padding: 5px;
+    }
+
+    .message{
+        height: 200px;
+        width: 900px;
+    }
+}

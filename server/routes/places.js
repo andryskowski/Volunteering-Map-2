@@ -65,18 +65,23 @@ router.delete('/:placeId', async (req, res) => {
     }
 });
 
-//update place
-// router.patch('/:placeId', async (req, res) => {
-//     try{
-//         const updatedPlace = await Place.updateOne(
-//             { _id: req.params.pId },
-//             { $set: {name: req.body.name }}
-//         );
-//         res.json(updatedDish);
-//     }
-//     catch (err){
-//         res.json({message: err});
-//     }
-//     });
+
+//update place status
+router.patch("/patch/changeStatus/:placeId", async (req, res) => {
+    try {
+      await Place.updateOne(
+        { _id: req.params.placeId },
+        {
+          $set: {
+            statusPlace: req.body.statusPlace,
+          },
+        }
+      );
+      const place = await Place.findOne({ _id: req.params.placeId });
+      res.json(place);
+    } catch (err) {
+      res.json({ message: err });
+    }
+  });
 
 module.exports = router;

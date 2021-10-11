@@ -10,7 +10,7 @@ import React, {
 import { getUsers, removeUser, updateUserRole } from '../../actions/FetchData';
 import '../../scss/base/_users-list.scss';
 
-function UsersList() {
+function UsersPanel() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -98,4 +98,4 @@ function UsersList() {
   );
 }
 
-export default UsersList;
+export default UsersPanel;

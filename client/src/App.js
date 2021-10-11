@@ -14,7 +14,8 @@ import Contact from './components/Contact/Contact';
 import ListPlaces from './components/ListPlaces/ListPlaces';
 import PlaceForm from './components/PlaceForm/PlaceForm';
 import { PlacesContext } from './contexts/PlacesContext';
-import UsersList from './components/UsersList/UsersList';
+import UsersPanel from './components/UsersPanel/UsersPanel';
+import PlacesPanel from './components/PlacesPanel/PlacesPanel';
 
 const CURRENT_USER = JSON.parse(window.localStorage.getItem('CURRENT_USER'));
 const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
@@ -42,7 +43,8 @@ function App() {
           {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
           {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
           {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
-          {CURRENT_USER_ID ? <PrivateRoute path="/userslist" component={UsersList} /> : false}
+          {CURRENT_USER_ID ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
+          {CURRENT_USER_ID ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
         </Switch>
       </Router>
     </>

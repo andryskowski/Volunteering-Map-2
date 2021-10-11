@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
 const placesRoute = require('./routes/places');
 const usersRoute = require('./routes/users');
+const commentsRoute = require('./routes/comments');
 const bodyParser = require('body-parser');
 var cors = require('cors');
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 app.use('/places', placesRoute);
 app.use('/users', usersRoute);
+app.use('/comments', commentsRoute);
 
 //Connect to DB
 mongoose.connect(

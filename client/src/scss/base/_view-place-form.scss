@@ -1,0 +1,19 @@
+.popup{
+    border: 3px lightblue solid;
+    border-radius: 10px;
+    padding: 50px 50px 0 50px;
+    background-color: white;
+    box-shadow: lightblue    0px 2px 4px 0px, lightblue     0px 2px 16px 0px;
+    width: 1100px;
+    min-height: 720px;
+    .button-container{
+    display: flex;
+    justify-content: flex-end;
+    button{
+        background-color: inherit;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+    }
+    }
+}

@@ -43,6 +43,34 @@ export async function postPlaces(NEW_PLACE, CURRENT_USER_USERNAME) {
   alert('Wyslano do bazy danych');
 }
 
+export async function updatePlaceStatus(placeId, newStatus) {
+  const response = await fetch(`http://localhost:8000/places/patch/changeStatus/${placeId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      statusPlace: newStatus,
+    }),
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      }
+      return resp.text().then((text) => {
+        throw Error(text);
+      });
+    })
+    .then(() => {
+      window.location.reload(true);
+    })
+    .catch((resp) => {
+      console.error(resp);
+    });
+  return response;
+}
+
 // USERS AUTHENTICATION:
 export async function authLogin(emailUser, passwordUser) {
   const response = await fetch('http://localhost:8000/api/user/login', {
@@ -109,6 +137,17 @@ export async function getUsers() {
       console.error(`${error.name}: ${error.message}`);
       alert('Error retrieving data!');
     });
+  return response;
+}
+
+export async function getUser(userId) {
+  const response = await fetch(`http://localhost:8000/users/get/${userId}`)
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      // alert('Error retrieving data!');
+    });
+  console.log(response);
   return response;
 }
 
@@ -179,4 +218,33 @@ export async function updateUserRole(currentUserId, newRole) {
       console.error(resp);
     });
   return response;
+}
+
+// COMMENTS
+
+export async function getComments() {
+  const response = await fetch('http://localhost:8000/comments/')
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}
+
+export async function postComment(authorIdComment, subjectComment, messageComment, placeIdComment) {
+  await fetch('http://localhost:8000/comments/post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      authorId: authorIdComment,
+      subject: subjectComment,
+      message: messageComment,
+      placeId: placeIdComment,
+    }),
+  });
+  alert('Wyslano do bazy danych');
 }
