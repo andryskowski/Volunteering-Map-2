@@ -24,17 +24,17 @@ router.get('/:commentId', async (req, res) => {
     }
   });
 
-//submits a places
+//submit a comment
 router.post('/post', async (req, res) => {
-    const place = new Comment({
-        author: req.body.author,
+    const comment = new Comment({
+        authorId: req.body.authorId,
         subject: req.body.subject,
         message: req.body.message,
         placeId: req.body.placeId,
     });
         try {
-            const savedPlace = await place.save();
-            res.json(savedPlace);
+            const savedComment = await comment.save();
+            res.json(savedComment);
         }
         catch(err){
             res.json({message: err});

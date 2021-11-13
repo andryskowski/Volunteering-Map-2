@@ -71,6 +71,16 @@ export async function updatePlaceStatus(placeId, newStatus) {
   return response;
 }
 
+export async function removePlace(placeId) {
+  console.log(placeId);
+  const response = await fetch(`http://localhost:8000/places/delete/${placeId}`, {
+    method: 'DELETE',
+  })
+    .then((res) => res.text()) // or res.json()
+    .then((res) => console.log(res));
+  return response;
+}
+
 // USERS AUTHENTICATION:
 export async function authLogin(emailUser, passwordUser) {
   const response = await fetch('http://localhost:8000/api/user/login', {

@@ -1,3 +1,6 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-undef */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -12,6 +15,14 @@ import CommentForm from './CommentForm/CommentForm';
 
 function Comments({ placeId }) {
   const [comments, setComments] = useState([]);
+  const [commentsNumber, setNumberComments] = useState(0);
+
+  const setRoleStyle = (role) => {
+    if (role === 'moderator') return { color: 'blue' };
+    if (role === 'admin') return { color: 'red' };
+    if (role === 'user') return { color: 'green' };
+    return { color: 'black' };
+  };
 
   const getAuthor = async (authorId) => {
     const authorFromDb = await getUser(authorId);
@@ -19,33 +30,44 @@ function Comments({ placeId }) {
   };
 
   useEffect(() => {
-    let mounted = true;
-    getComments().then((commentsFromDb) => {
-      if (mounted) {
-        commentsFromDb = commentsFromDb.map(async (comment) => {
-          comment.author = await getAuthor(comment.authorId);
-          return comment;
-        });
-        setComments(commentsFromDb);
-        console.log(comments);
+    getComments().then(async (commentsFromDb) => {
+      for (let index = 0; index < commentsFromDb.length; index++) {
+        const comment = commentsFromDb[index];
+
+        comment.author = await getAuthor(comment.authorId);
       }
+
+      console.log(commentsFromDb);
+      setComments(commentsFromDb);
+
+      // get number of comments fot this place
+      comments.filter((comment) => comment.placeId === placeId)
+        .map((comment, index) => setNumberComments(index + 1));
     });
-    return () => {
-      mounted = false;
-      console.log(comments);
-    };
-  }, []);
+  }, [comments, placeId]);
 
   return (
     <>
-      <h1>Komentarze</h1>
+      <h1>
+        Komentarze
+        {' '}
+        <span>
+          (
+          {commentsNumber}
+          )
+        </span>
+        :
+      </h1>
       <div className="comments">
         {comments.filter((comment) => comment.placeId === placeId).reverse().map((comment) => (
-          <div className="comment">
-            <p>
-              author:
-              {' '}
-              {comment.author.profilePhoto}
+          <div key={comment._id} className="comment">
+            <div className="profilephoto-container">
+              <img src={comment.author.profilePhoto} width="100px" height="100px" alt="no profilePhoto" />
+            </div>
+            <p style={setRoleStyle(comment.author.role)}>
+              <b>
+                {comment.author.name}
+              </b>
             </p>
             <p>
               subject:
@@ -55,7 +77,9 @@ function Comments({ placeId }) {
             <p>
               date:
               {' '}
-              {comment.date}
+              {comment.date.substring(0, 10)}
+              {' '}
+              {comment.date.substring(11, 19)}
             </p>
             <p>
               message:

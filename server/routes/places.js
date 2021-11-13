@@ -54,8 +54,8 @@ router.get('/:placeId', async (req, res) => {
     }
 });
 
-//delete place
-router.delete('/:placeId', async (req, res) => {
+//delete selected place
+router.delete('/delete/:placeId', async (req, res) => {
     try{
         const removedPlace = await Place.remove({ _id: req.params.placeId });
         res.json(removedPlace);
@@ -63,8 +63,7 @@ router.delete('/:placeId', async (req, res) => {
     catch (err){
         res.json({message: err});
     }
-});
-
+  });
 
 //update place status
 router.patch("/patch/changeStatus/:placeId", async (req, res) => {
