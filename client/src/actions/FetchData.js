@@ -81,6 +81,48 @@ export async function removePlace(placeId) {
   return response;
 }
 
+export async function updatePlace(placeId, placeName, logo, shortDescription, description,
+  category, phone, email, webPage, city, street, postalCode, houseNo, district, position) {
+  const response = await fetch(`http://localhost:8000/places/patch/editplace/${placeId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      name: placeName,
+      img: logo,
+      shortDescription,
+      description,
+      category,
+      phone,
+      email,
+      webPage,
+      city,
+      street,
+      postalCode,
+      houseNo,
+      district,
+      position,
+    }),
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      }
+      return resp.text().then((text) => {
+        throw Error(text);
+      });
+    })
+    .then(() => {
+      window.location.reload(true);
+    })
+    .catch((resp) => {
+      console.error(resp);
+    });
+  return response;
+}
+
 // USERS AUTHENTICATION:
 export async function authLogin(emailUser, passwordUser) {
   const response = await fetch('http://localhost:8000/api/user/login', {

@@ -104,9 +104,9 @@ function PlacesPanel() {
         <div className="popup" ref={popupEl}>
           <div className="button-popup-container">
             <button type="submit" className="button-popup" onClick={() => { popupEl.current.style.display = 'none'; }}>X</button>
-            {/* line 102 here */}
-            <EditPlaceForm placeToEdit={placeToEdit} />
           </div>
+          {/* line 102 here */}
+          <EditPlaceForm placeToEdit={placeToEdit} />
         </div>
       </div>
     </>

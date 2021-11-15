@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
@@ -6,34 +7,38 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { updatePlace } from '../../../actions/FetchData';
 import '../../../scss/base/_common.scss';
 
 function EditPlaceForm(props) {
-  const [placeName, setPlaceame] = useState('name');
-  const [phone, setPhone] = useState('phone');
-  const [email, setEmail] = useState('email');
-  const [webPage, setWebPage] = useState('webpage');
-  const [city, setCity] = useState('Łódź');
-  const [street, setStreet] = useState('Wierzbowa');
-  const [postalCode, setPostalCode] = useState('91-410');
-  const [houseNo, setHouseNo] = useState('6c');
+  const [placeName, setPlaceName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [webPage, setWebPage] = useState('');
+  const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [houseNo, setHouseNo] = useState('');
   const [shortDescription, setShortDescription] = useState('');
-  const [description, setDescription] = useState('Lorem ipsum');
-  const [category, setCategory] = useState('inne');
-  const [logo, setLogo] = useState(0);
-  const [district, setDistrict] = useState('inna');
-  const [latLng, setLatLng] = useState({ lat: 0, lng: 0 });
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [logo, setLogo] = useState('');
+  const [district, setDistrict] = useState('');
+  const [position, setPosition] = useState({
+    lat: '',
+    lng: '',
+  });
   const [smallMapOfPlace, setSmallMapOfPlace] = useState('Nie znaleziono lub wprowadzono nieprawidłowy adres');
   const [statusPlace, setStatusPlace] = useState('draft');
   const infoAboutCurretPlace = {
-    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, latLng, smallMapOfPlace, statusPlace,
+    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, position, smallMapOfPlace, statusPlace,
   };
 
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
     const apiRES = await fetch(URL).then((res) => res.json());
     setSmallMapOfPlace(apiRES.results[0].locations[0].mapUrl);
-    setLatLng(apiRES.results[0].locations[0].latLng);
+    // setLatLng(apiRES.results[0].locations[0].latLng);
   }
 
   function handleChange(event) {
@@ -42,7 +47,7 @@ function EditPlaceForm(props) {
     else if (name === 'street') setStreet(event.target.value);
     else if (name === 'houseNo') setHouseNo(event.target.value);
     else if (name === 'postalCode') setPostalCode(event.target.value);
-    else if (name === 'placeName') setPlaceame(event.target.value);
+    else if (name === 'placeName') setPlaceName(event.target.value);
     else if (name === 'webPage') setWebPage(event.target.value);
     else if (name === 'email') setEmail(event.target.value);
     else if (name === 'phone') setPhone(event.target.value);
@@ -50,13 +55,25 @@ function EditPlaceForm(props) {
     else if (name === 'category') setCategory(event.target.value);
     else if (name === 'district') setDistrict(event.target.value);
     else if (name === 'shortDescription') setShortDescription(event.target.value);
+    else if (name === 'positionLng') {
+      setPosition({
+        lng: event.target.value,
+      });
+    } else if (name === 'positionLat') {
+      setPosition({
+        lat: event.target.value,
+      });
+    }
   }
 
   // eslint-disable-next-line no-unused-vars
   function handleSubmit(event) {
     event.preventDefault();
-    getPlaceCoordinates();
-    setStatusPlace('pending');
+    // getPlaceCoordinates();
+    // setStatusPlace('pending');
+    alert('The place has been edited');
+    updatePlace(props.placeToEdit[0]._id, placeName, logo, shortDescription, description,
+      category, phone, email, webPage, city, street, postalCode, houseNo, district, position);
   }
 
   const formats = [
@@ -78,72 +95,134 @@ function EditPlaceForm(props) {
     ],
   };
 
+  const getInfoAboutPlace = () => {
+    setPlaceName(props.placeToEdit[0].name);
+    setWebPage(props.placeToEdit[0].webPage);
+    setEmail(props.placeToEdit[0].email);
+    setPhone(props.placeToEdit[0].phone);
+    setCity(props.placeToEdit[0].city);
+    setStreet(props.placeToEdit[0].street);
+    setHouseNo(props.placeToEdit[0].houseNo);
+    setPostalCode(props.placeToEdit[0].postalCode);
+    setDistrict(props.placeToEdit[0].district);
+    setPosition({
+      lat: props.placeToEdit[0] ? props.placeToEdit[0].position.lat : props.placeToEdit[0],
+      lng: props.placeToEdit[0] ? props.placeToEdit[0].position.lng : props.placeToEdit[0],
+    });
+    setLogo(props.placeToEdit[0].img);
+    setCategory(props.placeToEdit[0].category);
+    setShortDescription(props.placeToEdit[0].shortDescription);
+    setDescription(props.placeToEdit[0].description);
+  };
+
+  const clearInfoAboutPlace = () => {
+    setPlaceName('');
+    setWebPage('');
+    setEmail('');
+    setPhone('');
+    setCity('');
+    setStreet('');
+    setHouseNo('');
+    setPostalCode('');
+    setDistrict('');
+    setPosition({
+      lat: '',
+      lng: '',
+    });
+    setLogo('');
+    setCategory('');
+    setShortDescription('');
+    setDescription('');
+  };
+
   return (
     <div className="edit-place-form">
+      <input
+        id="getInfoAboutPlace"
+        type="submit"
+        value="Pobierz dane o miejscu"
+        className="getInfoAboutPlace"
+        onClick={getInfoAboutPlace}
+      />
+      <input
+        id="getInfoAboutPlace"
+        type="submit"
+        value="Wyczyść formularz"
+        className="getInfoAboutPlace"
+        onClick={clearInfoAboutPlace}
+      />
       <h1 className="page-header">Edytuj miejsce</h1>
       <form onSubmit={handleSubmit} className="form form-edit-place">
         <label htmlFor="place-name">
           Nazwa fundacji (lub miejsca pomocy):
-          <input id="place-name" defaultValue={props.placeToEdit[0] ? props.placeToEdit[0].name : props.placeToEdit[0]} type="place-name" name="placeName" onChange={handleChange} />
+          <input id="place-name" defaultValue={placeName} type="place-name" name="placeName" onChange={handleChange} />
           {console.log(props.placeToEdit)}
         </label>
         <label htmlFor="web-page">
           Strona internetowa:
-          <input id="web-page" type="web-page" name="webPage" onChange={handleChange} />
+          <input id="web-page" defaultValue={webPage} type="web-page" name="webPage" onChange={handleChange} />
         </label>
         <label htmlFor="email">
           E-mail:
-          <input id="email" type="email" name="email" onChange={handleChange} />
+          <input id="email" defaultValue={email} type="email" name="email" onChange={handleChange} />
         </label>
         <label htmlFor="phone">
           Telefon:
-          <input id="phone" type="phone" name="phone" onChange={handleChange} />
+          <input id="phone" defaultValue={phone} type="phone" name="phone" onChange={handleChange} />
         </label>
         <label htmlFor="city">
           Miasto:
-          <input id="city" type="city" name="city" onChange={handleChange} />
+          <input id="city" defaultValue={city} type="city" name="city" onChange={handleChange} />
         </label>
         <label htmlFor="street">
           Ulica:
-          <input id="street" type="street" name="street" onChange={handleChange} />
+          <input id="street" defaultValue={street} type="street" name="street" onChange={handleChange} />
         </label>
         <label htmlFor="house-no">
           Numer domu:
-          <input id="house-no" type="house-no" name="houseNo" onChange={handleChange} />
+          <input id="house-no" defaultValue={houseNo} type="house-no" name="houseNo" onChange={handleChange} />
         </label>
         <label htmlFor="postal-code">
           Kod pocztowy:
-          <input id="postal-code" type="postal-code" name="postalCode" onChange={handleChange} />
+          <input id="postal-code" defaultValue={postalCode} type="postal-code" name="postalCode" onChange={handleChange} />
         </label>
         <label htmlFor="district">
           Dzielnica:
-          <select id="district" name="district" onChange={handleChange}>
+          <select id="district" selected={district} name="district" onChange={handleChange}>
             <option value="Bałuty">Bałuty</option>
             <option value="Śródmieście">Śródmieście</option>
             <option value="Widzew">Widzew</option>
             <option value="Polesie">Polesie</option>
             <option value="Górna">Górna</option>
-            <option selected value="inna">inna</option>
+            <option value="inna">inna</option>
           </select>
+        </label>
+        <label htmlFor="position-lat">
+          Pozycja lng:
+          <input id="position-lat" defaultValue={position.lat} type="logo" name="positionLat" onChange={handleChange} />
+        </label>
+        <label htmlFor="position-lng">
+          Pozycja lng:
+          <input id="position-lng" defaultValue={position.lng} type="logo" name="positionLng" onChange={handleChange} />
         </label>
         <label htmlFor="logo">
           Link do zdjecia logo fundacji/miejsca pomocy:
-          <input id="logo" type="logo" name="logo" onChange={handleChange} />
+          <input id="logo" defaultValue={logo} type="logo" name="logo" onChange={handleChange} />
         </label>
         <label htmlFor="category">
           Kategoria:
-          <select id="category" name="category" onChange={handleChange}>
+          <select id="category" selected={category} name="category" onChange={handleChange}>
             <option value="dzieci">dzieci</option>
             <option value="zwierzeta">zwierzeta</option>
             <option value="inwalidzi">inwalidzi</option>
             <option value="uzaleznienia">uzaleznienia</option>
             <option value="emeryci">emeryci</option>
-            <option selected value="inne">inne</option>
+            <option value="inne">inne</option>
           </select>
         </label>
         <label htmlFor="shortDescription">
           Krótki opis fundacji/miejsca pomocy:
-          <input id="shortDescription" type="text" name="shortDescription" onChange={handleChange} />
+          <input id="shortDescription" defaultValue={shortDescription} type="text" name="shortDescription" onChange={handleChange} />
         </label>
         <label htmlFor="description">
           Opis:

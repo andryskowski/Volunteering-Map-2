@@ -83,4 +83,35 @@ router.patch("/patch/changeStatus/:placeId", async (req, res) => {
     }
   });
 
+  //update place status
+router.patch("/patch/editplace/:placeId", async (req, res) => {
+  try {
+    await Place.updateOne(
+      { _id: req.params.placeId },
+      {
+        $set: {
+          name: req.body.name,
+          img: req.body.img,
+          shortDescription: req.body.shortDescription,
+          description: req.body.description,
+          category: req.body.category,
+          phone: req.body.phone,
+          email: req.body.email,
+          webPage: req.body.webPage,
+          city: req.body.city,
+          street: req.body.street,
+          postalCode: req.body.postalCode,
+          houseNo: req.body.houseNo,
+          district: req.body.district,
+          position: req.body.position,
+        },
+      }
+    );
+    const place = await Place.findOne({ _id: req.params.placeId });
+    res.json(place);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;
