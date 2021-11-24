@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
@@ -213,7 +214,7 @@ export async function removeUser(userId) {
   return response;
 }
 
-export async function updateUser(newProfilePhoto, newUsername, newEmail, currentUserId) {
+export async function updateUser(newProfilePhoto, newUsername, newEmail, currentUserId, newDescription) {
   const response = await fetch(`http://localhost:8000/users/patch/${currentUserId}`, {
     method: 'PATCH',
     headers: {
@@ -224,6 +225,7 @@ export async function updateUser(newProfilePhoto, newUsername, newEmail, current
       profilePhoto: newProfilePhoto,
       name: newUsername,
       email: newEmail,
+      description: newDescription,
     }),
   })
     .then((resp) => {

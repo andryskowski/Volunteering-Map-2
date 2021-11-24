@@ -58,10 +58,12 @@ function EditPlaceForm(props) {
     else if (name === 'positionLng') {
       setPosition({
         lng: event.target.value,
+        lat: position.lat,
       });
     } else if (name === 'positionLat') {
       setPosition({
         lat: event.target.value,
+        lng: position.lng,
       });
     }
   }
@@ -198,11 +200,11 @@ function EditPlaceForm(props) {
           </select>
         </label>
         <label htmlFor="position-lat">
-          Pozycja lng:
+          Szerokość geograficznej (Latitude):
           <input id="position-lat" defaultValue={position.lat} type="logo" name="positionLat" onChange={handleChange} />
         </label>
         <label htmlFor="position-lng">
-          Pozycja lng:
+          Długość geograficzna (Longitude):
           <input id="position-lng" defaultValue={position.lng} type="logo" name="positionLng" onChange={handleChange} />
         </label>
         <label htmlFor="logo">

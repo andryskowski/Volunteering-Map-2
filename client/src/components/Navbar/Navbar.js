@@ -27,7 +27,7 @@ function Navbar() {
           <li>O projekcie</li>
           <Link to="/userspanel"><li>Panel użytkowników</li></Link>
           <Link to="/placespanel"><li>Panel miejsc</li></Link>
-          <Link to={CURRENT_USER.userInfo._id}><li>Profil</li></Link>
+          <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>Profil</li></Link>
           <li onClick={logOut}>Wyloguj się</li>
           <div className="small-profilephoto-container">
             <Link to={CURRENT_USER.userInfo._id}>

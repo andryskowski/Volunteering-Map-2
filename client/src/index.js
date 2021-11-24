@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'leaflet/dist/leaflet.css';
 import { PlacesContextProvider } from './contexts/PlacesContext';
+import { UsersContextProvider } from './contexts/UsersContext';
 import CurrentUserContext, { CURRENT_USER_FROM_CONTEXT } from './contexts/CurrentUserContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <CurrentUserContext.Provider value={CURRENT_USER_FROM_CONTEXT}>
       <PlacesContextProvider>
-        <App />
+        <UsersContextProvider>
+          <App />
+        </UsersContextProvider>
       </PlacesContextProvider>
     </CurrentUserContext.Provider>
   </React.StrictMode>,

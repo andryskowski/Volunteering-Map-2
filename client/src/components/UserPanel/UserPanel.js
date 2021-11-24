@@ -4,6 +4,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
+import Parser from 'html-react-parser';
 import UpdateUser from './UpdateUser';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -41,6 +42,10 @@ function UserPanel() {
         <p>
           <b>Email użytkownika: </b>
           {CURRENT_USER.userInfo.email}
+        </p>
+        <p>
+          <b>Opis użytkownika: </b>
+          {Parser(CURRENT_USER.userInfo.description)}
         </p>
         <UpdateUser />
       </div>

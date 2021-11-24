@@ -25,10 +25,6 @@ function PlacesPanel() {
     updatePlaceStatus(changedPlaceId, changedStatus);
   };
 
-  const handleChangeStatus2 = (event) => {
-    console.log('handleChangeStatuts2');
-  };
-
   const removeSelectedPlace = (event) => {
     const removedPlaceId = event.target.value;
     const fetchMyData = async () => {
@@ -97,15 +93,13 @@ function PlacesPanel() {
               <option value="pending">pending</option>
               <option value="added">added</option>
             </select>
-            {/* line 96 here */}
-            <input className="edit-place-button" onChange={handleChangeStatus2} value="Edytuj" onClick={() => editPlace(this, place._id)} type="submit" />
+            <input className="edit-place-button" value="Edytuj" onClick={() => editPlace(this, place._id)} type="submit" />
           </div>
         ))}
         <div className="popup" ref={popupEl}>
           <div className="button-popup-container">
             <button type="submit" className="button-popup" onClick={() => { popupEl.current.style.display = 'none'; }}>X</button>
           </div>
-          {/* line 102 here */}
           <EditPlaceForm placeToEdit={placeToEdit} />
         </div>
       </div>

@@ -45,6 +45,7 @@ router.patch("/patch/:userId", async (req, res) => {
           profilePhoto: req.body.profilePhoto,
           name: req.body.name,
           email: req.body.email,
+          description: req.body.description,
         },
       }
     );

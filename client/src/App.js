@@ -16,14 +16,18 @@ import PlaceForm from './components/PlaceForm/PlaceForm';
 import { PlacesContext } from './contexts/PlacesContext';
 import UsersPanel from './components/UsersPanel/UsersPanel';
 import PlacesPanel from './components/PlacesPanel/PlacesPanel';
+import UserProfile from './components/UserProfile/UserProfile';
+import { UsersContext } from './contexts/UsersContext';
 
 const CURRENT_USER = JSON.parse(window.localStorage.getItem('CURRENT_USER'));
 const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
 
 function App() {
   const PLACES = useContext(PlacesContext);
+  const USERS = useContext(UsersContext);
   return (
     <>
+      {console.log('witam', USERS)}
       <Router>
         {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
         <Switch>
@@ -32,12 +36,20 @@ function App() {
           ) : (
             <Route exact path="/" component={LandingPage} />
           )}
-          <PrivateRoute exact path={`/${CURRENT_USER_ID}`} component={UserPanel} />
+          <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
+          <Route exact path="/userProfile" component={UserProfile} />
           {PLACES ? PLACES.map((place) => (
             <PrivateRoute
               exact
               path={`/${place._id}`}
               component={() => <PlacePage placeId={place._id} />}
+            />
+          )) : false}
+          {USERS ? USERS.map((user) => (
+            <PrivateRoute
+              exact
+              path={`/${user._id}`}
+              component={() => <UserProfile userId={user._id} />}
             />
           )) : false}
           {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
