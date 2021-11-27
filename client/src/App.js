@@ -18,6 +18,7 @@ import UsersPanel from './components/UsersPanel/UsersPanel';
 import PlacesPanel from './components/PlacesPanel/PlacesPanel';
 import UserProfile from './components/UserProfile/UserProfile';
 import { UsersContext } from './contexts/UsersContext';
+import Messages from './components/Messages/Messages';
 
 const CURRENT_USER = JSON.parse(window.localStorage.getItem('CURRENT_USER'));
 const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
@@ -36,8 +37,9 @@ function App() {
           ) : (
             <Route exact path="/" component={LandingPage} />
           )}
+          <PrivateRoute exact path="/messages" component={Messages} />
           <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
-          <Route exact path="/userProfile" component={UserProfile} />
+          <PrivateRoute exact path="/userProfile" component={UserProfile} />
           {PLACES ? PLACES.map((place) => (
             <PrivateRoute
               exact
