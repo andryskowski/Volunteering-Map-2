@@ -28,7 +28,6 @@ function App() {
   const USERS = useContext(UsersContext);
   return (
     <>
-      {console.log('witam', USERS)}
       <Router>
         {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
         <Switch>

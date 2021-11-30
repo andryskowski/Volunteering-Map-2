@@ -4,13 +4,22 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useContext, useEffect } from 'react';
+import React, {
+  useContext, useEffect, useState,
+} from 'react';
+import { useHistory } from 'react-router-dom';
 import Parser from 'html-react-parser';
 import { UsersContext } from '../../contexts/UsersContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { postConversation, findConversation } from '../../actions/FetchData';
 
 function UserProfile(props) {
   const { userId } = props;
   const users = useContext(UsersContext);
+  const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
+  const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
+  const [currentConversation, setCurrentConversation] = useState(null);
+  const history = useHistory();
 
   const setRoleStyle = (role) => {
     if (role === 'moderator') return { color: 'blue' };
@@ -21,8 +30,32 @@ function UserProfile(props) {
 
   useEffect(() => {
     const currentUser = users.filter((user) => user._id === userId);
-    console.log(currentUser.name, currentUser.email);
   }, [userId, users]);
+
+  useEffect(() => {
+    if (currentConversation) {
+      history.push('/messages', { conversationId: currentConversation });
+    }
+  }, [currentConversation, history]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const fetchMyDataIfConversationExists = async () => {
+      const response = await findConversation(props.userId, CURRENT_USER._id);
+      if (response) {
+        setCurrentConversation(response._id);
+      } else {
+        const fetchMyDataIfConversationNotExists = async () => {
+          await postConversation(CURRENT_USER._id, props.userId);
+          const response2 = await findConversation(props.userId, CURRENT_USER._id);
+          setCurrentConversation(response2._id);
+        };
+        fetchMyDataIfConversationNotExists();
+      }
+    };
+    fetchMyDataIfConversationExists();
+  };
 
   return (
     <>
@@ -38,6 +71,14 @@ function UserProfile(props) {
                 <b>Rola: </b>
                 <span style={setRoleStyle(user.role)}>{user.role}</span>
               </p>
+              <input
+                key="submit"
+                id="send"
+                type="submit"
+                value="Napisz wiadomość"
+                className="submit"
+                onClick={handleSubmit}
+              />
               <p>
                 <b>Nazwa użytkownika: </b>
                 {user.name}

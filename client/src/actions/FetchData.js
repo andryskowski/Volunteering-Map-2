@@ -302,3 +302,60 @@ export async function postComment(authorIdComment, subjectComment, messageCommen
   });
   alert('Wyslano do bazy danych');
 }
+
+// messenger
+
+export async function postConversation(senderId, receiverId) {
+  await fetch('http://localhost:8000/conversations', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      senderId,
+      receiverId,
+    }),
+  }).then((resp) => {
+    if (resp.ok) {
+      return resp.text();
+    }
+    return resp.text().then((text) => { throw Error(text); });
+  });
+  alert('Stworzono nowa konwersacje');
+}
+
+export async function findConversation(user1, user2) {
+  const response = await fetch(`http://localhost:8000/conversations/find/${user1}/${user2}`)
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}
+
+export async function postMessage(senderId, text) {
+  await fetch('http://localhost:8000/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify({
+      senderId,
+      text,
+    }),
+  });
+  alert('Stworzono nowa konwersacje');
+}
+
+export async function getMessage(conversationId) {
+  const response = await fetch(`http://localhost:8000/messages/${conversationId}`)
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}

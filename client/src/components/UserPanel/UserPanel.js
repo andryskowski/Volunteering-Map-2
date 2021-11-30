@@ -45,7 +45,7 @@ function UserPanel() {
         </p>
         <p>
           <b>Opis użytkownika: </b>
-          {Parser(CURRENT_USER.userInfo.description)}
+          {CURRENT_USER.userInfo.description ? Parser(CURRENT_USER.userInfo.description) : 'brak opisu'}
         </p>
         <UpdateUser />
       </div>
