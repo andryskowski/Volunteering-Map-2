@@ -3,4 +3,23 @@
     border: 3px black solid;
     width: 1000px;
     height: 400px;
+    overflow: auto;
+}
+
+.message-box{
+    border-bottom: 3px darkgray dashed;
+}
+
+.chat-avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.user-online{
+    color: green;
+}
+
+.user-offline{
+    color: red;
 }

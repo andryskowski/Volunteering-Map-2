@@ -34,7 +34,7 @@ function UserProfile(props) {
 
   useEffect(() => {
     if (currentConversation) {
-      history.push('/messages', { conversationId: currentConversation });
+      history.push('/messages', { conversation: currentConversation });
     }
   }, [currentConversation, history]);
 
@@ -44,12 +44,12 @@ function UserProfile(props) {
     const fetchMyDataIfConversationExists = async () => {
       const response = await findConversation(props.userId, CURRENT_USER._id);
       if (response) {
-        setCurrentConversation(response._id);
+        setCurrentConversation(response);
       } else {
         const fetchMyDataIfConversationNotExists = async () => {
           await postConversation(CURRENT_USER._id, props.userId);
           const response2 = await findConversation(props.userId, CURRENT_USER._id);
-          setCurrentConversation(response2._id);
+          setCurrentConversation(response2);
         };
         fetchMyDataIfConversationNotExists();
       }

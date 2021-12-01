@@ -45,12 +45,12 @@ const io = require("socket.io")(8900, {
     });
   
     //send and get message
-    socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    socket.on("sendMessage", ({ senderId, receiverId, text, date }) => {
       const user = getUser(receiverId);
       io.to(user.socketId).emit("getMessage", {
             senderId,
             text,
-            date: Date.now(),
+            date,
       });
       console.log(senderId, text, user.socketId, user);
     });

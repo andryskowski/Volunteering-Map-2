@@ -9,33 +9,51 @@ import React, {
 } from 'react';
 import { io } from 'socket.io-client';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { UsersContext } from '../../contexts/UsersContext';
 import '../../scss/base/_messages.scss';
+import { getMessages, postMessage } from '../../actions/FetchData';
 
 function Messages(props) {
-  // const [socket, setSocket] = useState(null)
   const socket = useRef();
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
+  const USERS = useContext(UsersContext);
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentMessageText, setCurrentMessageText] = useState('napisz wiadomość');
   const [conversationMessages, setConversationMessages] = useState([{ text: 'witam', date: '29.11.2021', senderId: 'fdsfsdfsd' }, 
     { text: 'cześć', date: '30.11.2021', senderId: 'fdsfdsadsdfsd' }]);
+  const [friendId, setFriendId] = useState(null);
+  const [friend, setFriend] = useState(null);
+  const el = useRef(null);
 
   useEffect(() => {
     socket.current = io('ws://localhost:8900');
+    // get messages of this conversation from db
+    const fetchMyData = async () => {
+      const response = await getMessages(props.location.state.conversation._id);
+      const messagesFromDb = response.map((message) => ({ text: message.text, date: message.createdAt, senderId: message.sender }));
+      setConversationMessages(messagesFromDb);
+    };
+    fetchMyData();
+    // socket io
     socket.current.on('getMessage', (data) => {
       const newMessage = { text: data.text, date: data.date, senderId: data.senderId };
       setConversationMessages((prevState) => ([
         ...prevState, newMessage,
       ]));
     });
-  }, []); 
+  }, [props.location.state.conversation._id]); 
+
+  useEffect(() => {
+    setFriendId(props.location.state.conversation.members?.find((memberId) => memberId !== CURRENT_USER._id));
+    setFriend(USERS.find((user) => user._id === friendId));
+    // console.log(props.location.state.conversation.members?.find((memberId) => memberId !== CURRENT_USER._id));
+  }, [CURRENT_USER._id, USERS, friendId, props.location.state.conversation.members]);
 
   useEffect(() => {
     socket.current.emit('addUser', CURRENT_USER._id);
     socket.current.on('getUsers', (users) => {
-      console.log(users);
       setOnlineUsers(
         users,
       );
@@ -48,54 +66,65 @@ function Messages(props) {
     const receiver = onlineUsers.find(
       (member) => member.userId !== CURRENT_USER._id,
     );
-
+    
     if (receiver) {
       socket.current.emit('sendMessage', {
         senderId: CURRENT_USER._id,
         receiverId: receiver.userId,
         text: currentMessageText,
+        date: new Date().toISOString(),
       });
     }
-    const newMessage = { text: currentMessageText, date: '22.22.2022', senderId: CURRENT_USER._id };
+    const newMessage = { text: currentMessageText, date: new Date().toISOString(), senderId: CURRENT_USER._id };
     setConversationMessages((prevState) => ([
       ...prevState, newMessage,
     ]));
-  };
-
-  const handleSubmit2 = async (e) => {
-    e.preventDefault();
-
-    const newMessage = { text: currentMessageText, date: '22.22.2022', senderId: CURRENT_USER._id };
-    setConversationMessages((prevState) => ([
-      ...prevState, newMessage,
-    ]));
-    // socket.current.on('getMessage', (data) => {
-    //   setArrivalMessage(data.text);
-    // });
+    await postMessage(props.location.state.conversation._id, CURRENT_USER._id, currentMessageText);
   };
 
   const handleChange = (e) => {
     setCurrentMessageText(e.target.value);
   };
 
+  // to set navigation bar at bottom
+  useEffect(() => {
+    el.current.scrollIntoView({ block: 'end', behavior: 'auto' });
+  });
+
   return (
     <>
-      <h1>
+      <h6>
         Messages, konwersacja o ID
         {' '}
-        {props.location.state.conversationId}
-      </h1>
+        {props.location.state.conversation._id}
+      </h6>
+      <h2>
+        Konwersacja z użytkownikiem
+        {' '}
+        {friend?.name}
+        {' '}
+        {onlineUsers?.map((user) => user.userId).includes(friendId) 
+          ? <span className="user-online">(online)</span> : <span className="user-offline">(offline)</span>}
+        {' '}
+      </h2>
+      <div src="chat-avat-container">
+        <img className="chat-avatar" src={friend?.profilePhoto} alt="no chat-avatar" />
+      </div>
       {onlineUsers ? onlineUsers.map((user) => (
         <h5>
+          Użytkownicy online:
           {user.userId}
         </h5>
       )) : 'brak'}
       {arrivalMessage || 'brak'}
       <div className="chatbox">
-        Chatbox
         {' '}
         {conversationMessages.map((message) => (
-          <div>
+          <div className="message-box">
+            {USERS.filter((user) => user._id === message.senderId)
+              .map((user) => (
+                <h5>{user.name}</h5>
+              ))}
             {message.text}
             ,
             {' '}
@@ -105,6 +134,7 @@ function Messages(props) {
             {message.senderId}
           </div>
         ))}
+        <div id="el" ref={el} />
       </div>
       <input
         key="message-input"
@@ -121,14 +151,6 @@ function Messages(props) {
         value="Wyślij"
         className="submit"
         onClick={handleSubmit}
-      />
-      <input
-        key="submit2"
-        id="send2"
-        type="submit"
-        value="Odbierz"
-        className="submit"
-        onClick={handleSubmit2}
       />
       {currentMessageText || 'current'}
     </>

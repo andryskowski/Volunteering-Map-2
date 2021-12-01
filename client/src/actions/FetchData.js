@@ -335,7 +335,7 @@ export async function findConversation(user1, user2) {
   return response;
 }
 
-export async function postMessage(senderId, text) {
+export async function postMessage(conversationId, sender, text) {
   await fetch('http://localhost:8000/messages', {
     method: 'POST',
     headers: {
@@ -343,14 +343,15 @@ export async function postMessage(senderId, text) {
       'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
-      senderId,
+      conversationId,
+      sender,
       text,
     }),
   });
-  alert('Stworzono nowa konwersacje');
+  alert('Wyslano wiadomosc do db');
 }
 
-export async function getMessage(conversationId) {
+export async function getMessages(conversationId) {
   const response = await fetch(`http://localhost:8000/messages/${conversationId}`)
     .then((resp) => resp.json())
     .catch((error) => {
