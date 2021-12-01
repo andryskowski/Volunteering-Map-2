@@ -360,3 +360,13 @@ export async function getMessages(conversationId) {
     });
   return response;
 }
+
+export async function getConversations(userId) {
+  const response = await fetch(`http://localhost:8000/conversations/${userId}`)
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}

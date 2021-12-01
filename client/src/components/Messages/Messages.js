@@ -48,7 +48,6 @@ function Messages(props) {
   useEffect(() => {
     setFriendId(props.location.state.conversation.members?.find((memberId) => memberId !== CURRENT_USER._id));
     setFriend(USERS.find((user) => user._id === friendId));
-    // console.log(props.location.state.conversation.members?.find((memberId) => memberId !== CURRENT_USER._id));
   }, [CURRENT_USER._id, USERS, friendId, props.location.state.conversation.members]);
 
   useEffect(() => {
@@ -98,17 +97,20 @@ function Messages(props) {
         {' '}
         {props.location.state.conversation._id}
       </h6>
-      <h2>
-        Konwersacja z użytkownikiem
+      <div className="chat-main-bar">
+        <h2>
+          Konwersacja z użytkownikiem 
+          {' '}
+          {friend?.name}
+          {' '}
+          {onlineUsers?.map((user) => user.userId).includes(friendId) 
+            ? <span className="user-online">(online)</span> : <span className="user-offline">(offline)</span>}
+        </h2>
         {' '}
-        {friend?.name}
         {' '}
-        {onlineUsers?.map((user) => user.userId).includes(friendId) 
-          ? <span className="user-online">(online)</span> : <span className="user-offline">(offline)</span>}
-        {' '}
-      </h2>
-      <div src="chat-avat-container">
-        <img className="chat-avatar" src={friend?.profilePhoto} alt="no chat-avatar" />
+        <div src="chat-avatar-container">
+          <img className="chat-avatar" src={friend?.profilePhoto} alt="no chat-avatar" />
+        </div>
       </div>
       {onlineUsers ? onlineUsers.map((user) => (
         <h5>
@@ -152,7 +154,6 @@ function Messages(props) {
         className="submit"
         onClick={handleSubmit}
       />
-      {currentMessageText || 'current'}
     </>
   );
 }
