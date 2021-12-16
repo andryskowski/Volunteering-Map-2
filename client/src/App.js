@@ -58,8 +58,10 @@ function App() {
           {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
           {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
           {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
-          {CURRENT_USER_ID ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
-          {CURRENT_USER_ID ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
+          {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+            ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
+          {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+            ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
         </Switch>
       </Router>
     </>

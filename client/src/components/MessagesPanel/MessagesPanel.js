@@ -12,12 +12,25 @@ import { UsersContext } from '../../contexts/UsersContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { getConversations } from '../../actions/FetchData';
 import '../../scss/base/_messages-panel.scss';
+import Pagination from '../Pagination/Pagination';
   
 function MessagesPanel(props) {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
   const [currentConversations, setCurrentConversations] = useState(null);
   const USERS = useContext(UsersContext);
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(4);
+  
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentConversationsWithPagination = currentConversations?.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     const fetchMyData = async () => {
@@ -26,13 +39,6 @@ function MessagesPanel(props) {
     };
     fetchMyData();
   }, [CURRENT_USER._id]);
-  
-  const setRoleStyle = (role) => {
-    if (role === 'moderator') return { color: 'blue' };
-    if (role === 'admin') return { color: 'red' };
-    if (role === 'user') return { color: 'green' };
-    return { color: 'black' };
-  };
 
   const friendInfo = (currentConversation) => {
     const friendId = currentConversation.members.filter((member) => member !== CURRENT_USER._id);
@@ -55,7 +61,7 @@ function MessagesPanel(props) {
     <>
       <div className="page-container">
         <h1>Konwersacje</h1>
-        {currentConversations?.map((conversation) => (
+        {currentConversationsWithPagination?.map((conversation) => (
           <div className="conversation-box">
             <h6>
               id konwersacji:
@@ -66,6 +72,11 @@ function MessagesPanel(props) {
           </div>
         ))}
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={currentConversations?.length}
+        paginate={paginate}
+      />
     </>
   );
 }

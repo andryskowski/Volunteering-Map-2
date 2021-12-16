@@ -7,16 +7,10 @@ import React, { useContext } from 'react';
 import Parser from 'html-react-parser';
 import UpdateUser from './UpdateUser';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { setRoleStyle } from '../../actions/CommonFunctions';
 
 function UserPanel() {
   const CURRENT_USER = useContext(CurrentUserContext);
-
-  const setRoleStyle = (role) => {
-    if (role === 'moderator') return { color: 'blue' };
-    if (role === 'admin') return { color: 'red' };
-    if (role === 'user') return { color: 'green' };
-    return { color: 'black' };
-  };
 
   return (
     <>

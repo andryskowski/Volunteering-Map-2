@@ -7,6 +7,7 @@
 import React, {
   useContext, useEffect, useState, useRef, 
 } from 'react';
+import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { UsersContext } from '../../contexts/UsersContext';
@@ -21,8 +22,7 @@ function Messages(props) {
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentMessageText, setCurrentMessageText] = useState('napisz wiadomość');
-  const [conversationMessages, setConversationMessages] = useState([{ text: 'witam', date: '29.11.2021', senderId: 'fdsfsdfsd' }, 
-    { text: 'cześć', date: '30.11.2021', senderId: 'fdsfdsadsdfsd' }]);
+  const [conversationMessages, setConversationMessages] = useState([]);
   const [friendId, setFriendId] = useState(null);
   const [friend, setFriend] = useState(null);
   const el = useRef(null);
@@ -101,7 +101,11 @@ function Messages(props) {
         <h2>
           Konwersacja z użytkownikiem 
           {' '}
-          {friend?.name}
+          {friend ? (
+            <Link to={friend._id} userId={friend._id}>
+              {friend.name}
+            </Link>
+          ) : false}
           {' '}
           {onlineUsers?.map((user) => user.userId).includes(friendId) 
             ? <span className="user-online">(online)</span> : <span className="user-offline">(offline)</span>}

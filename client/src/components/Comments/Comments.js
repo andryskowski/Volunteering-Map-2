@@ -9,6 +9,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getComments, getUser } from '../../actions/FetchData';
 import '../../scss/base/_comments.scss';
 import CommentForm from './CommentForm/CommentForm';
@@ -61,14 +62,14 @@ function Comments({ placeId }) {
       <div className="comments">
         {comments.filter((comment) => comment.placeId === placeId).reverse().map((comment) => (
           <div key={comment._id} className="comment">
-            <div className="profilephoto-container">
-              <img src={comment.author.profilePhoto} width="100px" height="100px" alt="no profilePhoto" />
-            </div>
-            <p style={setRoleStyle(comment.author.role)}>
-              <b>
-                {comment.author.name}
-              </b>
-            </p>
+            <Link to={comment.authorId} userId={comment.authorId}>
+              <div className="profilephoto-container">
+                <img src={comment.author.profilePhoto} width="100px" height="100px" alt="no profilePhoto" />
+              </div>
+            </Link>
+            <Link to={comment.authorId} userId={comment.authorId}>
+              <p style={setRoleStyle(comment.author.role)}>{comment.author.name}</p>
+            </Link>
             <p>
               subject:
               {' '}

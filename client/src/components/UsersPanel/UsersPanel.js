@@ -7,11 +7,23 @@ import React, {
   Children,
   useContext, useEffect, useState,  
 } from 'react';
+import { Link } from 'react-router-dom';
 import { getUsers, removeUser, updateUserRole } from '../../actions/FetchData';
 import '../../scss/base/_users-list.scss';
+import { setRoleStyle } from '../../actions/CommonFunctions';
+import Pagination from '../Pagination/Pagination';
 
 function UsersPanel() {
   const [users, setUsers] = useState([]);
+  // pagination
+  const [itemsPerPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const usersWithPagination = users.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     const fetchMyData = async () => {
@@ -31,10 +43,6 @@ function UsersPanel() {
     window.location.reload(true);
   };
 
-  const changeUserRole = (event) => {
-
-  };
-
   const handleChangeRole = (event) => {
     const changedRole = event.target.value;
     const changedUserId = event.target.id;
@@ -42,18 +50,11 @@ function UsersPanel() {
     updateUserRole(changedUserId, changedRole);
   };
 
-  const setRoleStyle = (role) => {
-    if (role === 'moderator') return { color: 'blue' };
-    if (role === 'admin') return { color: 'red' };
-    if (role === 'user') return { color: 'green' };
-    return { color: 'black' };
-  };
-
   return (
     <>
       <div className="page-container">
         <h1>Users list</h1>
-        {users.map((user) => (
+        {usersWithPagination.map((user) => (
           <div className="users-container">
             <button className="remove-user-button" value={user._id} type="submit" onClick={removeSelectedUser}>X</button>
             <div className="role-container">
@@ -65,7 +66,9 @@ function UsersPanel() {
                 <option value="user">user</option>
               </select>
             </div>
-            <img src={user.profilePhoto} className="profile-photo" alt="no user img" width="100px" height="100px" />
+            <Link to={user._id} userId={user._id}>
+              <img src={user.profilePhoto} className="profile-photo" alt="no user img" width="100px" height="100px" />
+            </Link>
             <p>
               <b>role:</b> 
               {' '}
@@ -74,7 +77,9 @@ function UsersPanel() {
             <p>
               <b>login:</b> 
               {' '}
-              {user.name}
+              <Link to={user._id} userId={user._id}>
+                {user.name}
+              </Link>
             </p>
             <p>
               <b>id:</b> 
@@ -93,6 +98,11 @@ function UsersPanel() {
             </p>
           </div>
         ))}
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={users.length}
+          paginate={paginate}
+        />
       </div>
     </>
   );

@@ -25,8 +25,10 @@ function Navbar() {
           <Link to="/addplace"><li>Dodaj miejsce</li></Link>
           <Link to="/contact"><li>Kontakt</li></Link>
           <li>O projekcie</li>
-          <Link to="/userspanel"><li>Panel użytkowników</li></Link>
-          <Link to="/placespanel"><li>Panel miejsc</li></Link>
+          {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
+            ? <Link to="/userspanel"><li>Panel użytkowników</li></Link> : false}
+          {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
+            ? <Link to="/placespanel"><li>Panel miejsc</li></Link> : false}
           <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>Profil</li></Link>
           <Link to="/messagespanel"><li>Wiadomości (0)</li></Link>
           <li onClick={logOut}>Wyloguj się</li>

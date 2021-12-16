@@ -13,11 +13,24 @@ import '../../scss/base/_users-list.scss';
 import { PlacesContext } from '../../contexts/PlacesContext';
 import EditPlaceForm from './EditPlaceForm/EditPlaceForm';
 import '../../scss/base/_places-panel.scss';
+import Pagination from '../Pagination/Pagination';
 
 function PlacesPanel() {
   const places = useContext(PlacesContext);
   const popupEl = useRef(null);
   const [placeToEdit, setPlaceToEdit] = useState(0);
+
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(4);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const placesWithPagination = places.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleChangeStatus = (event) => {
     const changedStatus = event.target.value;
@@ -44,7 +57,7 @@ function PlacesPanel() {
     <>
       <div className="page-container">
         <h1>Places list</h1>
-        {places.map((place) => (
+        {placesWithPagination.map((place) => (
           <div className="place-list-item" key={place._id}>
             <button className="remove-user-button" value={place._id} type="submit" onClick={removeSelectedPlace}>X</button>
             <div>
@@ -103,6 +116,11 @@ function PlacesPanel() {
           <EditPlaceForm placeToEdit={placeToEdit} />
         </div>
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={places.length}
+        paginate={paginate}
+      />
     </>
   );
 }
