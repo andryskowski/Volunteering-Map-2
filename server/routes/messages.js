@@ -27,4 +27,18 @@ router.get("/:conversationId", async (req, res) => {
   }
 });
 
+//get message which is the newest
+
+router.get("/newestmessage/:conversationId", async (req, res) => {
+  try {
+    const messages = await Message.find({
+      conversationId: req.params.conversationId,
+    });
+    const newMessages = messages.reduce((prev, current) => (prev.createdAt > current.createdAt) ? prev : current);
+    res.status(200).json(newMessages);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

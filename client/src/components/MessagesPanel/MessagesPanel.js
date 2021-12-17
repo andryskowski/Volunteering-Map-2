@@ -17,8 +17,11 @@ import Pagination from '../Pagination/Pagination';
 function MessagesPanel(props) {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
-  const [currentConversations, setCurrentConversations] = useState(null);
+  const [conversationsFromDB, setconversationsFromDB] = useState(null);
   const USERS = useContext(UsersContext);
+
+  // sort by createdAt date
+  const conversationsSortedByDate = conversationsFromDB?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,12 +33,12 @@ function MessagesPanel(props) {
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentConversationsWithPagination = currentConversations?.slice(indexOfFirstItem, indexOfLastItem);
+  const conversationsDefinitive = conversationsSortedByDate?.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     const fetchMyData = async () => {
       const response = await getConversations(CURRENT_USER._id);
-      setCurrentConversations(response);
+      setconversationsFromDB(response);
     };
     fetchMyData();
   }, [CURRENT_USER._id]);
@@ -61,12 +64,16 @@ function MessagesPanel(props) {
     <>
       <div className="page-container">
         <h1>Konwersacje</h1>
-        {currentConversationsWithPagination?.map((conversation) => (
+        {conversationsDefinitive?.map((conversation) => (
           <div className="conversation-box">
             <h6>
               id konwersacji:
               {' '}
               {conversation._id}
+              {' '}
+              createdAt:
+              {' '}
+              {conversation.createdAt}
             </h6>
             {friendInfo(conversation)}
           </div>
@@ -74,7 +81,7 @@ function MessagesPanel(props) {
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}
-        totalItems={currentConversations?.length}
+        totalItems={conversationsFromDB?.length}
         paginate={paginate}
       />
     </>
