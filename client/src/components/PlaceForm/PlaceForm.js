@@ -27,6 +27,7 @@ function PlaceForm() {
   const infoAboutCurretPlace = {
     placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, latLng, smallMapOfPlace, statusPlace,
   };
+  const [showPopUp, setShowPopUp] = useState(false);
 
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
@@ -56,6 +57,7 @@ function PlaceForm() {
     event.preventDefault();
     getPlaceCoordinates();
     setStatusPlace('pending');
+    setShowPopUp(true);
   }
 
   const formats = [
@@ -80,7 +82,7 @@ function PlaceForm() {
   return (
     <div className="page-container">
       <h1 className="page-header">Dodaj miejsce</h1>
-      <form onSubmit={handleSubmit} className="form">
+      <form className="form">
         <label htmlFor="place-name">
           Nazwa fundacji (lub miejsca pomocy):
           <input id="place-name" type="place-name" name="placeName" onChange={handleChange} />
@@ -152,10 +154,10 @@ function PlaceForm() {
           type="submit"
           value="Wyślij"
           className="submit"
-          onClick={handleSubmit}
+          onClick={(event) => { handleSubmit(event); }}
         />
       </form>
-      <ViewPlaceForm info={infoAboutCurretPlace} />
+      <ViewPlaceForm info={infoAboutCurretPlace} showPopUp={showPopUp} setShowPopUp={setShowPopUp} />
     </div>
   );
 }

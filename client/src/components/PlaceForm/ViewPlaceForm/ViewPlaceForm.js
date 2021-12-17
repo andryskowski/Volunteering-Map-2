@@ -5,25 +5,33 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import Parser from 'html-react-parser';
 import { postPlaces } from '../../../actions/FetchData';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import '../../../scss/base/_view-place-form.scss';
 
 function ViewPlaceForm(props) {
-  const inputEl = useRef(null);
+  const inputEl = useRef(null); 
   const CURRENT_USER = useContext(CurrentUserContext);
+
   async function sendPlaceToDB(event) {
     event.preventDefault();
     const NEW_PLACE = props.info;
     postPlaces(NEW_PLACE, CURRENT_USER.userInfo._id);
   }
 
+  useEffect(() => {
+    if (props.showPopUp === true) {
+      inputEl.current.style.display = 'block';
+    }
+  });
+
   const onButtonClick = () => {
     // `current` wskazuje na zamontowany element kontrolki formularza
     console.log(inputEl.current);
     inputEl.current.style.display = 'none';
+    props.setShowPopUp('false');
   };
   
   return (

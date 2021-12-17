@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
@@ -8,6 +10,8 @@ import React, { useState, useContext } from 'react';
 import ReactQuill from 'react-quill';
 import { updateUser } from '../../actions/FetchData';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import UpdatePassword from './UpdatePassword';
+import '../../scss/base/_update-user.scss';
 
 function UserPanel() {
   const CURRENT_USER = useContext(CurrentUserContext);
@@ -15,6 +19,7 @@ function UserPanel() {
   const [newUsername, setNewUsername] = useState(CURRENT_USER.userInfo.name);
   const [newEmail, setNewEmail] = useState(CURRENT_USER.userInfo.email);
   const [description, setDescription] = useState('');
+  const [updatePasswordPanelVisible, setUpdatePasswordPanelVisible] = useState(false);
   
   function handleChange(event) {
     if (event.target.name === 'profilePhoto') {
@@ -85,6 +90,8 @@ function UserPanel() {
             onChange={handleChange}
           />
         </label>
+        <p className="update-password" onClick={() => { setUpdatePasswordPanelVisible(true); }}>Zmień hasło</p>
+        {updatePasswordPanelVisible ? <UpdatePassword /> : false}
         <div htmlFor="description">
           Opis:
           <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} modules={modules} formats={formats} />
