@@ -12,6 +12,7 @@ import '../../scss/base/_pagination.scss';
 function ListPlaces() {
   const [filteredDistrict, setFilteredDistrict] = useState('');
   const [filteredCategory, setFilteredCategory] = useState('');
+  const [filteredName, setFilteredName] = useState('');
   const PLACES = useContext(PlacesContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
@@ -23,13 +24,17 @@ function ListPlaces() {
     if (event.target.name === 'category') {
       setFilteredCategory(event.target.value);
     }
+    if (event.target.name === 'search-name') {
+      setFilteredName(event.target.value);
+    }
   }
 
   function changeFiltres() {
-    if (filteredCategory === '' && filteredDistrict === '') return ((place) => place);
+    if (filteredCategory === '' && filteredDistrict === '' && filteredName === '') return ((place) => place);
     if (filteredCategory && filteredDistrict) return ((place) => place.district === filteredDistrict && place.category === filteredCategory);
     if (filteredDistrict) return ((place) => place.district === filteredDistrict);
     if (filteredCategory) return ((place) => place.category === filteredCategory);
+    if (filteredName) return ((place) => place.name.toLowerCase().includes(filteredName.toLowerCase()));
     return ((place) => place);
   }
 
@@ -107,6 +112,11 @@ function ListPlaces() {
               <option value="inne">inne</option>
             </select>
           </label>
+          <label>
+            Wyszukaj po nazwie:
+            <input type="text" name="search-name" onChange={handleChange} />
+          </label>
+          <input type="submit" value="Wyślij" />
         </form>
       </div>
       {placesWithPagination}
