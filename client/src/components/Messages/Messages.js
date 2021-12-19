@@ -12,7 +12,7 @@ import { io } from 'socket.io-client';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { UsersContext } from '../../contexts/UsersContext';
 import '../../scss/base/_messages.scss';
-import { getMessages, postMessage } from '../../actions/FetchData';
+import { getMessages, postMessage, updateConversation } from '../../actions/FetchData';
 
 function Messages(props) {
   const socket = useRef();
@@ -61,6 +61,8 @@ function Messages(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const today = new Date();
+    today.setHours(today.getHours() + 1);
 
     const receiver = onlineUsers.find(
       (member) => member.userId !== CURRENT_USER._id,
@@ -71,13 +73,14 @@ function Messages(props) {
         senderId: CURRENT_USER._id,
         receiverId: receiver.userId,
         text: currentMessageText,
-        date: new Date().toISOString(),
+        date: today.toISOString(),
       });
     }
-    const newMessage = { text: currentMessageText, date: new Date().toISOString(), senderId: CURRENT_USER._id };
+    const newMessage = { text: currentMessageText, date: today.toISOString(), senderId: CURRENT_USER._id };
     setConversationMessages((prevState) => ([
       ...prevState, newMessage,
     ]));
+    await updateConversation(props.location.state.conversation._id);
     await postMessage(props.location.state.conversation._id, CURRENT_USER._id, currentMessageText);
   };
 

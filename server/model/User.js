@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const today = new Date();
+today.setHours(today.getHours() + 1);
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -21,7 +24,7 @@ const userSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now
+        default: today.toISOString()
     },  
     role: {
         type: String,

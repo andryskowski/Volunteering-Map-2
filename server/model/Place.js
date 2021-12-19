@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+const today = new Date();
+today.setHours(today.getHours() + 1);
+
 const placeSchema = new mongoose.Schema({
     name: String,
     img: String,
@@ -20,7 +23,7 @@ const placeSchema = new mongoose.Schema({
     addedBy: String,
     date: {
         type: Date,
-        default: Date.now
+        default: today.toISOString()
     }
 });
 

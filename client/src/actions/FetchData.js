@@ -361,12 +361,61 @@ export async function getMessages(conversationId) {
   return response;
 }
 
+// get the newest message from conversation
+export async function getLastMessage(conversationId) {
+  const response = await fetch(`http://localhost:8000/messages/newestmessage/${conversationId}`)
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.error(`${error.name}: ${error.message}`);
+      alert('Error retrieving data!');
+    });
+  return response;
+}
+
 export async function getConversations(userId) {
   const response = await fetch(`http://localhost:8000/conversations/${userId}`)
     .then((resp) => resp.json())
     .catch((error) => {
       console.error(`${error.name}: ${error.message}`);
       alert('Error retrieving data!');
+    });
+  return response;
+}
+
+export async function updateConversation(conversationId) {
+  const response = await fetch(`http://localhost:8000/conversations/patch/updateTimeStamp/${conversationId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      }
+      return resp.text().then((text) => {
+        throw Error(text);
+      });
+    });
+  return response;
+}
+
+export async function visitedConversation(conversationId) {
+  const response = await fetch(`http://localhost:8000/conversations/patch/visited/${conversationId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  })
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.text();
+      }
+      return resp.text().then((text) => {
+        throw Error(text);
+      });
     });
   return response;
 }

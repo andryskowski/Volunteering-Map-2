@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+const today = new Date();
+today.setHours(today.getHours() + 1);
+
 const MessageSchema = new mongoose.Schema(
   {
     conversationId: {
@@ -11,8 +14,19 @@ const MessageSchema = new mongoose.Schema(
     text: {
       type: String,
     },
+    createdAt: {
+      type: Date,
+      default: today.toISOString()
+    },
+    updatedAt: {
+      type: Date,
+      default: today.toISOString()
+    },
+    visitedAt: {
+      type: Date,
+      default: today.toISOString()
+    },
   },
-  { timestamps: true }
 );
 
 module.exports = mongoose.model("Message", MessageSchema);

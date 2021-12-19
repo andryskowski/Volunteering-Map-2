@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-plusplus */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
@@ -10,18 +12,18 @@ import React, {
 import { Link } from 'react-router-dom';
 import { UsersContext } from '../../contexts/UsersContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { getConversations } from '../../actions/FetchData';
+import { getConversations, getLastMessage, updateConversation } from '../../actions/FetchData';
 import '../../scss/base/_messages-panel.scss';
 import Pagination from '../Pagination/Pagination';
   
 function MessagesPanel(props) {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
-  const [conversationsFromDB, setconversationsFromDB] = useState(null);
+  const [conversationsFromDB, setConversationsFromDB] = useState(null);
   const USERS = useContext(UsersContext);
 
   // sort by createdAt date
-  const conversationsSortedByDate = conversationsFromDB?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const conversationsSortedByDate = conversationsFromDB?.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,11 +38,14 @@ function MessagesPanel(props) {
   const conversationsDefinitive = conversationsSortedByDate?.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
-    const fetchMyData = async () => {
-      const response = await getConversations(CURRENT_USER._id);
-      setconversationsFromDB(response);
-    };
-    fetchMyData();
+    getConversations(CURRENT_USER._id).then(async (conversations) => {
+      for (let index = 0; index < conversations.length; index++) {
+        const conversation = conversations[index];
+        conversation.lastMessage = await getLastMessage(conversation._id);
+      }
+
+      setConversationsFromDB(conversations);
+    });
   }, [CURRENT_USER._id]);
 
   const friendInfo = (currentConversation) => {
@@ -67,13 +72,16 @@ function MessagesPanel(props) {
         {conversationsDefinitive?.map((conversation) => (
           <div className="conversation-box">
             <h6>
+              ostatnia wiadomosc:
+              {conversation.lastMessage.text}
+              {' '}
               id konwersacji:
               {' '}
               {conversation._id}
               {' '}
-              createdAt:
+              updatedAt:
               {' '}
-              {conversation.createdAt}
+              {conversation.updatedAt}
             </h6>
             {friendInfo(conversation)}
           </div>

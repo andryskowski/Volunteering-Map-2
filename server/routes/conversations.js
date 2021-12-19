@@ -42,4 +42,40 @@ router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
   }
 });
 
+router.patch("/patch/updateTimeStamp/:conversationId", async (req, res) => {
+  const today = new Date();
+  try {
+    await Conversation.updateOne(
+      { _id: req.params.conversationId },
+      {
+        $set: {
+          updatedAt: today.setHours(today.getHours() + 1),
+        },
+      }
+    );
+    const conversation = await Conversation.findOne({ _id: req.params.conversationId });
+    res.json(conversation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+router.patch("/patch/visited/:conversationId", async (req, res) => {
+  const today = new Date();
+  try {
+    await Conversation.updateOne(
+      { _id: req.params.conversationId },
+      {
+        $set: {
+          updatedAt: today.setHours(today.getHours() + 1),
+        },
+      }
+    );
+    const conversation = await Conversation.findOne({ _id: req.params.conversationId });
+    res.json(conversation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;
