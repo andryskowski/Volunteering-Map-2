@@ -41,4 +41,23 @@ router.get("/newestmessage/:conversationId", async (req, res) => {
   }
 });
 
+//hasread messages
+router.patch("/patch/hasRead/:messageId", async (req, res) => {
+  const today = new Date();
+  try {
+    await Message.updateOne(
+      { _id: req.params.messageId },
+      {
+        $set: {
+          receiverHasRead: true,
+        },
+      }
+    );
+    const message = await Message.findOne({ _id: req.params.messageId });
+    res.json(message);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;

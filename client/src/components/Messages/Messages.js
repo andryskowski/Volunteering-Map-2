@@ -12,7 +12,9 @@ import { io } from 'socket.io-client';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { UsersContext } from '../../contexts/UsersContext';
 import '../../scss/base/_messages.scss';
-import { getMessages, postMessage, updateConversation } from '../../actions/FetchData';
+import {
+  getMessages, postMessage, updateConversation, updateReadMessage, 
+} from '../../actions/FetchData';
 
 function Messages(props) {
   const socket = useRef();
@@ -32,7 +34,9 @@ function Messages(props) {
     // get messages of this conversation from db
     const fetchMyData = async () => {
       const response = await getMessages(props.location.state.conversation._id);
-      const messagesFromDb = response.map((message) => ({ text: message.text, date: message.createdAt, senderId: message.sender }));
+      const messagesFromDb = response.map((message) => ({
+        text: message.text, date: message.createdAt, senderId: message.sender, receiverHasRead: message.receiverHasRead, _id: message._id,  
+      }));
       setConversationMessages(messagesFromDb);
     };
     fetchMyData();
@@ -58,6 +62,12 @@ function Messages(props) {
       );
     });
   }, [CURRENT_USER]);
+
+  // read unread messages
+  useEffect(() => {
+    conversationMessages?.filter((message) => message.sender !== CURRENT_USER._id && message.receiverHasRead === false)
+      .map((message) => updateReadMessage(message._id));
+  }, [CURRENT_USER._id, conversationMessages]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

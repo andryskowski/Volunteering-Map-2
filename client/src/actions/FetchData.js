@@ -401,8 +401,8 @@ export async function updateConversation(conversationId) {
   return response;
 }
 
-export async function visitedConversation(conversationId) {
-  const response = await fetch(`http://localhost:8000/conversations/patch/visited/${conversationId}`, {
+export async function updateReadMessage(messageId) {
+  const response = await fetch(`http://localhost:8000/messages/patch/hasRead/${messageId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -419,3 +419,14 @@ export async function visitedConversation(conversationId) {
     });
   return response;
 }
+
+// // get unread messages
+// export async function getUnreadConversations(conversationId) {
+//   const response = await fetch(`http://localhost:8000/messages/isIncludesUnreadMessages/${conversationId}`)
+//     .then((resp) => resp.json())
+//     .catch((error) => {
+//       console.error(`${error.name}: ${error.message}`);
+//       alert('Error retrieving data!');
+//     });
+//   return response;
+// }

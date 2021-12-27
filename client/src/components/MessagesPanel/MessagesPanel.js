@@ -12,7 +12,7 @@ import React, {
 import { Link } from 'react-router-dom';
 import { UsersContext } from '../../contexts/UsersContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { getConversations, getLastMessage, updateConversation } from '../../actions/FetchData';
+import { getConversations, getLastMessage } from '../../actions/FetchData';
 import '../../scss/base/_messages-panel.scss';
 import Pagination from '../Pagination/Pagination';
   
@@ -20,6 +20,7 @@ function MessagesPanel(props) {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
   const [conversationsFromDB, setConversationsFromDB] = useState(null);
+  const [unreadConversations, setUnreadConversations] = useState(null);
   const USERS = useContext(UsersContext);
 
   // sort by createdAt date
@@ -37,6 +38,7 @@ function MessagesPanel(props) {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const conversationsDefinitive = conversationsSortedByDate?.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Get last messages
   useEffect(() => {
     getConversations(CURRENT_USER._id).then(async (conversations) => {
       for (let index = 0; index < conversations.length; index++) {
@@ -48,6 +50,17 @@ function MessagesPanel(props) {
     });
   }, [CURRENT_USER._id]);
 
+  // Get unread conversations
+  useEffect(() => {
+    const fetchMyData = async () => {
+      const unreadConvs = await conversationsFromDB?.filter((conv) => conv.lastMessage.receiverHasRead === false);
+      setUnreadConversations(unreadConvs);
+      console.log(unreadConvs);
+    };
+    fetchMyData();
+  }, [conversationsFromDB]);
+
+  // get info about friend (second member of conversation)
   const friendInfo = (currentConversation) => {
     const friendId = currentConversation.members.filter((member) => member !== CURRENT_USER._id);
     const friend = USERS.find((user) => user._id === friendId.toString());
@@ -72,6 +85,11 @@ function MessagesPanel(props) {
         {conversationsDefinitive?.map((conversation) => (
           <div className="conversation-box">
             <h6>
+              {/* {console.log(unreadConversations?.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id))} */}
+              {console.log(unreadConversations?.filter((conv) => conv._id === conversation._id))}
+              {unreadConversations?.some((conv) => conv._id === conversation._id)
+              && unreadConversations.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id)
+                ? 'nie' : 'tak'}
               ostatnia wiadomosc:
               {conversation.lastMessage.text}
               {' '}

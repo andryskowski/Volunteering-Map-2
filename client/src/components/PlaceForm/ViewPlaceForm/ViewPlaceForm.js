@@ -68,18 +68,19 @@ function ViewPlaceForm(props) {
         Podgląg na mapie:
         <img src={props.info.smallMapOfPlace} alt="Podano nieprawidłowy adres" />
       </h5>
-      <img src={props.info.logo} alt="logo img" />
+      <img src={props.info.logo} alt="Błędny link do zdjęcia logo miesca pomocy." />
       <h5>
         Kategoria:
         {props.info.category}
       </h5>
       <div>
+        Opis:
         {Parser(props.info.description)}
       </div>
       <input type="submit" onClick={sendPlaceToDB} value="Wyślij" />
       <p>
         <b>Uwaga! </b>
-        Pamiętaj, że dodane przez Ciebie miejsce nie będzie od razu widoczne na mapie. Najpierw musi zostać zaakceptowane przez moderatora.
+        Pamiętaj, że dodane przez Ciebie miejsce nie będzie od razu widoczne na mapie. Najpierw musi zostać zaakceptowane przez moderatora. W przypadku błędnego wyświetlania miejsca pomocy na mapie, bez obaw, każda lokalizacja zostaje potwierdzona przez moderatora.
       </p>
     </div>
   );

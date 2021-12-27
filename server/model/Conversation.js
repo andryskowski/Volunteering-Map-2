@@ -16,10 +16,10 @@ const ConversationSchema = new mongoose.Schema(
       type: Date,
       default: today.toISOString()
     },
-    visitedAt: {
-      type: Date,
-      default: today.toISOString()
-    },
+    // visitedAt: {
+    //   type: Date,
+    //   default: today.toISOString()
+    // },
   },
 );
 

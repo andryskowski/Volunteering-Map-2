@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
@@ -8,18 +9,18 @@ import '../../scss/base/_common.scss';
 import ViewPlaceForm from './ViewPlaceForm/ViewPlaceForm';
 
 function PlaceForm() {
-  const [placeName, setPlaceame] = useState('name');
-  const [phone, setPhone] = useState('phone');
-  const [email, setEmail] = useState('email');
-  const [webPage, setWebPage] = useState('webpage');
-  const [city, setCity] = useState('Łódź');
-  const [street, setStreet] = useState('Wierzbowa');
-  const [postalCode, setPostalCode] = useState('91-410');
-  const [houseNo, setHouseNo] = useState('6c');
+  const [placeName, setPlaceame] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [webPage, setWebPage] = useState('');
+  const [city, setCity] = useState('');
+  const [street, setStreet] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [houseNo, setHouseNo] = useState('');
   const [shortDescription, setShortDescription] = useState('');
-  const [description, setDescription] = useState('Lorem ipsum');
-  const [category, setCategory] = useState('inne');
-  const [logo, setLogo] = useState(0);
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('inna');
+  const [logo, setLogo] = useState('');
   const [district, setDistrict] = useState('inna');
   const [latLng, setLatLng] = useState({ lat: 0, lng: 0 });
   const [smallMapOfPlace, setSmallMapOfPlace] = useState('Nie znaleziono lub wprowadzono nieprawidłowy adres');
@@ -52,14 +53,6 @@ function PlaceForm() {
     else if (name === 'shortDescription') setShortDescription(event.target.value);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  function handleSubmit(event) {
-    event.preventDefault();
-    getPlaceCoordinates();
-    setStatusPlace('pending');
-    setShowPopUp(true);
-  }
-
   const formats = [
     'header', 'font', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
@@ -78,6 +71,34 @@ function PlaceForm() {
       }],
     ],
   };
+
+  const validation = () => {
+    if (placeName === '') { alert('Pole z nazwa miejca nie moze byc puste'); }
+    else if (webPage === '') { alert('Pole strony internetowej nie moze byc puste'); }
+    else if (email === '') { alert('Pole email nie moze byc puste'); }
+    else if (phone === '') { alert('Pole telefon nie moze byc puste'); }
+    else if (city === '') { alert('Pole miasto nie moze byc puste'); }
+    else if (street === '') { alert('Pole ulica nie moze byc puste'); }
+    else if (postalCode === '') { alert('Pole kod pocztowy nie moze byc puste'); }
+    else if (houseNo === '') { alert('Pole numer domu nie moze byc puste'); }
+    else if (district === '') { alert('Pole dzielnica nie moze byc puste'); }
+    else if (logo === '') { alert('Pole zdjecia logo nie moze byc puste'); }
+    else if (category === '') { alert('Pole kategorii nie moze byc puste'); }
+    else if (shortDescription === '') { alert('Pole krotkiego opisu nie moze byc puste'); }
+    else return true;
+    return false;
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  function handleSubmit(event) {
+    event.preventDefault();
+    const isValidated = validation();
+    if (isValidated === true) {
+      getPlaceCoordinates();
+      setStatusPlace('pending');
+      setShowPopUp(true);
+    }
+  }
 
   return (
     <div className="page-container">
