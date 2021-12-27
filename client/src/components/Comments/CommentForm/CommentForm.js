@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -20,14 +21,24 @@ function CommentForm({ placeId }) {
     if (event.target.name === 'message') setMessage(event.target.value);
   }
 
+  const validation = () => {
+    if (subject === '') { alert('Pole tematu nie moze byc puste.'); }
+    else if (message === '') { alert('Pole wiadomosci nie moze byc puste.'); }
+    else { return true; }
+    return false;
+  };
+
   function handleSubmit() {
     const authorId = currentUser.userInfo._id;
-    const fetchMyData = async () => {
-      const response = await postComment(authorId, subject, message, placeId);
-      console.log(response);
+    const isValidated = validation();
+    if (isValidated === true) {
+      const fetchMyData = async () => {
+        const response = await postComment(authorId, subject, message, placeId);
+        console.log(response);
       // setUsers(response);
-    };
-    fetchMyData();
+      };
+      fetchMyData();
+    }
   }
 
   return (
