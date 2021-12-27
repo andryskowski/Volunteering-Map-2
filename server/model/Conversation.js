@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-const today = new Date();
-today.setHours(today.getHours() + 1);
-
 const ConversationSchema = new mongoose.Schema(
   {
     members: {
@@ -10,16 +7,12 @@ const ConversationSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: today.toISOString()
+      default: () => { const today = new Date();  today.setHours(today.getHours() + 1); return today.toISOString();}
     },
     updatedAt: {
       type: Date,
-      default: today.toISOString()
+      default: () => { const today = new Date();  today.setHours(today.getHours() + 1); return today.toISOString();}
     },
-    // visitedAt: {
-    //   type: Date,
-    //   default: today.toISOString()
-    // },
   },
 );
 

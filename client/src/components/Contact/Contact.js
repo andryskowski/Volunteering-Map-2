@@ -32,6 +32,7 @@ function Contact() {
           console.log(error.text);
         },
       );
+      alert('Wiadomosc zostala wyslana do administratora.');
       e.target.reset();
     }
   }

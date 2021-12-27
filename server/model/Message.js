@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-const today = new Date();
-today.setHours(today.getHours() + 1);
-
 const MessageSchema = new mongoose.Schema(
   {
     conversationId: {
@@ -16,11 +13,11 @@ const MessageSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: today.toISOString()
+      default: () => { const today = new Date();  today.setHours(today.getHours() + 1); return today.toISOString();}
     },
     updatedAt: {
       type: Date,
-      default: today.toISOString()
+      default: () => { const today = new Date();  today.setHours(today.getHours() + 1); return today.toISOString();}
     },
     receiverHasRead: {
       type: Boolean,

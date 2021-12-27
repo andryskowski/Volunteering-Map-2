@@ -55,6 +55,7 @@ function MessagesPanel(props) {
     const fetchMyData = async () => {
       const unreadConvs = await conversationsFromDB?.filter((conv) => conv.lastMessage.receiverHasRead === false);
       setUnreadConversations(unreadConvs);
+      localStorage.setItem('numberUnreadConversations', unreadConvs?.length);
       console.log(unreadConvs);
     };
     fetchMyData();
