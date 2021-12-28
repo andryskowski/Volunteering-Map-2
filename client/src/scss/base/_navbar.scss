@@ -1,7 +1,7 @@
 .background-x-navbar{
     background-image: url("../../assets/x_icon.svg") !important;
     font-size: 2em !important;
-    color: white;
+    
 }
 
 .navbar{
@@ -11,7 +11,7 @@
         margin: 0;
         display: flex;
         li{
-            padding: 10px 20px;
+            padding: 10px 15px;
             list-style-type: none;
         }
     }
@@ -39,15 +39,48 @@
     }
 }
 
+@media only screen and (max-width: 1400px) {
+    .navbar{
+        font-size: 0.8em;
+        .navbar-list{
+            li{
+                padding: 10px 10px;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1300px) {
     .navbar{
         font-size: 0.8em;
+        .navbar-list{
+            li{
+                padding: 10px 8px;
+            }
+        }
     }
 }
+
+
+@media only screen and (max-width: 1100px) {
+    .navbar{
+        .navbar-list{
+            li{
+                padding: 10px 8px;
+            }
+        }
+    }
+}
+
 
 @media only screen and (max-width: 1024px) {
     .navbar{
         font-size: 0.6em;
+        .navbar-list{
+            li{
+                padding: 10px 4px;
+            }
+        }
     }
 }
 
