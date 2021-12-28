@@ -40,7 +40,7 @@ margin: 0;
 
 .page-container{
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    padding: 50px 50px 50px 50px;
+    padding: 10px 50px 50px 50px;
     margin: 25px 50px 25px 50px;
 }
 
@@ -85,4 +85,11 @@ input[type=submit]{
 
 .display-flex{
     display: flex !important;
+}
+
+@media only screen and (max-width: 576px) {
+    .page-container{
+        padding: 10px 50px 50px 50px;
+        margin: 25px 0px 25px 0px;
+    }
 }

@@ -4,10 +4,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import '../../scss/base/list-places.scss';
+import '../../scss/base/_list-places.scss';
 import { PlacesContext } from '../../contexts/PlacesContext';
 import Pagination from '../Pagination/Pagination';
 import '../../scss/base/_pagination.scss';
+import '../../scss/base/_filters.scss';
 
 function ListPlaces() {
   const [filteredDistrict, setFilteredDistrict] = useState('');
@@ -93,7 +94,7 @@ function ListPlaces() {
     <div className="page-container">
       <h1 className="page-header">Lista miejsc</h1>
       <div className="filter">
-        <form>
+        <form className="filters-form">
           <label htmlFor="district">
             Dzielnica:
             <select id="district" name="district" onChange={handleChange}>

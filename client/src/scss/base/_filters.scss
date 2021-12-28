@@ -1,0 +1,11 @@
+.filters-form{
+    display: flex;
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 768px) {
+    .filters-form{
+        display: flex;
+        flex-direction: column;
+    }
+}

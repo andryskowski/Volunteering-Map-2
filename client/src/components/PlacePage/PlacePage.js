@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import '../../scss/base/list-places.scss';
+import '../../scss/base/_list-places.scss';
 import Parser from 'html-react-parser';
 import { PlacesContext } from '../../contexts/PlacesContext';
 import Comments from '../Comments/Comments';

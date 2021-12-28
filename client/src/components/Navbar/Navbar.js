@@ -42,7 +42,7 @@ function Navbar() {
       <div className="navbar">
         <div className="button-x-navbar-conainer">
           {/* <button ref={xButton} onClick={toggleNavbarList} className="button-x-navbar" type="submit">...</button> */}
-          <svg className="button-x-navbar" src="../../assets/burger_icon.svg" ref={xButton} onClick={toggleNavbarList} />
+          <svg className="button-x-navbar" alt="button-navbar error" src="../../assets/burger_icon.svg" ref={xButton} onClick={toggleNavbarList} />
         </div>
         <ul ref={navbarList} className="navbar-list">
           <Link to="/"><li>Start</li></Link>
