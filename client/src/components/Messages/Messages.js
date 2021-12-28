@@ -12,6 +12,7 @@ import { io } from 'socket.io-client';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { UsersContext } from '../../contexts/UsersContext';
 import '../../scss/base/_messages.scss';
+import '../../scss/base/_common.scss';
 import {
   getMessages, postMessage, updateConversation, updateReadMessage, 
 } from '../../actions/FetchData';
@@ -106,7 +107,7 @@ function Messages(props) {
   return (
     <>
       <h6>
-        Messages, konwersacja o ID
+        Konwersacja o ID
         {' '}
         {props.location.state.conversation._id}
       </h6>
@@ -115,7 +116,7 @@ function Messages(props) {
           Konwersacja z użytkownikiem 
           {' '}
           {friend ? (
-            <Link to={friend._id} userId={friend._id}>
+            <Link to={friend._id} userId={friend._id} className="fontColorWhite">
               {friend.name}
             </Link>
           ) : false}
@@ -135,7 +136,7 @@ function Messages(props) {
           {user.userId}
         </h5>
       )) : 'brak'}
-      {arrivalMessage || 'brak'}
+      {/* {arrivalMessage || 'brak'} */}
       <div className="chatbox">
         {' '}
         {conversationMessages.map((message) => (

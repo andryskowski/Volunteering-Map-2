@@ -7,13 +7,14 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, {
-  useContext, useEffect, useState,
+  useContext, useEffect, useState, useRef,
 } from 'react';
 import { Link } from 'react-router-dom';
 import { UsersContext } from '../../contexts/UsersContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { getConversations, getLastMessage } from '../../actions/FetchData';
 import '../../scss/base/_messages-panel.scss';
+import '../../scss/base/_common.scss';
 import Pagination from '../Pagination/Pagination';
   
 function MessagesPanel(props) {
@@ -22,6 +23,7 @@ function MessagesPanel(props) {
   const [conversationsFromDB, setConversationsFromDB] = useState(null);
   const [unreadConversations, setUnreadConversations] = useState(null);
   const USERS = useContext(UsersContext);
+  const conversationBox = useRef(null);
 
   // sort by createdAt date
   const conversationsSortedByDate = conversationsFromDB?.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -66,43 +68,47 @@ function MessagesPanel(props) {
     const friendId = currentConversation.members.filter((member) => member !== CURRENT_USER._id);
     const friend = USERS.find((user) => user._id === friendId.toString());
     return (
-      <Link exact to={{ pathname: '/messages', state: { conversation: currentConversation } }}>
-        <h5>
-          {friendId.toString()}
-          ,
-          {' '}
-          {friend ? friend.name : 'user'}
-          {' '}
-          {friend ? <img className="chat-avatar" src={friend ? friend.profilePhoto : 'profile photo'} alt="no chat-avatar" /> : 'user photo'}
-        </h5>
-      </Link>
+      <div className="linkToConversation">
+        <Link exact to={{ pathname: '/messages', state: { conversation: currentConversation } }}>
+          <h5>
+            {'Konwersacja z użytkownikiem: '}
+            {' '}
+            {friend ? friend.name : 'user'}
+            {' '}
+            {friend ? <img className="chat-avatar" src={friend ? friend.profilePhoto : 'profile photo'} alt="no chat-avatar" /> : 'user photo'}
+          </h5>
+        </Link>
+      </div>
     );
   };
 
   return (
     <>
       <div className="page-container">
-        <h1>Konwersacje</h1>
+        <h1>Konwersacje z użytkownikami</h1>
         {conversationsDefinitive?.map((conversation) => (
-          <div className="conversation-box">
+          <div className="conversation-box" ref={conversationBox}>
+            {friendInfo(conversation)}
             <h6>
               {/* {console.log(unreadConversations?.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id))} */}
               {console.log(unreadConversations?.filter((conv) => conv._id === conversation._id))}
               {unreadConversations?.some((conv) => conv._id === conversation._id)
               && unreadConversations.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id)
-                ? 'nie' : 'tak'}
-              ostatnia wiadomosc:
-              {conversation.lastMessage.text}
+                ? <h5 className="fontWeightBold">Nowe wiadomości</h5> : <h5>Brak nowych wiadomości</h5> }
+              <h3>
+                ostatnia wiadomosc:
+                {' '}
+                {conversation.lastMessage.text}
+              </h3>
               {' '}
-              id konwersacji:
               {' '}
-              {conversation._id}
+              Data:
               {' '}
-              updatedAt:
               {' '}
-              {conversation.updatedAt}
+              {conversation.updatedAt.substring(0, 10)}
+              {' '}
+              {conversation.updatedAt.substring(11, 19)}
             </h6>
-            {friendInfo(conversation)}
           </div>
         ))}
       </div>

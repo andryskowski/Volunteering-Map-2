@@ -17,7 +17,7 @@ function PlacePage(props) {
   return (
     <>
       <div className="page-container">
-        <h1>PlacePage</h1>
+        <h1>Strona miejsca pomocy</h1>
         {PLACES
           .filter((place) => placeId === place._id)
           .map((place) => (

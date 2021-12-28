@@ -7,7 +7,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-cycle */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useState, useRef,
+} from 'react';
+import '../../scss/base/_common.scss';
 import '../../scss/base/_navbar.scss';
 import { Link } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -21,13 +24,27 @@ function logOut() {
 function Navbar() {
   const CURRENT_USER = useContext(CurrentUserContext);
   const [numberUnreadConversations, setNumberUnreadConversations] = useState(0);
+  const xButton = useRef(null);
+  const navbarList = useRef(null);
+
   useEffect(() => {
     setNumberUnreadConversations(window.localStorage.getItem('numberUnreadConversations') ? window.localStorage.getItem('numberUnreadConversations') : 0);
-  });
+  }, []);
+
+  const toggleNavbarList = () => {
+    navbarList.current.classList.toggle('display-flex');
+    xButton.current.classList.toggle('background-x-navbar');
+    // navbarList.current.classList.toggle('navbar-list');
+  };
+
   return (
     <>
       <div className="navbar">
-        <ul className="navbar-list">
+        <div className="button-x-navbar-conainer">
+          {/* <button ref={xButton} onClick={toggleNavbarList} className="button-x-navbar" type="submit">...</button> */}
+          <svg className="button-x-navbar" src="../../assets/burger_icon.svg" ref={xButton} onClick={toggleNavbarList} />
+        </div>
+        <ul ref={navbarList} className="navbar-list">
           <Link to="/"><li>Start</li></Link>
           <Link to="/listplaces"><li>Lista miejsc</li></Link>
           <Link to="/addplace"><li>Dodaj miejsce</li></Link>

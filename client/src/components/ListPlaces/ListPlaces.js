@@ -62,14 +62,20 @@ function ListPlaces() {
       </div>
       <div className="place-category">
         <p>
-          Kategoria:
+          <b>Kategoria:</b>
           {place.category}
         </p>
       </div>
       <div className="place-district">
         <p>
-          Dzielnica:
+          <b>Dzielnica:</b>
           {place.district}
+        </p>
+      </div>
+      <div className="short-description">
+        <p>
+          <b>Opis:</b>
+          <p>{place.shortDescription}</p>
         </p>
       </div>
     </div>

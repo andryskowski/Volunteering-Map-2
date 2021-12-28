@@ -53,7 +53,7 @@ function UsersPanel() {
   return (
     <>
       <div className="page-container">
-        <h1>Users list</h1>
+        <h1>Panel użytkowników</h1>
         {usersWithPagination.map((user) => (
           <div className="users-container">
             <button className="remove-user-button" value={user._id} type="submit" onClick={removeSelectedUser}>X</button>
@@ -70,7 +70,7 @@ function UsersPanel() {
               <img src={user.profilePhoto} className="profile-photo" alt="no user img" width="100px" height="100px" />
             </Link>
             <p>
-              <b>role:</b> 
+              <b>rola:</b> 
               {' '}
               <span style={setRoleStyle(user.role)}>{user.role}</span>
             </p>
@@ -94,7 +94,10 @@ function UsersPanel() {
             <p>
               <b>data dołączenia:</b> 
               {' '}
-              {user.date}
+              {' '}
+              {user.date.substring(0, 10)}
+              {' '}
+              {user.date.substring(11, 19)}
             </p>
           </div>
         ))}
