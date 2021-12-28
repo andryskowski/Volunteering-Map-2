@@ -123,7 +123,9 @@ function ListPlaces() {
             Wyszukaj po nazwie:
             <input type="text" name="search-name" onChange={handleChange} />
           </label>
-          <input type="submit" value="Wyślij" />
+          <label>
+            <input type="submit" value="Wyślij" />
+          </label>
         </form>
       </div>
       {placesWithPagination}

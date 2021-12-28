@@ -174,7 +174,7 @@ function PlaceForm() {
           id="send"
           type="submit"
           value="Wyślij"
-          className="submit"
+          className="submit submit-addplace"
           onClick={(event) => { handleSubmit(event); }}
         />
       </form>
