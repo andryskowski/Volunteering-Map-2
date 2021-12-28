@@ -52,7 +52,7 @@ function UsersPanel() {
 
   return (
     <>
-      <div className="page-container">
+      <div className="page-container users-panel">
         <h1>Panel użytkowników</h1>
         {usersWithPagination.map((user) => (
           <div className="users-container">

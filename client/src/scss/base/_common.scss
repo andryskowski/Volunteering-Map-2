@@ -63,6 +63,9 @@ input[type=submit]{
       background-color: royalblue;
       color: white;
     }
+    @media only screen and (max-width: 576px) {
+        margin: 40px 0.3em 0.3em 0;
+    }
 }
 
 .description-box{
@@ -113,7 +116,9 @@ input[type=submit]{
             select{
                 width: 300px;
             }
+
         }
+
     }
 
 }

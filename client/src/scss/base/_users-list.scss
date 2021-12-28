@@ -31,4 +31,17 @@
     display: flex;
     justify-content: space-between;
     width: 240px;
+}   
+
+@media only screen and (max-width: 576px) {
+    .users-panel{
+        padding: 1px 0px 50px 0px;
+        font-size: 0.7em;
+        .role-container{
+            flex-direction: column;
+        }
+        .users-container{
+            padding: 0;
+        }
+    }
 }
