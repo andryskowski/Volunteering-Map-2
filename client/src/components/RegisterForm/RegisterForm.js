@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-alert */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
@@ -33,8 +34,10 @@ export default class RegisterForm extends React.Component {
   render() {
     return (
       <>
-        <h3>Rejestracja</h3>
         <form onSubmit={this.handleSubmit} className="form">
+          <label>
+            <h3>Rejestracja</h3>
+          </label>
           <label htmlFor="name">
             Login/Nazwa użytkownika:
             <input id="name" type="text" name="nameUser" onChange={this.handleChange} />
@@ -44,7 +47,7 @@ export default class RegisterForm extends React.Component {
             <input id="email" type="email" name="emailUser" onChange={this.handleChange} />
           </label>
           <label htmlFor="password">
-            Password:
+            Hasło:
             <input id="password" type="password" name="passwordUser" onChange={this.handleChange} />
           </label>
           <input
