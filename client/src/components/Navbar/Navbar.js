@@ -8,7 +8,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {
-  useContext, useEffect, useState, useRef,
+  useContext, useRef,
 } from 'react';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_navbar.scss';
@@ -23,13 +23,8 @@ function logOut() {
 
 function Navbar() {
   const CURRENT_USER = useContext(CurrentUserContext);
-  const [numberUnreadConversations, setNumberUnreadConversations] = useState(0);
   const xButton = useRef(null);
   const navbarList = useRef(null);
-
-  useEffect(() => {
-    setNumberUnreadConversations(window.localStorage.getItem('numberUnreadConversations') ? window.localStorage.getItem('numberUnreadConversations') : 0);
-  }, []);
 
   const toggleNavbarList = () => {
     navbarList.current.classList.toggle('display-flex');
@@ -55,7 +50,7 @@ function Navbar() {
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
             ? <Link to="/placespanel"><li>Panel miejsc</li></Link> : false}
           <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>Profil</li></Link>
-          <Link to="/messagespanel"><li>Wiadomości ({numberUnreadConversations ? numberUnreadConversations : '0'})</li></Link>
+          <Link to="/messagespanel"><li>Wiadomości</li></Link>
           <li onClick={logOut}>Wyloguj się</li>
           <div className="small-profilephoto-container">
             <Link to={CURRENT_USER.userInfo._id}>

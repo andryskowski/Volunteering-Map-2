@@ -71,11 +71,12 @@ function MessagesPanel(props) {
       <div className="linkToConversation">
         <Link exact to={{ pathname: '/messages', state: { conversation: currentConversation } }}>
           <h5>
-            {'Konwersacja z użytkownikiem: '}
-            {' '}
-            {friend ? friend.name : 'user'}
-            {' '}
             {friend ? <img className="chat-avatar" src={friend ? friend.profilePhoto : 'profile photo'} alt="no chat-avatar" /> : 'user photo'}
+            {' '}
+            {'Konwersacja z użytkownikiem: '}
+            {' '} 
+            {friend ? friend.name : 'user'}
+            
           </h5>
         </Link>
       </div>
@@ -89,26 +90,26 @@ function MessagesPanel(props) {
         {conversationsDefinitive?.map((conversation) => (
           <div className="conversation-box" ref={conversationBox}>
             {friendInfo(conversation)}
-            <h6>
-              {/* {console.log(unreadConversations?.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id))} */}
-              {console.log(unreadConversations?.filter((conv) => conv._id === conversation._id))}
-              {unreadConversations?.some((conv) => conv._id === conversation._id)
+            <div className="second-part">
+              <h6>
+                {unreadConversations?.some((conv) => conv._id === conversation._id)
               && unreadConversations.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id)
-                ? <h5 className="fontWeightBold">Nowe wiadomości</h5> : <h5>Brak nowych wiadomości</h5> }
-              <h3>
-                ostatnia wiadomosc:
+                  ? <h5 className="fontWeightBold">Nowe wiadomości</h5> : <h5 className="text-no-newmessages">Brak nowych wiadomości</h5> }
+                <h2>
+                  ostatnia wiadomosc:
+                  {' '}
+                  <span className="last-message">{conversation.lastMessage.text}</span>
+                </h2>
                 {' '}
-                {conversation.lastMessage.text}
-              </h3>
-              {' '}
-              {' '}
-              Data:
-              {' '}
-              {' '}
-              {conversation.updatedAt.substring(0, 10)}
-              {' '}
-              {conversation.updatedAt.substring(11, 19)}
-            </h6>
+                {' '}
+                Data:
+                {' '}
+                {' '}
+                {conversation.updatedAt.substring(0, 10)}
+                {' '}
+                {conversation.updatedAt.substring(11, 19)}
+              </h6>
+            </div>
           </div>
         ))}
       </div>

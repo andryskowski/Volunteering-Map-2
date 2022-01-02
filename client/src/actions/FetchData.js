@@ -348,7 +348,6 @@ export async function postMessage(conversationId, sender, text) {
       text,
     }),
   });
-  alert('Wyslano wiadomosc do db');
 }
 
 export async function getMessages(conversationId) {

@@ -24,7 +24,7 @@ function Messages(props) {
   const USERS = useContext(UsersContext);
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [currentMessageText, setCurrentMessageText] = useState('napisz wiadomość');
+  const [currentMessageText, setCurrentMessageText] = useState('');
   const [conversationMessages, setConversationMessages] = useState([]);
   const [friendId, setFriendId] = useState(null);
   const [friend, setFriend] = useState(null);
