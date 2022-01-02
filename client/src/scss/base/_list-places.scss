@@ -8,6 +8,12 @@
     }
 }
 
+.place-img-placepage{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    width: 320px;
+    height: 320px;
+}
+
 @media only screen and (max-width: 1300px) {
     .place-list-item{
         margin: 20px 150px 20px 150px;

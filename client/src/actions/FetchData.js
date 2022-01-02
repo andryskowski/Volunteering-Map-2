@@ -303,6 +303,16 @@ export async function postComment(authorIdComment, subjectComment, messageCommen
   alert('Wyslano do bazy danych');
 }
 
+// remove comment
+export async function removeComment(commentId) {
+  const response = await fetch(`http://localhost:8000/comments/delete/${commentId}`, {
+    method: 'DELETE',
+  })
+    .then((res) => res.text()) // or res.json()
+    .then((res) => console.log(res));
+  return response;
+}
+
 // messenger
 
 export async function postConversation(senderId, receiverId) {

@@ -25,7 +25,7 @@ function PlacePage(props) {
               <div>
                 <h4>
                   <img
-                    className="place-img"
+                    className="place-img-placepage"
                     src={place.img}
                     alt="place-img"
                     width="300"
@@ -35,9 +35,7 @@ function PlacePage(props) {
               </div>
               <div className="place-name">
                 <h4>
-                  <Link to={place._id} place_id={place._id}>
-                    {place.name}
-                  </Link>
+                  {place.name}
                 </h4>
               </div>
               <div className="place-address">

@@ -49,13 +49,15 @@ function Navbar() {
             ? <Link to="/userspanel"><li>Panel użytkowników</li></Link> : false}
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
             ? <Link to="/placespanel"><li>Panel miejsc</li></Link> : false}
-          <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>Profil</li></Link>
+          {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
+            ? <Link to="/commentspanel"><li>Panel komentarzy</li></Link> : false}
           <Link to="/messagespanel"><li>Wiadomości</li></Link>
+          <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>Profil</li></Link>
           <li onClick={logOut}>Wyloguj się</li>
           <div className="small-profilephoto-container">
-            <Link to={CURRENT_USER.userInfo._id}>
+            <div>
               <img width="35px" height="35px" src={CURRENT_USER.userInfo.profilePhoto} alt="profile img" />
-            </Link>
+            </div>
           </div>
         </ul>
       </div>
