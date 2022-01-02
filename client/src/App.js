@@ -21,6 +21,7 @@ import { UsersContext } from './contexts/UsersContext';
 import Messages from './components/Messages/Messages';
 import MessagesPanel from './components/MessagesPanel/MessagesPanel';
 import CommentsPanel from './components/CommentsPanel/CommentsPanel';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 const CURRENT_USER = JSON.parse(window.localStorage.getItem('CURRENT_USER'));
 const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
@@ -32,39 +33,41 @@ function App() {
     <>
       <Router>
         {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
-        <Switch>
-          {CURRENT_USER_ID ? (
-            <PrivateRoute exact path="/" component={MainPage} />
-          ) : (
-            <Route exact path="/" component={LandingPage} />
-          )}
-          <PrivateRoute exact path="/messages" component={Messages} />
-          <PrivateRoute exact path="/messagespanel" component={MessagesPanel} />
-          <PrivateRoute exact path="/commentspanel" component={CommentsPanel} />
-          <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
-          <PrivateRoute exact path="/userProfile" component={UserProfile} />
-          {PLACES ? PLACES.map((place) => (
-            <PrivateRoute
-              exact
-              path={`/${place._id}`}
-              component={() => <PlacePage placeId={place._id} />}
-            />
-          )) : false}
-          {USERS ? USERS.map((user) => (
-            <PrivateRoute
-              exact
-              path={`/${user._id}`}
-              component={() => <UserProfile userId={user._id} />}
-            />
-          )) : false}
-          {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
-          {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
-          {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
-          {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
-            ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
-          {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
-            ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            {CURRENT_USER_ID ? (
+              <PrivateRoute exact path="/" component={MainPage} />
+            ) : (
+              <Route exact path="/" component={LandingPage} />
+            )}
+            <PrivateRoute exact path="/messages" component={Messages} />
+            <PrivateRoute exact path="/messagespanel" component={MessagesPanel} />
+            <PrivateRoute exact path="/commentspanel" component={CommentsPanel} />
+            <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
+            <PrivateRoute exact path="/userProfile" component={UserProfile} />
+            {PLACES ? PLACES.map((place) => (
+              <PrivateRoute
+                exact
+                path={`/${place._id}`}
+                component={() => <PlacePage placeId={place._id} />}
+              />
+            )) : false}
+            {USERS ? USERS.map((user) => (
+              <PrivateRoute
+                exact
+                path={`/${user._id}`}
+                component={() => <UserProfile userId={user._id} />}
+              />
+            )) : false}
+            {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
+            {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
+            {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
+            {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+              ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
+            {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+              ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
+          </Switch>
+        </ScrollToTop>
       </Router>
     </>
   );
