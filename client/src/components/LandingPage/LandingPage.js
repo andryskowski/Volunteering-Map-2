@@ -13,6 +13,8 @@ import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import '../../scss/base/_landing-page.scss';
 import kids from '../../assets/kids.jpg';
+import vmlogo from '../../assets/vm-logo.png';
+import lodzlogo from '../../assets/lodz.svg';
 
 function ViewPlaceForm(props) {
   const refContextContainer1 = useRef(false);
@@ -38,8 +40,16 @@ function ViewPlaceForm(props) {
           <div ref={refContextContainer1} className="landing-page-container-context-1">
             <div className="header-container"><h1>Volunteering Map</h1></div>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            <div className="img-container">
-              <img className="img-kids" src={kids} alt="kids" />
+            <div className="images-container">
+              <div className="lodz-logo-container">
+                <img className="lodz-logo img-landingpage" src={lodzlogo} alt="lodz-logo" />
+              </div>
+              <div className="img-kids-container">
+                <img className="img-kids img-landingpage" src={kids} alt="kids" />
+              </div>
+              <div className="vm-logo-container">
+                <img className="vm-logo img-landingpage" src={vmlogo} alt="vm-logo" />
+              </div>
             </div>
           </div>
 

@@ -5,13 +5,6 @@
     width: 100vw;
     height: 100vh;
     color: navy; 
-    
-.landing-page-img-container{
-.landing-page-img{
-    width: 100vw;
-    height: 100vh;
-}
-}
 
 .landing-page-container{
     position: absolute;
@@ -23,10 +16,16 @@
     border-radius: 20px;
     background-color: rgb(255, 190, 201);
     .landing-page-container-context-1{
-        .img-container{
+        .images-container{
             display: flex;
             justify-content: center;
+            justify-content: space-around;
             margin: 15px 0;
+
+            .img-landing-page{
+                width: 210px;
+                height: 130px;
+            }
 
             .img-kids{
                 width: 210px;
@@ -60,6 +59,16 @@
     color: black;
 }
 }
+}
+
+.lodz-logo{
+    width: 110px;
+    height: 130px;
+}
+
+.vm-logo{
+    width: 130px;
+    height: 130px;
 }
 
 @media only screen and (max-width: 1024px) {

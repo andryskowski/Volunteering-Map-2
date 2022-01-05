@@ -38,7 +38,6 @@ function Comments({ placeId }) {
         comment.author = await getAuthor(comment.authorId);
       }
 
-      console.log(commentsFromDb);
       setComments(commentsFromDb);
 
       // get number of comments fot this place
