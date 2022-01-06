@@ -115,12 +115,12 @@ function PlacesPanel() {
           </div>
           <EditPlaceForm placeToEdit={placeToEdit} />
         </div>
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={places.length}
+          paginate={paginate}
+        />
       </div>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={places.length}
-        paginate={paginate}
-      />
     </>
   );
 }

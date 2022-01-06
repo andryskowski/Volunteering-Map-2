@@ -12,7 +12,7 @@ import CurrentUserContext from '../../../contexts/CurrentUserContext';
 import '../../../scss/base/_view-place-form.scss';
 
 function ViewPlaceForm(props) {
-  const inputEl = useRef(null); 
+  const popup = useRef(null); 
   const CURRENT_USER = useContext(CurrentUserContext);
 
   async function sendPlaceToDB(event) {
@@ -23,19 +23,18 @@ function ViewPlaceForm(props) {
 
   useEffect(() => {
     if (props.showPopUp === true) {
-      inputEl.current.style.display = 'block';
+      popup.current.style.display = 'block';
     }
   });
 
   const onButtonClick = () => {
     // `current` wskazuje na zamontowany element kontrolki formularza
-    console.log(inputEl.current);
-    inputEl.current.style.display = 'none';
+    popup.current.style.display = 'none';
     props.setShowPopUp('false');
   };
   
   return (
-    <div className="popup" ref={inputEl}>
+    <div className="popup" ref={popup}>
       <div className="button-container"><button onClick={onButtonClick}>X</button></div>
       <h2>Podgląd: </h2>
       <h5>

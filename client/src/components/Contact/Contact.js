@@ -7,6 +7,7 @@ import emailjs from 'emailjs-com';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_contact.scss';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import people from '../../assets/people-contact-page-2.png';
 
 function Contact() {
   const CURRENT_USER = useContext(CurrentUserContext);
@@ -38,12 +39,13 @@ function Contact() {
   }
 
   return (
-    <div className="page-container">
+    <div className="page-container contact-page">
       <div>
         <h1 className="page-header">Kontakt</h1>
+        <h4 className="contact-header-2"><b>Masz pytanie? Zauważyłeś błąd na stronie? Za pomocą poniższego formularza możesz z łatwością skontaktować się z administratorem portalu.</b></h4>
         <form onSubmit={sendEmail} className="form form-contact">
           <label htmlFor="name">
-            Name:
+            Nazwa użytkownika:
             <input id="name" defaultValue={CURRENT_USER.userInfo.name} type="text" name="name" />
           </label>
           <label htmlFor="email">
@@ -51,16 +53,19 @@ function Contact() {
             <input id="email" defaultValue={CURRENT_USER.userInfo.email} type="text" name="email" />
           </label>
           <label htmlFor="subject">
-            Subject:
+            Temat:
             <input id="subject" onChange={(e) => setSubject(e.target.value)} type="text" name="subject" />
           </label>
           <label htmlFor="message">
-            Message:
+            Wiadomość:
             <textarea onChange={(e) => setMessage(e.target.value)} id="message" type="text" name="message" className="message-input" />
           </label>
           <input type="submit" value="Send Message" />
         </form>
       </div>
+      {/* <div className="contact-bcg-image-container">
+        <img className="contact-bcg-image" alt="no people img" src={people} />
+      </div> */}
     </div>
   );
 }

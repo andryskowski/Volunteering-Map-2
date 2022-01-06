@@ -35,11 +35,24 @@ function ViewPlaceForm(props) {
   return (
     <>
       <div className="landing-page">
-
         <div className="landing-page-container">
           <div ref={refContextContainer1} className="landing-page-container-context-1">
-            <div className="header-container"><h1>Volunteering Map</h1></div>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div className="header-container">
+              <h1>Volunteering Map</h1>
+            </div>
+            <p>
+              Szukasz miejsca, w którym mógłbyś spędzić wspaniałe chwile, poznać nowych ludzi, a
+              przy okazji nieść pomoc innym? Dobrze trafiłeś! &apos;Volunteering Map&apos; ułatwi Ci
+              znalezienie tego czego szukasz. Ta całkowicie darmowa aplikacja pozwala na znalezienie
+              fundacji, schroniska, domu seniora czy jakiegokolwiek innego miejsca, w którym
+              poszukiwani są wolontariusze. Sprawdź jakie placówki znajdują się w Twojej
+              okolicy. Być może założenie konta na naszym portalu zmieni Twoje życie... Kto wie,
+              może spotkasz tu przyjaciół na lata, którzy będą Twoją pomocną dłonią w trudniejszych
+              chwilach?
+            </p>
+            <div className="see-for-yourself-header-container">
+              <h4 className="see-for-yourself-header">Przekonaj się sam!</h4>
+            </div>
             <div className="images-container">
               <div className="lodz-logo-container">
                 <img className="lodz-logo img-landingpage" src={lodzlogo} alt="lodz-logo" />
@@ -60,12 +73,16 @@ function ViewPlaceForm(props) {
           </div>
 
           <div className="goback-container">
-            <a onClick={() => { changeView(); }}>{heading}</a>
+            <a
+              onClick={() => {
+                changeView();
+              }}
+            >
+              {heading}
+            </a>
           </div>
         </div>
-        
       </div>
-
     </>
   );
 }

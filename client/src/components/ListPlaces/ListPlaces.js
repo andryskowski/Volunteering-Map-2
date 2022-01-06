@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/base/_list-places.scss';
 import { PlacesContext } from '../../contexts/PlacesContext';
@@ -17,6 +17,11 @@ function ListPlaces() {
   const PLACES = useContext(PlacesContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
+  const [sortedPlaces, setSortedPlaces] = useState([]);
+
+  useEffect(() => {
+    setSortedPlaces(PLACES);
+  }, [PLACES]);
 
   function handleChange(event) {
     if (event.target.name === 'district') {
@@ -30,6 +35,18 @@ function ListPlaces() {
     }
   }
 
+  function handleSort(event) {
+    if (event.target.value === 'oldest') {
+      const sortedPlacesByOldest = PLACES?.sort((a, b) => new Date(a.date) - new Date(b.date));
+      setSortedPlaces(sortedPlacesByOldest);
+    } else if (event.target.value === 'newest') {
+      const sortedPlacesByNewest = PLACES?.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setSortedPlaces(sortedPlacesByNewest);
+    } else {
+      setSortedPlaces(PLACES);
+    }
+  }
+
   function changeFiltres() {
     if (filteredCategory === '' && filteredDistrict === '' && filteredName === '') return ((place) => place);
     if (filteredCategory && filteredDistrict) return ((place) => place.district === filteredDistrict && place.category === filteredCategory);
@@ -39,7 +56,7 @@ function ListPlaces() {
     return ((place) => place);
   }
 
-  const currentPlaces = PLACES.filter(changeFiltres()).map((place) => (
+  const currentPlaces = PLACES?.filter(changeFiltres()).map((place) => (
     <div className="place-list-item">
       <div>
         <Link to={place._id}><img className="place-img" src={place.img} alt="place-img" width="100" height="100" /></Link>
@@ -71,6 +88,15 @@ function ListPlaces() {
         <p>
           <b>Dzielnica:</b>
           {place.district}
+        </p>
+      </div>
+      <div className="place-date">
+        <p>
+          <b>Ostatnia aktualizacja:</b>
+          {' '}
+          {place.date.substring(0, 10)}
+          {' '}
+          {place.date.substring(11, 19)}
         </p>
       </div>
       <div className="short-description">
@@ -112,19 +138,24 @@ function ListPlaces() {
             <select id="category" name="category" onChange={handleChange}>
               <option value="">Wszystkie</option>
               <option value="dzieci">dzieci</option>
-              <option value="zwierzęta">zwierzęta</option>
+              <option value="zwierzeta">zwierzęta</option>
               <option value="inwalidzi">inwalidzi</option>
-              <option value="uzależnienia">uzależnienia</option>
+              <option value="uzaleznienia">uzależnienia</option>
               <option value="emeryci">emeryci</option>
               <option value="inne">inne</option>
+            </select>
+          </label>
+          <label htmlFor="sort">
+            Sortuj:
+            <select id="sort" name="sort" onChange={handleSort}>
+              <option selected value="-">--</option>
+              <option value="newest">najnowsze</option>
+              <option value="oldest">najstarsze</option>
             </select>
           </label>
           <label>
             Wyszukaj po nazwie:
             <input type="text" name="search-name" onChange={handleChange} />
-          </label>
-          <label>
-            <input type="submit" value="Wyślij" />
           </label>
         </form>
       </div>

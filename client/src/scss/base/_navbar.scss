@@ -5,14 +5,20 @@
 }
 
 .navbar{
-    background-color: lightblue;
+    background-color: #03396c;
     color: white;
+    width: 100vw;
     .navbar-list{
         margin: 0;
         display: flex;
         li{
             padding: 10px 15px;
             list-style-type: none;
+            color: #d0efff;
+        }
+        li:hover{
+            color: #6497b1;
+
         }
     }
     .small-profilephoto-container{
