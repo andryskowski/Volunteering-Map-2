@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../../scss/base/_common.scss';
+import '../../scss/base/_place-form.scss';
 import ViewPlaceForm from './ViewPlaceForm/ViewPlaceForm';
 
 function PlaceForm() {
@@ -101,7 +102,7 @@ function PlaceForm() {
   }
 
   return (
-    <div className="page-container">
+    <div className="page-container placeform-page">
       <h1 className="page-header">Dodaj miejsce</h1>
       <form className="form">
         <label htmlFor="place-name">

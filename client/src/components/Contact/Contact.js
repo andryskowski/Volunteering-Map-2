@@ -42,7 +42,7 @@ function Contact() {
     <div className="page-container contact-page">
       <div>
         <h1 className="page-header">Kontakt</h1>
-        <h4 className="contact-header-2"><b>Masz pytanie? Zauważyłeś błąd na stronie? Za pomocą poniższego formularza możesz z łatwością skontaktować się z administratorem portalu.</b></h4>
+        <h4 className="contact-header-2"><b>Masz pytanie? Zauważyłeś błąd na stronie? Za pomocą poniższego formularza możesz z łatwością skontaktować się z administratorem serwisu.</b></h4>
         <form onSubmit={sendEmail} className="form form-contact">
           <label htmlFor="name">
             Nazwa użytkownika:

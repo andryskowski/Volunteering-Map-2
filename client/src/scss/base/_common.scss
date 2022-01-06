@@ -8,6 +8,19 @@ overflow-x: hidden;
 color: navy;
 }
 
+textarea{
+    border-color: royalblue;
+    background-color: rgb(223, 231, 255);
+    color: navy;
+    outline: none;
+}
+
+.textarea:focus{
+    outline: none;
+    border-color: navy;
+    box-shadow: 0 5px 15px rgba(92, 119, 182, 0.4);
+}
+
 .form{
     border-radius: 20px;
     display: flex;
@@ -80,6 +93,7 @@ input[type=submit]{
 .description-box{
     height: 300px;
     padding: 0 0 50px 0;
+    background-color: rgb(223, 231, 255);
 }
 
 .fontWeightBold{
