@@ -105,14 +105,9 @@ function Messages(props) {
   });
 
   return (
-    <>
-      <h6>
-        Konwersacja o ID
-        {' '}
-        {props.location.state.conversation._id}
-      </h6>
+    <div className="page-container">
       <div className="chat-main-bar">
-        <h2>
+        <h2 className="h2-messages">
           Konwersacja z użytkownikiem 
           {' '}
           {friend ? (
@@ -130,13 +125,6 @@ function Messages(props) {
           <img className="chat-avatar" src={friend?.profilePhoto} alt="no chat-avatar" />
         </div>
       </div>
-      {onlineUsers ? onlineUsers.map((user) => (
-        <h5>
-          Użytkownicy online:
-          {user.userId}
-        </h5>
-      )) : 'brak'}
-      {/* {arrivalMessage || 'brak'} */}
       <div className="chatbox">
         {' '}
         {conversationMessages.map((message) => (
@@ -169,10 +157,10 @@ function Messages(props) {
         id="send"
         type="submit"
         value="Wyślij"
-        className="submit"
+        className="submit submit-messages"
         onClick={handleSubmit}
       />
-    </>
+    </div>
   );
 }
 
