@@ -69,15 +69,16 @@ function MessagesPanel(props) {
     const friend = USERS.find((user) => user._id === friendId.toString());
     return (
       <div className="linkToConversation">
-        <Link exact to={{ pathname: '/messages', state: { conversation: currentConversation } }}>
+        <Link className="first-part" exact to={{ pathname: '/messages', state: { conversation: currentConversation } }}>
           <h5>
             {friend ? <img className="chat-avatar" src={friend ? friend.profilePhoto : 'profile photo'} alt="no chat-avatar" /> : 'user photo'}
             {' '}
+          </h5>
+          <h4 className="h4-messagespanel">
             {'Konwersacja z użytkownikiem: '}
             {' '} 
             {friend ? friend.name : 'user'}
-            
-          </h5>
+          </h4>
         </Link>
       </div>
     );

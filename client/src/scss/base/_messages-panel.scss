@@ -11,6 +11,10 @@
     
 }
 
+.first-part{
+    display: flex;
+}
+
 .second-part{
     margin-left: 20px;
 }
@@ -18,7 +22,7 @@
 .linkToConversation{
     background-color: #a1bfda;
     display: flex;
-    width: 470px;
+    width: 520px;
 }
 
 .text-no-newmessages{
@@ -32,4 +36,8 @@
 
 .chat-avatar{
     margin: 0 10px;
+}
+
+.h4-messagespanel{
+margin-top: 60px;
 }
