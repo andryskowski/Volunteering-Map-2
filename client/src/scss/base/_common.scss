@@ -8,6 +8,18 @@ overflow-x: hidden;
 color: navy;
 }
 
+a{
+    text-decoration: none !important;
+}
+
+a:focus{
+    color: navy;
+}
+
+a:visited{
+    color: navy;
+}
+
 textarea{
     border-color: royalblue;
     background-color: rgb(223, 231, 255);

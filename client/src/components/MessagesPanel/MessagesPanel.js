@@ -113,12 +113,13 @@ function MessagesPanel(props) {
             </div>
           </div>
         ))}
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={conversationsFromDB?.length}
+          paginate={paginate}
+          className="pagination"
+        />
       </div>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={conversationsFromDB?.length}
-        paginate={paginate}
-      />
     </>
   );
 }
