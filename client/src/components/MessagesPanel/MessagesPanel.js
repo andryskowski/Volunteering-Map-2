@@ -88,31 +88,33 @@ function MessagesPanel(props) {
     <>
       <div className="page-container">
         <h1>Konwersacje z użytkownikami</h1>
-        {conversationsDefinitive?.map((conversation) => (
-          <div className="conversation-box" ref={conversationBox}>
-            {friendInfo(conversation)}
-            <div className="second-part">
-              <h6>
-                {unreadConversations?.some((conv) => conv._id === conversation._id)
+        <div className="conversations-box">
+          {conversationsDefinitive?.map((conversation) => (
+            <div className="conversation-box" ref={conversationBox}>
+              {friendInfo(conversation)}
+              <div className="second-part">
+                <h6>
+                  {unreadConversations?.some((conv) => conv._id === conversation._id)
               && unreadConversations.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id)
-                  ? <h5 className="fontWeightBold">Nowe wiadomości</h5> : <h5 className="text-no-newmessages">Brak nowych wiadomości</h5> }
-                <h2>
-                  ostatnia wiadomosc:
+                    ? <h5 className="fontWeightBold">Nowe wiadomości</h5> : <h5 className="text-no-newmessages">Brak nowych wiadomości</h5> }
+                  <h2>
+                    ostatnia wiadomosc:
+                    {' '}
+                    <span className="last-message">{conversation.lastMessage.text}</span>
+                  </h2>
                   {' '}
-                  <span className="last-message">{conversation.lastMessage.text}</span>
-                </h2>
-                {' '}
-                {' '}
-                Data:
-                {' '}
-                {' '}
-                {conversation.updatedAt.substring(0, 10)}
-                {' '}
-                {conversation.updatedAt.substring(11, 19)}
-              </h6>
+                  {' '}
+                  Data:
+                  {' '}
+                  {' '}
+                  {conversation.updatedAt.substring(0, 10)}
+                  {' '}
+                  {conversation.updatedAt.substring(11, 19)}
+                </h6>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={conversationsFromDB?.length}

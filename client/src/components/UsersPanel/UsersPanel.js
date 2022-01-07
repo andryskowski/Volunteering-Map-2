@@ -54,53 +54,55 @@ function UsersPanel() {
     <>
       <div className="page-container users-panel">
         <h1>Panel użytkowników</h1>
-        {usersWithPagination.map((user) => (
-          <div className="users-container">
-            <button className="remove-user-button" value={user._id} type="submit" onClick={removeSelectedUser}>X</button>
-            <div className="role-container">
-              <p>Zmień rolę na: </p>
-              <select onChange={handleChangeRole} id={user._id}>
-                <option selected value=""> </option>
-                <option value="admin">admin</option>
-                <option value="moderator">moderator</option>
-                <option value="user">user</option>
-              </select>
-            </div>
-            <Link to={user._id} userId={user._id}>
-              <img src={user.profilePhoto} className="profile-photo" alt="no user img" width="100px" height="100px" />
-            </Link>
-            <p>
-              <b>rola:</b> 
-              {' '}
-              <span style={setRoleStyle(user.role)}>{user.role}</span>
-            </p>
-            <p>
-              <b>login:</b> 
-              {' '}
+        <div className="users-container">
+          {usersWithPagination.map((user) => (
+            <div className="user-container">
+              <button className="remove-user-button" value={user._id} type="submit" onClick={removeSelectedUser}>X</button>
+              <div className="role-container">
+                <p>Zmień rolę na: </p>
+                <select onChange={handleChangeRole} id={user._id}>
+                  <option selected value=""> </option>
+                  <option value="admin">admin</option>
+                  <option value="moderator">moderator</option>
+                  <option value="user">user</option>
+                </select>
+              </div>
               <Link to={user._id} userId={user._id}>
-                {user.name}
+                <img src={user.profilePhoto} className="profile-photo" alt="no user img" width="100px" height="100px" />
               </Link>
-            </p>
-            <p>
-              <b>id:</b> 
-              {' '}
-              {user._id}
-            </p>
-            <p>
-              <b>email:</b> 
-              {' '}
-              {user.email}
-            </p>
-            <p>
-              <b>data dołączenia:</b> 
-              {' '}
-              {' '}
-              {user.date.substring(0, 10)}
-              {' '}
-              {user.date.substring(11, 19)}
-            </p>
-          </div>
-        ))}
+              <p>
+                <b>rola:</b> 
+                {' '}
+                <span style={setRoleStyle(user.role)}>{user.role}</span>
+              </p>
+              <p>
+                <b>login:</b> 
+                {' '}
+                <Link to={user._id} userId={user._id}>
+                  {user.name}
+                </Link>
+              </p>
+              <p>
+                <b>id:</b> 
+                {' '}
+                {user._id}
+              </p>
+              <p>
+                <b>email:</b> 
+                {' '}
+                {user.email}
+              </p>
+              <p>
+                <b>data dołączenia:</b> 
+                {' '}
+                {' '}
+                {user.date.substring(0, 10)}
+                {' '}
+                {user.date.substring(11, 19)}
+              </p>
+            </div>
+          ))}
+        </div>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={users.length}

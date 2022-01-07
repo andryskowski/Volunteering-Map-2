@@ -12,6 +12,7 @@ import Parser from 'html-react-parser';
 import { UsersContext } from '../../contexts/UsersContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { postConversation, findConversation } from '../../actions/FetchData';
+import '../../scss/base/_user-panel.scss';
 
 function UserProfile(props) {
   const { userId } = props;
@@ -60,45 +61,47 @@ function UserProfile(props) {
   return (
     <>
       <div className="page-container">
-        {users.filter((user) => user._id === userId)
-          .map((user) => (
-            <>
-              <h2>Profil użytkownika</h2>
-              <div>
-                <img src={user.profilePhoto} width="150" height="150" alt="Error no profile phot" />
-              </div>
-              <p>
-                <b>Rola: </b>
-                <span style={setRoleStyle(user.role)}>{user.role}</span>
-              </p>
-              <input
-                key="submit"
-                id="send"
-                type="submit"
-                value="Napisz wiadomość"
-                className="submit"
-                onClick={handleSubmit}
-              />
-              <p>
-                <b>Nazwa użytkownika: </b>
-                {user.name}
-              </p>
-              <p>
-                <b>Dołączył dnia </b>
-                {user.date.substring(0, 10)}
-                <b>, o gdzinie </b>
-                {user.date.substring(11, 16)}
-              </p>
-              <p>
-                <b>Email użytkownika: </b>
-                {user.email}
-              </p>
-              <p>
-                <b>Opis użytkownika: </b>
-                {user.description ? Parser(user.description) : 'brak opisu'}
-              </p>
-            </>
-          ))}
+        <div className="user-info">
+          {users.filter((user) => user._id === userId)
+            .map((user) => (
+              <>
+                <h2>Profil użytkownika</h2>
+                <div>
+                  <img src={user.profilePhoto} width="150" height="150" alt="Error no profile phot" />
+                </div>
+                <p>
+                  <b>Rola: </b>
+                  <span style={setRoleStyle(user.role)}>{user.role}</span>
+                </p>
+                <input
+                  key="submit"
+                  id="send"
+                  type="submit"
+                  value="Napisz wiadomość"
+                  className="submit"
+                  onClick={handleSubmit}
+                />
+                <p>
+                  <b>Nazwa użytkownika: </b>
+                  {user.name}
+                </p>
+                <p>
+                  <b>Dołączył dnia </b>
+                  {user.date.substring(0, 10)}
+                  <b>, o gdzinie </b>
+                  {user.date.substring(11, 16)}
+                </p>
+                <p>
+                  <b>Email użytkownika: </b>
+                  {user.email}
+                </p>
+                <p>
+                  <b>Opis użytkownika: </b>
+                  {user.description ? Parser(user.description) : 'brak opisu'}
+                </p>
+              </>
+            ))}
+        </div>
       </div>
     </>
   );

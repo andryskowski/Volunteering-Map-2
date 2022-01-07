@@ -12,6 +12,10 @@ a{
     text-decoration: none !important;
 }
 
+input, select{
+    font-size: 0.8em;
+}
+
 a:focus{
     color: navy;
 }
