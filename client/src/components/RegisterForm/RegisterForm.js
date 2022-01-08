@@ -37,6 +37,7 @@ export default class RegisterForm extends React.Component {
         <form onSubmit={this.handleSubmit} className="form">
           <label>
             <h3>Rejestracja</h3>
+            <p>Wypełnij poniższy formularz, aby się zalogować.</p>
           </label>
           <label htmlFor="name">
             Login/Nazwa użytkownika:

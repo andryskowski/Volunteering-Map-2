@@ -63,33 +63,30 @@ function Comments({ placeId }) {
           <div key={comment._id} className="comment">
             <Link to={comment.authorId} userId={comment.authorId}>
               <div className="profilephoto-container">
-                <img src={comment.author.profilePhoto} width="100px" height="100px" alt="no profilePhoto" />
+                <img className="profilephoto-comment" src={comment.author.profilePhoto} width="100px" height="100px" alt="no profilePhoto" />
               </div>
             </Link>
-            <Link to={comment.authorId} userId={comment.authorId}>
-              <p style={setRoleStyle(comment.author.role)}>{comment.author.name}</p>
-            </Link>
+            <b>
+              <Link to={comment.authorId} userId={comment.authorId}>
+                <p style={setRoleStyle(comment.author.role)}>{comment.author.name}</p>
+              </Link>
+            </b>
             <p>
-              subject:
+              <b>Temat:</b>
               {' '}
               {comment.subject}
             </p>
             <p>
-              date:
-              {' '}
-              {comment.date.substring(0, 10)}
-              {' '}
-              {comment.date.substring(11, 19)}
-            </p>
-            <p>
-              message:
+              <b>Wiadomość:</b>
               {' '}
               {comment.message}
             </p>
             <p>
-              o:
+              <b>Data dodania:</b>
               {' '}
-              {comment.placeId}
+              {comment.date.substring(0, 10)}
+              {', o '}
+              {comment.date.substring(11, 16)}
             </p>
           </div>
         ))}

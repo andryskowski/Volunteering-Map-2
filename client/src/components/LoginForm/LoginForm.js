@@ -34,6 +34,7 @@ export default class LoginForm extends React.Component {
         <form onSubmit={this.handleSubmit} className="form">
           <label>
             <h3>Logowanie</h3>
+            <p>Wypełnij poniższy formularz, aby się zalogować.</p>
           </label>
           <label htmlFor="email">
             Email:

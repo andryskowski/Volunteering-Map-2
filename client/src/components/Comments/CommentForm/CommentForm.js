@@ -45,15 +45,15 @@ function CommentForm({ placeId }) {
     <>
       <div className="comment-form">
         <h1>Dodaj swój komentarz:</h1>
-        <label htmlFor="subject">
+        <label htmlFor="subject-comment">
           Temat:
-          <input id="subject" type="text" name="subject" onChange={handleChange} />
+          <input className="subject-comment" id="subject-comment" type="text" name="subject" onChange={handleChange} />
         </label>
-        <label htmlFor="message">
+        <label htmlFor="textarea-comment">
           Treść komentarza:
-          <textarea className="message" id="message" type="text" name="message" onChange={handleChange} />
+          <textarea className="textarea-comment" id="textarea-comment" type="text" name="message" onChange={handleChange} />
         </label>
-        <input type="submit" value="Wyślij" onClick={handleSubmit} />
+        <input className="comment-submit" type="submit" value="Wyślij" onClick={handleSubmit} />
       </div>
     </>
   );
