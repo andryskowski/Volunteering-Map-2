@@ -17,4 +17,18 @@
         cursor: pointer;
     }
     }
+    & > * {
+        margin: 15px 0;
+    }
+
+}
+
+.popup-background{
+    display: none;
+    width: 100vw;
+    height: 1500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 235, 205, 0.555);
 }

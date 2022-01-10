@@ -134,12 +134,12 @@ function Messages(props) {
                 <h5>{user.name}</h5>
               ))}
             {message.text}
-            ,
-            {' '}
-            {message.date}
-            ,
-            {' '}
-            {message.senderId}
+            <h5>
+              {' '}
+              {message.date.substring(0, 10)}
+              {', '}
+              {message.date.substring(11, 16)}
+            </h5>
           </div>
         ))}
         <div id="el" ref={el} />

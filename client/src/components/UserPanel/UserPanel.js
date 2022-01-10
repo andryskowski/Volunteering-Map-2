@@ -20,7 +20,7 @@ function UserPanel() {
         <h2>Panel użytkownika</h2>
         <div className="user-info">
           <div>
-            <img src={CURRENT_USER.userInfo.profilePhoto} width="150" height="150" alt="Error no profile phot" />
+            <img src={CURRENT_USER.userInfo.profilePhoto} className="user-profilephoto" width="150" height="150" alt="Error no profile phot" />
           </div>
           <p>
             <b>Rola: </b>
