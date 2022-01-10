@@ -30,7 +30,7 @@ export default class LoginForm extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="login-form">
         <form onSubmit={this.handleSubmit} className="form">
           <label>
             <h3>Logowanie</h3>
@@ -52,7 +52,7 @@ export default class LoginForm extends React.Component {
             onClick={this.handleSubmit}
           />
         </form>
-      </>
+      </div>
     );
   }
 }

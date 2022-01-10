@@ -33,7 +33,7 @@ export default class RegisterForm extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="register-form">
         <form onSubmit={this.handleSubmit} className="form">
           <label>
             <h3>Rejestracja</h3>
@@ -59,7 +59,7 @@ export default class RegisterForm extends React.Component {
             onClick={this.handleSubmit}
           />
         </form>
-      </>
+      </div>
     );
   }
 }
