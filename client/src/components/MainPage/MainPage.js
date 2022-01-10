@@ -4,14 +4,11 @@ import React, { useContext } from 'react';
 import Map from '../Map/Map';
 import '../../scss/base/_main-page.scss';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-// import PrivateRoute from '../Router/PrivateRoute';
-// import PlacePage from '../PlacePage/PlacePage';
-import { PlacesContext } from '../../contexts/PlacesContext';
-// import Contact from '../Contact/Contact';
+import Legend from '../Legend/Legend';
 
 function MainPage() {
   const USER = useContext(CurrentUserContext);
-  const PLACES = useContext(PlacesContext);
+
   return (
     <>
       <div className="main-page">
@@ -22,9 +19,9 @@ function MainPage() {
         </h1>
         <div>
           <Map />
+          <Legend />
         </div>
       </div>
-      {console.log(PLACES)}
     </>
   );
 }

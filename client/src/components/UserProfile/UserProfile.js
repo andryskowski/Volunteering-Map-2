@@ -67,7 +67,7 @@ function UserProfile(props) {
               <>
                 <h2>Profil użytkownika</h2>
                 <div>
-                  <img src={user.profilePhoto} width="150" height="150" alt="Error no profile phot" />
+                  <img className="user-profilephoto" src={user.profilePhoto} width="150" height="150" alt="Error no profile phot" />
                 </div>
                 <p>
                   <b>Rola: </b>
