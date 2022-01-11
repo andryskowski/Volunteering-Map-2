@@ -1,10 +1,3 @@
-/* eslint-disable brace-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-cycle */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useContext } from 'react';
 import '../../../scss/base/_comment-form.scss';
 import PropTypes from 'prop-types';
@@ -34,8 +27,6 @@ function CommentForm({ placeId }) {
     if (isValidated === true) {
       const fetchMyData = async () => {
         const response = await postComment(authorId, subject, message, placeId);
-        console.log(response);
-      // setUsers(response);
       };
       fetchMyData();
     }

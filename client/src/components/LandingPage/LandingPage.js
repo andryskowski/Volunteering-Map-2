@@ -1,13 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/button-has-type */
-/* eslint-disable max-len */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
@@ -65,13 +55,11 @@ function ViewPlaceForm(props) {
               </div>
             </div>
           </div>
-
           <div ref={refContextContainer2} className="landing-page-container-context-2">
             <LoginForm />
             <hr className="hr-1" />
             <RegisterForm />
           </div>
-
           <div className="goback-container">
             <a
               onClick={() => {

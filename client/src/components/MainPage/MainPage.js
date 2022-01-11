@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-cycle */
 import React, { useContext } from 'react';
 import Map from '../Map/Map';
 import '../../scss/base/_main-page.scss';

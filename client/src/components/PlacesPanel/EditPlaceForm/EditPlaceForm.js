@@ -1,9 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -28,18 +22,6 @@ function EditPlaceForm(props) {
     lat: '',
     lng: '',
   });
-  const [smallMapOfPlace, setSmallMapOfPlace] = useState('Nie znaleziono lub wprowadzono nieprawidłowy adres');
-  const [statusPlace, setStatusPlace] = useState('draft');
-  const infoAboutCurretPlace = {
-    placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, position, smallMapOfPlace, statusPlace,
-  };
-
-  async function getPlaceCoordinates() {
-    const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
-    const apiRES = await fetch(URL).then((res) => res.json());
-    setSmallMapOfPlace(apiRES.results[0].locations[0].mapUrl);
-    // setLatLng(apiRES.results[0].locations[0].latLng);
-  }
 
   function handleChange(event) {
     const { name } = event.target;
@@ -71,8 +53,6 @@ function EditPlaceForm(props) {
   // eslint-disable-next-line no-unused-vars
   function handleSubmit(event) {
     event.preventDefault();
-    // getPlaceCoordinates();
-    // setStatusPlace('pending');
     alert('The place has been edited');
     updatePlace(props.placeToEdit[0]._id, placeName, logo, shortDescription, description,
       category, phone, email, webPage, city, street, postalCode, houseNo, district, position);
@@ -158,7 +138,6 @@ function EditPlaceForm(props) {
         <label htmlFor="place-name">
           Nazwa fundacji (lub miejsca pomocy):
           <input id="place-name" defaultValue={placeName} type="place-name" name="placeName" onChange={handleChange} />
-          {console.log(props.placeToEdit)}
         </label>
         <label htmlFor="web-page">
           Strona internetowa:

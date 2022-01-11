@@ -1,9 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, {
   useContext, useEffect, useState, useRef, 
 } from 'react';
@@ -23,7 +17,6 @@ function Messages(props) {
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
   const USERS = useContext(UsersContext);
   const [onlineUsers, setOnlineUsers] = useState(null);
-  const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentMessageText, setCurrentMessageText] = useState('');
   const [conversationMessages, setConversationMessages] = useState([]);
   const [friendId, setFriendId] = useState(null);

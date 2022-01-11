@@ -1,23 +1,7 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 import React, {
-  Children,
-  useContext, useEffect, useState,  
+  useEffect, useState,  
 } from 'react';
-import { Link } from 'react-router-dom';
 import { getComments, removeComment } from '../../actions/FetchData';
-import { setRoleStyle } from '../../actions/CommonFunctions';
 import Pagination from '../Pagination/Pagination';
 import '../../scss/base/_comments-panel.scss';
   
@@ -50,14 +34,7 @@ function CommentsPanel() {
     alert(`Usunieto uzytkownika o id ${removedCommentId}`);
     window.location.reload(true);
   };
-  
-  //   const handleChangeRole = (event) => {
-  //     const changedRole = event.target.value;
-  //     const changedUserId = event.target.id;
-  //     console.log(event.target.id, changedRole);
-  //     updateUserRole(changedUserId, changedRole);
-  //   };
-  
+
   return (
     <>
       <div className="page-container comments-panel">

@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-alert */
-/* eslint-disable no-shadow */
 import React from 'react';
 import { authLogin } from '../../actions/FetchData';
 import '../../scss/base/_login-form.scss';

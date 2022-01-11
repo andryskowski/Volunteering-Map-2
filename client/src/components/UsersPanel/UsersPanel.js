@@ -1,11 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, {
-  Children,
-  useContext, useEffect, useState,  
+  useEffect, useState,  
 } from 'react';
 import { Link } from 'react-router-dom';
 import { getUsers, removeUser, updateUserRole } from '../../actions/FetchData';
@@ -46,7 +40,6 @@ function UsersPanel() {
   const handleChangeRole = (event) => {
     const changedRole = event.target.value;
     const changedUserId = event.target.id;
-    console.log(event.target.id, changedRole);
     updateUserRole(changedUserId, changedRole);
   };
 

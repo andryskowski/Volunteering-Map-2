@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 function ScrollToTop({ history, children }) {

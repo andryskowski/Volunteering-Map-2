@@ -1,11 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-plusplus */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, {
   useContext, useEffect, useState, useRef,
 } from 'react';
@@ -58,7 +50,6 @@ function MessagesPanel(props) {
       const unreadConvs = await conversationsFromDB?.filter((conv) => conv.lastMessage.receiverHasRead === false);
       setUnreadConversations(unreadConvs);
       localStorage.setItem('numberUnreadConversations', unreadConvs?.length);
-      console.log(unreadConvs);
     };
     fetchMyData();
   }, [conversationsFromDB]);

@@ -1,11 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import ReactQuill from 'react-quill';
 import { updateUser } from '../../actions/FetchData';
@@ -29,7 +21,6 @@ function UserPanel() {
     } else if (event.target.name === 'email') {
       setNewEmail(event.target.value);
     }
-    console.log(newProfilePhoto, newUsername, newEmail);
   }
 
   async function handleSubmit(event) {

@@ -1,8 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/state-in-constructor */
-/* eslint-disable react/no-unused-state */
 import React, { useContext } from 'react';
 import L from 'leaflet';
 import { Popup, Marker } from 'react-leaflet';
@@ -16,7 +11,6 @@ import bluePin from '../../../assets/gps6.svg';
 import { PlacesContext } from '../../../contexts/PlacesContext';
 
 const setPinColor = (place) => {
-  console.log(place.category);
   if (place.category === 'zwierzeta') return purplePin;
   if (place.category === 'dzieci') return greenPin;
   if (place.category === 'inwalidzi') return orangePin;

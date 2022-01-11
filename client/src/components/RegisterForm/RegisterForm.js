@@ -1,8 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-alert */
-/* eslint-disable no-unused-vars */
-/* eslint-disable consistent-return */
-/* eslint-disable no-shadow */
 import React from 'react';
 import '../../scss/base/_register-form.scss';
 import { authRegister } from '../../actions/FetchData';

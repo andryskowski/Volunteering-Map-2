@@ -1,9 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/state-in-constructor */
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
-import L from 'leaflet';
 import {
   MapContainer, TileLayer,
 } from 'react-leaflet';

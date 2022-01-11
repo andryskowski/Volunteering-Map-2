@@ -1,10 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, {
-  Children,
   useContext, useRef, useState,
 } from 'react';
 import { Link } from 'react-router-dom';
@@ -50,7 +44,6 @@ function PlacesPanel() {
   const editPlace = (e, placeId) => {
     setPlaceToEdit(places.filter((place) => place._id === placeId));
     popupEl.current.style.display = 'block';
-    console.log(placeId, placeToEdit);
   };
 
   return (

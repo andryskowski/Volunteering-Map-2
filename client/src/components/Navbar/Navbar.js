@@ -1,12 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable react/jsx-no-comment-textnodes */
-/* eslint-disable no-unneeded-ternary */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-cycle */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {
   useContext, useRef,
 } from 'react';
@@ -29,14 +20,12 @@ function Navbar() {
   const toggleNavbarList = () => {
     navbarList.current.classList.toggle('display-flex');
     xButton.current.classList.toggle('background-x-navbar');
-    // navbarList.current.classList.toggle('navbar-list');
   };
 
   return (
     <>
       <div className="navbar">
         <div className="button-x-navbar-conainer">
-          {/* <button ref={xButton} onClick={toggleNavbarList} className="button-x-navbar" type="submit">...</button> */}
           <svg className="button-x-navbar" alt="button-navbar error" src="../../assets/burger_icon.svg" ref={xButton} onClick={toggleNavbarList} />
         </div>
         <ul ref={navbarList} className="navbar-list">

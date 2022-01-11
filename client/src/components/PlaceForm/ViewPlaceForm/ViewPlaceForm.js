@@ -1,10 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/button-has-type */
-/* eslint-disable max-len */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { useContext, useRef, useEffect } from 'react';
 import Parser from 'html-react-parser';
 import { postPlaces } from '../../../actions/FetchData';
@@ -30,7 +23,6 @@ function ViewPlaceForm(props) {
   });
 
   const onButtonClick = () => {
-    // `current` wskazuje na zamontowany element kontrolki formularza
     popup.current.style.display = 'none';
     popupBackground.current.style.display = 'none';
     props.setShowPopUp('false');

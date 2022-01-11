@@ -1,7 +1,3 @@
-/* eslint-disable brace-style */
-/* eslint-disable max-len */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import emailjs from 'emailjs-com';
 import '../../scss/base/_common.scss';
@@ -25,14 +21,7 @@ function Contact() {
     e.preventDefault();
     const isValidated = validation();
     if (isValidated === true) {
-      emailjs.sendForm('service_ht9ycji', 'template_s3vzm0j', e.target, 'user_sUt0KQRlhNXDQuf9BzGLr').then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        },
-      );
+      emailjs.sendForm('service_ht9ycji', 'template_s3vzm0j', e.target, 'user_sUt0KQRlhNXDQuf9BzGLr');
       alert('Wiadomosc zostala wyslana do administratora.');
       e.target.reset();
     }
@@ -63,9 +52,6 @@ function Contact() {
           <input type="submit" value="Send Message" />
         </form>
       </div>
-      {/* <div className="contact-bcg-image-container">
-        <img className="contact-bcg-image" alt="no people img" src={people} />
-      </div> */}
     </div>
   );
 }
