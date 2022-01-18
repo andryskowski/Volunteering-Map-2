@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/base/_list-places.scss';
@@ -13,12 +14,8 @@ function ListPlaces() {
   const PLACES = useContext(PlacesContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
-  const [sortedPlaces, setSortedPlaces] = useState([]);
-
-  useEffect(() => {
-    setSortedPlaces(PLACES);
-  }, [PLACES]);
-
+  const [sortedPlaces, setSortedPlaces] = useState(PLACES);
+  
   function handleChange(event) {
     if (event.target.name === 'district') {
       setFilteredDistrict(event.target.value);
@@ -29,17 +26,19 @@ function ListPlaces() {
     if (event.target.name === 'search-name') {
       setFilteredName(event.target.value);
     }
-  }
-
-  function handleSort(event) {
-    if (event.target.value === 'oldest') {
-      const sortedPlacesByOldest = PLACES?.sort((a, b) => new Date(a.date) - new Date(b.date));
-      setSortedPlaces(sortedPlacesByOldest);
-    } else if (event.target.value === 'newest') {
-      const sortedPlacesByNewest = PLACES?.sort((a, b) => new Date(b.date) - new Date(a.date));
-      setSortedPlaces(sortedPlacesByNewest);
-    } else {
-      setSortedPlaces(PLACES);
+    if (event.target.name === 'sort') {
+      if (event.target.value === 'oldest') {
+        const sortedPlacesByOldest = PLACES?.sort((a, b) => new Date(a.date) - new Date(b.date));
+        setSortedPlaces(sortedPlacesByOldest);
+        console.log(sortedPlaces);
+      } else if (event.target.value === 'newest') {
+        const sortedPlacesByNewest = PLACES?.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setSortedPlaces(sortedPlacesByNewest);
+        console.log(sortedPlaces);
+      } else if (event.target.value === '-') {
+        setSortedPlaces(PLACES);
+        console.log(sortedPlaces);
+      }
     }
   }
 
@@ -52,8 +51,8 @@ function ListPlaces() {
     return ((place) => place);
   }
 
-  const currentPlaces = PLACES?.filter(changeFiltres()).map((place) => (
-    <div className="place-list-item">
+  const currentPlaces = sortedPlaces?.filter(changeFiltres()).map((place) => (
+    <div className="place-list-item" key={place._id}>
       <div>
         <Link to={place._id}><img className="place-img" src={place.img} alt="place-img" width="100" height="100" /></Link>
       </div>
@@ -143,8 +142,8 @@ function ListPlaces() {
           </label>
           <label htmlFor="sort">
             Sortuj:
-            <select id="sort" name="sort" onChange={handleSort}>
-              <option selected value="-">--</option>
+            <select id="sort" name="sort" onChange={handleChange}>
+              <option value="-">--</option>
               <option value="newest">najnowsze</option>
               <option value="oldest">najstarsze</option>
             </select>

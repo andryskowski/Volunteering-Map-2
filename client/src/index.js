@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -7,8 +7,10 @@ import 'leaflet/dist/leaflet.css';
 import { PlacesContextProvider } from './contexts/PlacesContext';
 import { UsersContextProvider } from './contexts/UsersContext';
 import CurrentUserContext, { CURRENT_USER_FROM_CONTEXT } from './contexts/CurrentUserContext';
+import './i18next';
 
 ReactDOM.render(
+  // <Suspense fallback={(<div>Loading ~~~~</div>)}>
   <React.StrictMode>
     <CurrentUserContext.Provider value={CURRENT_USER_FROM_CONTEXT}>
       <PlacesContextProvider>
@@ -18,6 +20,7 @@ ReactDOM.render(
       </PlacesContextProvider>
     </CurrentUserContext.Provider>
   </React.StrictMode>,
+  // </Suspense>
   document.getElementById('root'),
 );
 

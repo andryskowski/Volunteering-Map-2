@@ -1,9 +1,10 @@
 import React, {
-  useContext, useRef,
+  useContext, useEffect, useRef,
 } from 'react';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_navbar.scss';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function logOut() {
@@ -16,6 +17,7 @@ function Navbar() {
   const CURRENT_USER = useContext(CurrentUserContext);
   const xButton = useRef(null);
   const navbarList = useRef(null);
+  const { t } = useTranslation();
 
   const toggleNavbarList = () => {
     navbarList.current.classList.toggle('display-flex');
@@ -33,7 +35,7 @@ function Navbar() {
           <Link to="/listplaces"><li>Lista miejsc</li></Link>
           <Link to="/addplace"><li>Dodaj miejsce</li></Link>
           <Link to="/contact"><li>Kontakt</li></Link>
-          <li>O projekcie</li>
+          <li>{t('Navbar.1')}</li>
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
             ? <Link to="/userspanel"><li>Panel użytkowników</li></Link> : false}
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'

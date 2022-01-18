@@ -2,8 +2,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import i18next from 'i18next';
 import LandingPage from './components/LandingPage/LandingPage';
 import PrivateRoute from './components/Router/PrivateRoute';
 import PlacePage from './components/PlacePage/PlacePage';
@@ -29,10 +30,28 @@ const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
 function App() {
   const PLACES = useContext(PlacesContext);
   const USERS = useContext(UsersContext);
+
+  const changeLang = () => {
+    if (i18next.resolvedLanguage === 'en')
+    {
+      i18next.changeLanguage('pl');
+    }
+    else if (i18next.resolvedLanguage === 'pl')
+    {
+      i18next.changeLanguage('en');
+    }
+    // i18next.changeLanguage('pl');
+    console.log(i18next);
+  };
+
   return (
     <>
       <Router>
         {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
+        <div className="container-button-changelang">
+          <button onClick={() => { changeLang(); }} className="button-changelang">PL</button>
+        </div>
+        
         <ScrollToTop>
           <Switch>
             {CURRENT_USER_ID ? (

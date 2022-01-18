@@ -3,7 +3,6 @@ import emailjs from 'emailjs-com';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_contact.scss';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import people from '../../assets/people-contact-page-2.png';
 
 function Contact() {
   const CURRENT_USER = useContext(CurrentUserContext);
