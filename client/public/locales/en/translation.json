@@ -1,5 +1,15 @@
 {
     "Navbar": {
-        "1": "About"
+        "1": "Start",
+        "2": "List of places",
+        "3": "Add place",
+        "4": "Contact",
+        "5": "About",
+        "6": "Panel of users",
+        "7": "Panel of places",
+        "8": "Panel of comments",
+        "9": "Messages",
+        "10": "Profile",
+        "11": "Log out"
     }
 }

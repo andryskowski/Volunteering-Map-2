@@ -10,17 +10,17 @@ import CurrentUserContext, { CURRENT_USER_FROM_CONTEXT } from './contexts/Curren
 import './i18next';
 
 ReactDOM.render(
-  // <Suspense fallback={(<div>Loading ~~~~</div>)}>
-  <React.StrictMode>
-    <CurrentUserContext.Provider value={CURRENT_USER_FROM_CONTEXT}>
-      <PlacesContextProvider>
-        <UsersContextProvider>
-          <App />
-        </UsersContextProvider>
-      </PlacesContextProvider>
-    </CurrentUserContext.Provider>
-  </React.StrictMode>,
-  // </Suspense>
+  <Suspense fallback={(<div>Loading ~~~~</div>)}>
+    <React.StrictMode>
+      <CurrentUserContext.Provider value={CURRENT_USER_FROM_CONTEXT}>
+        <PlacesContextProvider>
+          <UsersContextProvider>
+            <App />
+          </UsersContextProvider>
+        </PlacesContextProvider>
+      </CurrentUserContext.Provider>
+    </React.StrictMode>
+  </Suspense>,
   document.getElementById('root'),
 );
 

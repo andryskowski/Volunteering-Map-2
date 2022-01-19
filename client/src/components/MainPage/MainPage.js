@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { motion } from 'framer-motion';
 import Map from '../Map/Map';
 import '../../scss/base/_main-page.scss';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -9,6 +10,11 @@ function MainPage() {
 
   return (
     <>
+      {/* <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      > */}
       <div className="main-page">
         <h1 className="hello-header">
           Witaj
@@ -20,6 +26,7 @@ function MainPage() {
           <Legend />
         </div>
       </div>
+      {/* </motion.div> */}
     </>
   );
 }

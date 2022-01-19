@@ -1,5 +1,15 @@
 {
     "Navbar": {
-        "1": "O stronie"
+        "1": "Start",
+        "2": "Lista miejsc",
+        "3": "Dodaj miejsce",
+        "4": "Kontakt",
+        "5": "O stronie",
+        "6": "Panel użytkowników",
+        "7": "Panel miejsc",
+        "8": "Panel komentarzy",
+        "9": "Wiadomości",
+        "10": "Profil",
+        "11": "Wyloguj się"
     }
 }

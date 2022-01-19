@@ -31,20 +31,20 @@ function Navbar() {
           <svg className="button-x-navbar" alt="button-navbar error" src="../../assets/burger_icon.svg" ref={xButton} onClick={toggleNavbarList} />
         </div>
         <ul ref={navbarList} className="navbar-list">
-          <Link to="/"><li>Start</li></Link>
-          <Link to="/listplaces"><li>Lista miejsc</li></Link>
-          <Link to="/addplace"><li>Dodaj miejsce</li></Link>
-          <Link to="/contact"><li>Kontakt</li></Link>
-          <li>{t('Navbar.1')}</li>
+          <Link to="/"><li>{t('Navbar.1')}</li></Link>
+          <Link to="/listplaces"><li>{t('Navbar.2')}</li></Link>
+          <Link to="/addplace"><li>{t('Navbar.3')}</li></Link>
+          <Link to="/contact"><li>{t('Navbar.4')}</li></Link>
+          <li>{t('Navbar.5')}</li>
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
-            ? <Link to="/userspanel"><li>Panel użytkowników</li></Link> : false}
+            ? <Link to="/userspanel"><li>{t('Navbar.6')}</li></Link> : false}
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
-            ? <Link to="/placespanel"><li>Panel miejsc</li></Link> : false}
+            ? <Link to="/placespanel"><li>{t('Navbar.7')}</li></Link> : false}
           {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
-            ? <Link to="/commentspanel"><li>Panel komentarzy</li></Link> : false}
-          <Link to="/messagespanel"><li>Wiadomości</li></Link>
-          <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>Profil</li></Link>
-          <li onClick={logOut}>Wyloguj się</li>
+            ? <Link to="/commentspanel"><li>{t('Navbar.8')}</li></Link> : false}
+          <Link to="/messagespanel"><li>{t('Navbar.9')}</li></Link>
+          <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>{t('Navbar.10')}</li></Link>
+          <li onClick={logOut}>{t('Navbar.11')}</li>
           <div className="small-profilephoto-container">
             <div>
               <img width="35px" height="35px" src={CURRENT_USER.userInfo.profilePhoto} alt="profile img" />

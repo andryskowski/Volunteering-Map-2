@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 import React, { useContext, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import i18next from 'i18next';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -47,46 +48,55 @@ function App() {
   return (
     <>
       <Router>
-        {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
-        <div className="container-button-changelang">
-          <button onClick={() => { changeLang(); }} className="button-changelang">PL</button>
-        </div>
+        <AnimatePresence exit={{ opacity: 0 }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
+            <div className="container-button-changelang">
+              <button onClick={() => { changeLang(); }} className="button-changelang">PL</button>
+            </div>
         
-        <ScrollToTop>
-          <Switch>
-            {CURRENT_USER_ID ? (
-              <PrivateRoute exact path="/" component={MainPage} />
-            ) : (
-              <Route exact path="/" component={LandingPage} />
-            )}
-            <PrivateRoute exact path="/messages" component={Messages} />
-            <PrivateRoute exact path="/messagespanel" component={MessagesPanel} />
-            <PrivateRoute exact path="/commentspanel" component={CommentsPanel} />
-            <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
-            <PrivateRoute exact path="/userProfile" component={UserProfile} />
-            {PLACES ? PLACES.map((place) => (
-              <PrivateRoute
-                exact
-                path={`/${place._id}`}
-                component={() => <PlacePage placeId={place._id} />}
-              />
-            )) : false}
-            {USERS ? USERS.map((user) => (
-              <PrivateRoute
-                exact
-                path={`/${user._id}`}
-                component={() => <UserProfile userId={user._id} />}
-              />
-            )) : false}
-            {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
-            {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
-            {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
-            {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
-              ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
-            {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
-              ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
-          </Switch>
-        </ScrollToTop>
+            <ScrollToTop>
+              <Switch>
+                {CURRENT_USER_ID ? (
+                  <PrivateRoute exact path="/" component={MainPage} />
+                ) : (
+                  <Route exact path="/" component={LandingPage} />
+                )}
+                <PrivateRoute exact path="/messages" component={Messages} />
+                <PrivateRoute exact path="/messagespanel" component={MessagesPanel} />
+                <PrivateRoute exact path="/commentspanel" component={CommentsPanel} />
+                <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
+                <PrivateRoute exact path="/userProfile" component={UserProfile} />
+                {PLACES ? PLACES.map((place) => (
+                  <PrivateRoute
+                    exact
+                    path={`/${place._id}`}
+                    component={() => <PlacePage placeId={place._id} />}
+                  />
+                )) : false}
+                {USERS ? USERS.map((user) => (
+                  <PrivateRoute
+                    exact
+                    path={`/${user._id}`}
+                    component={() => <UserProfile userId={user._id} />}
+                  />
+                )) : false}
+                {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
+                {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
+                {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
+                {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+                  ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
+                {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+                  ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
+              </Switch>
+            </ScrollToTop>
+          </motion.div>
+        </AnimatePresence>
       </Router>
     </>
   );
