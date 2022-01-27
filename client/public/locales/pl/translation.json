@@ -95,5 +95,71 @@
         "2": "Przekonaj się sam!",
         "3": "Zaloguj/Zarejestruj się",
         "4": "Powrót"
+    },
+    "LoginForm": {
+        "1": "Logowanie",
+        "2": "Wypełnij poniższy formularz, aby się zalogować.",
+        "3": "E-mail",
+        "4": "Hasło",
+        "5": "Wyślij"
+    },
+    "RegisterForm": {
+        "1": "Rejestracja",
+        "2": "Wypełnij poniższy formularz, aby się zarejestrować.",
+        "3": "Login/Nazwa użytkownika:",
+        "4": "E-mail:",
+        "5": "Hasło:",
+        "6": "Wyślij"
+    },
+    "MainPage": {
+        "1": "Witaj"
+    },
+    "Legend": {
+        "1": "Legend",
+        "2": "kategoria dzieci",
+        "3": "kategoria zwierzęta",
+        "4": "kategoria inwalidzi",
+        "5": "kategoria uzależnienia",
+        "6": "kategoria emeryci",
+        "7": "kategoria inne"
+    },
+    "MessagesPanel": {
+        "1": "Konwersacje z użytkownikami",
+        "2": "Konwersacja z użytkownikiem:",
+        "3": "Brak nowych wiadomości",
+        "4": "Nowe wiadomości",
+        "5": "Ostatnia wiadomość:",
+        "6": "Data:"
+    },
+    "Messages": {
+        "1": "Konwersacja z użytkownikiem:"
+    },
+    "UserProfile": {
+        "1": "Profil użytkownika",
+        "2": "Rola:",
+        "3": "Napisz wiadomość",
+        "4": "Nazwa użytkownika:",
+        "5": "Dołączył dnia",
+        "6": ", o godzinie",
+        "7": "E-mail:",
+        "8": "Opis użytkownika:"
+    },
+    "UserPanel": {
+        "1": "Panel użytkownika",
+        "2": "Rola:",
+        "3": "Nazwa użytkownika",
+        "4": "Dołączył dnia",
+        "5": ",o godzinie",
+        "6": "E-mail",
+        "7": "Opis użytkownika:",
+        "9": "Edytuj profil",
+        "10": "Link do nowego zdjęcia profilowego:",
+        "11": "Nowa nazwa użytkownika:",
+        "12": "Nowy email:",
+        "13": "Zmień hasło:",
+        "14": "Nowe hasło:",
+        "15": "Wyślij:",
+        "16": "Opis:",
+        "17": "Wyślij:"
     }
 }

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import Map from '../Map/Map';
 import '../../scss/base/_main-page.scss';
@@ -7,6 +8,7 @@ import Legend from '../Legend/Legend';
 
 function MainPage() {
   const USER = useContext(CurrentUserContext);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -17,7 +19,7 @@ function MainPage() {
       > */}
       <div className="main-page">
         <h1 className="hello-header">
-          Witaj
+          {t('MainPage.1')}
           {' '}
           {USER.userInfo.name}
         </h1>

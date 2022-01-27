@@ -1,6 +1,5 @@
-import React, {
-  useContext, useEffect, useState,
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import Parser from 'html-react-parser';
 import { UsersContext } from '../../contexts/UsersContext';
@@ -15,6 +14,7 @@ function UserProfile(props) {
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
   const [currentConversation, setCurrentConversation] = useState(null);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const setRoleStyle = (role) => {
     if (role === 'moderator') return { color: 'blue' };
@@ -56,41 +56,66 @@ function UserProfile(props) {
     <>
       <div className="page-container">
         <div className="user-info">
-          {users.filter((user) => user._id === userId)
+          {users
+            .filter((user) => user._id === userId)
             .map((user) => (
               <>
-                <h2>Profil użytkownika</h2>
+                <h2>{t('UserProfile.1')}</h2>
                 <div>
-                  <img className="user-profilephoto" src={user.profilePhoto} width="150" height="150" alt="Error no profile phot" />
+                  <img
+                    className="user-profilephoto"
+                    src={user.profilePhoto}
+                    width="150"
+                    height="150"
+                    alt="Error no profile phot"
+                  />
                 </div>
                 <p>
-                  <b>Rola: </b>
+                  <b>
+                    {t('UserProfile.2')}
+                    {' '}
+                  </b>
                   <span style={setRoleStyle(user.role)}>{user.role}</span>
                 </p>
                 <input
                   key="submit"
                   id="send"
                   type="submit"
-                  value="Napisz wiadomość"
+                  value={t('UserProfile.3')}
                   className="submit"
                   onClick={handleSubmit}
                 />
                 <p>
-                  <b>Nazwa użytkownika: </b>
+                  <b>
+                    {t('UserProfile.4')}
+                    {' '}
+                  </b>
                   {user.name}
                 </p>
                 <p>
-                  <b>Dołączył dnia </b>
+                  <b>
+                    {t('UserProfile.5')}
+                    {' '}
+                  </b>
                   {user.date.substring(0, 10)}
-                  <b>, o gdzinie </b>
+                  <b>
+                    {t('UserProfile.6')}
+                    {' '}
+                  </b>
                   {user.date.substring(11, 16)}
                 </p>
                 <p>
-                  <b>Email użytkownika: </b>
+                  <b>
+                    {t('UserProfile.7')}
+                    {' '}
+                  </b>
                   {user.email}
                 </p>
                 <p>
-                  <b>Opis użytkownika: </b>
+                  <b>
+                    {t('UserProfile.8')}
+                    {' '}
+                  </b>
                   {user.description ? Parser(user.description) : 'brak opisu'}
                 </p>
               </>

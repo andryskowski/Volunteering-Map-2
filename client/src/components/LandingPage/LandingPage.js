@@ -51,9 +51,9 @@ function ViewPlaceForm() {
             </div>
           </div>
           <div ref={refContextContainer2} className="landing-page-container-context-2">
-            <LoginForm />
+            <LoginForm translation={t} />
             <hr className="hr-1" />
-            <RegisterForm />
+            <RegisterForm translation={t} />
           </div>
           <div className="goback-container">
             <a

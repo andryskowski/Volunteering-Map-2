@@ -95,5 +95,71 @@
         "2": "See for yourself!",
         "3": "Log in/Create an account",
         "4": "Go back"
+    },
+    "LoginForm": {
+        "1": "Log in",
+        "2": "Fill out the form below to log in.",
+        "3": "E-mail:",
+        "4": "Password:",
+        "5": "Send"
+    },
+    "RegisterForm": {
+        "1": "Create an account",
+        "2": "Fill out the form below to create an account.",
+        "3": "Login/Username:",
+        "4": "E-mail:",
+        "5": "Password:",
+        "6": "Send"
+    },
+    "MainPage": {
+        "1": "Hello"
+    },
+    "Legend": {
+        "1": "Legenda",
+        "2": "children category",
+        "3": "animals category",
+        "4": "invalids category",
+        "5": "addictions category",
+        "6": "retirees category",
+        "7": "another category"
+    },
+    "MessagesPanel": {
+        "1": "Conversations with users",
+        "2": "Conversation with user:",
+        "3": "No new messages",
+        "4": "New messages",
+        "5": "Last message:",
+        "6": "Date:"
+    },
+    "Messages": {
+        "1": "Conversation with user:"
+    },
+    "UserProfile": {
+        "1": "User profile",
+        "2": "Role",
+        "3": "Send a message",
+        "4": "Username",
+        "5": "Joined on",
+        "6": "at",
+        "7": "E-mail",
+        "8": "Description"
+    },
+    "UserPanel": {
+        "1": "Panel użytkownika",
+        "2": "Rola:",
+        "3": "Nazwa użytkownika",
+        "4": "Dołączył dnia",
+        "5": ",o godzinie",
+        "6": "E-mail",
+        "7": "Opis użytkownika:",
+        "8": "Edytuj profil",
+        "9": "Link do nowego zdjęcia profilowego:",
+        "10": "Nowa nazwa użytkownika:",
+        "11": "Nowy email:",
+        "12": "Zmień hasło:",
+        "13": "Nowe hasło:",
+        "14": "Wyślij:",
+        "15": "Opis:",
+        "16": "Wyślij:"
     }
 }

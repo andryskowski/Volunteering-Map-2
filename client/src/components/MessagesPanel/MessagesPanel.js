@@ -1,6 +1,7 @@
 import React, {
-  useContext, useEffect, useState, useRef,
+  useContext, useEffect, useState, useRef, 
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { UsersContext } from '../../contexts/UsersContext';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -8,7 +9,7 @@ import { getConversations, getLastMessage } from '../../actions/FetchData';
 import '../../scss/base/_messages-panel.scss';
 import '../../scss/base/_common.scss';
 import Pagination from '../Pagination/Pagination';
-  
+
 function MessagesPanel(props) {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
@@ -16,21 +17,27 @@ function MessagesPanel(props) {
   const [unreadConversations, setUnreadConversations] = useState(null);
   const USERS = useContext(UsersContext);
   const conversationBox = useRef(null);
+  const { t } = useTranslation();
 
   // sort by createdAt date
-  const conversationsSortedByDate = conversationsFromDB?.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+  const conversationsSortedByDate = conversationsFromDB?.sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+  );
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
-  
+
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const conversationsDefinitive = conversationsSortedByDate?.slice(indexOfFirstItem, indexOfLastItem);
+  const conversationsDefinitive = conversationsSortedByDate?.slice(
+    indexOfFirstItem,
+    indexOfLastItem,
+  );
 
   // Get last messages
   useEffect(() => {
@@ -47,7 +54,9 @@ function MessagesPanel(props) {
   // Get unread conversations
   useEffect(() => {
     const fetchMyData = async () => {
-      const unreadConvs = await conversationsFromDB?.filter((conv) => conv.lastMessage.receiverHasRead === false);
+      const unreadConvs = await conversationsFromDB?.filter(
+        (conv) => conv.lastMessage.receiverHasRead === false,
+      );
       setUnreadConversations(unreadConvs);
       localStorage.setItem('numberUnreadConversations', unreadConvs?.length);
     };
@@ -60,14 +69,26 @@ function MessagesPanel(props) {
     const friend = USERS.find((user) => user._id === friendId.toString());
     return (
       <div className="linkToConversation">
-        <Link className="first-part" exact to={{ pathname: '/messages', state: { conversation: currentConversation } }}>
+        <Link
+          className="first-part"
+          exact
+          to={{ pathname: '/messages', state: { conversation: currentConversation } }}
+        >
           <h5>
-            {friend ? <img className="chat-avatar" src={friend ? friend.profilePhoto : 'profile photo'} alt="no chat-avatar" /> : 'user photo'}
+            {friend ? (
+              <img
+                className="chat-avatar"
+                src={friend ? friend.profilePhoto : 'profile photo'}
+                alt="no chat-avatar"
+              />
+            ) : (
+              'user photo'
+            )}
             {' '}
           </h5>
           <h4 className="h4-messagespanel">
-            {'Konwersacja z użytkownikiem: '}
-            {' '} 
+            {t('MessagesPanel.2')} 
+            {' '}
             {friend ? friend.name : 'user'}
           </h4>
         </Link>
@@ -78,7 +99,7 @@ function MessagesPanel(props) {
   return (
     <>
       <div className="page-container">
-        <h1>Konwersacje z użytkownikami</h1>
+        <h1>{t('MessagesPanel.1')}</h1>
         <div className="conversations-box">
           {conversationsDefinitive?.map((conversation) => (
             <div className="conversation-box" ref={conversationBox}>
@@ -86,17 +107,20 @@ function MessagesPanel(props) {
               <div className="second-part">
                 <h6>
                   {unreadConversations?.some((conv) => conv._id === conversation._id)
-              && unreadConversations.filter((conv) => conv._id === conversation._id).some((conv) => conv.lastMessage.sender !== CURRENT_USER._id)
-                    ? <h5 className="fontWeightBold">Nowe wiadomości</h5> : <h5 className="text-no-newmessages">Brak nowych wiadomości</h5> }
+                  && unreadConversations
+                    .filter((conv) => conv._id === conversation._id)
+                    .some((conv) => conv.lastMessage.sender !== CURRENT_USER._id) ? (
+                      <h5 className="fontWeightBold">Nowe wiadomości</h5>
+                    ) : (
+                      <h5 className="text-no-newmessages">{t('MessagesPanel.3')}</h5>
+                    )}
                   <h2>
-                    ostatnia wiadomosc:
+                    {t('MessagesPanel.5')}
                     {' '}
                     <span className="last-message">{conversation.lastMessage.text}</span>
                   </h2>
                   {' '}
-                  {' '}
-                  Data:
-                  {' '}
+                  {t('MessagesPanel.6')} 
                   {' '}
                   {conversation.updatedAt.substring(0, 10)}
                   {' '}
@@ -116,5 +140,5 @@ function MessagesPanel(props) {
     </>
   );
 }
-  
+
 export default MessagesPanel;

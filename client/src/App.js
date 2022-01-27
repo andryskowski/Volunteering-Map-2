@@ -67,11 +67,11 @@ function App() {
                 ) : (
                   <Route exact path="/" component={LandingPage} />
                 )}
-                <PrivateRoute exact path="/messages" component={Messages} />
-                <PrivateRoute exact path="/messagespanel" component={MessagesPanel} />
-                <PrivateRoute exact path="/commentspanel" component={CommentsPanel} />
-                <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} />
-                <PrivateRoute exact path="/userProfile" component={UserProfile} />
+                {CURRENT_USER_ID ? <PrivateRoute exact path="/messages" component={Messages} /> : false}
+                {CURRENT_USER_ID ? <PrivateRoute exact path="/messagespanel" component={MessagesPanel} /> : false}
+                {CURRENT_USER_ID ? <PrivateRoute exact path="/commentspanel" component={CommentsPanel} /> : false}
+                {CURRENT_USER_ID ? <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} /> : false}
+                {CURRENT_USER_ID ? <PrivateRoute exact path="/userProfile" component={UserProfile} /> : false}
                 {PLACES ? PLACES.map((place) => (
                   <PrivateRoute
                     exact
