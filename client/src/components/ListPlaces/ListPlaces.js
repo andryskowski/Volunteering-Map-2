@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import '../../scss/base/_list-places.scss';
 import { PlacesContext } from '../../contexts/PlacesContext';
 import Pagination from '../Pagination/Pagination';
@@ -14,7 +15,8 @@ function ListPlaces() {
   const PLACES = useContext(PlacesContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
-  const [sortedPlaces, setSortedPlaces] = useState(PLACES);
+  const [sortedPlaces, setSortedPlaces] = useState([...PLACES]);
+  const { t } = useTranslation();
   
   function handleChange(event) {
     if (event.target.name === 'district') {
@@ -75,19 +77,19 @@ function ListPlaces() {
       </div>
       <div className="place-category">
         <p>
-          <b>Kategoria:</b>
+          <b>{t('List of places.5')}</b>
           {place.category}
         </p>
       </div>
       <div className="place-district">
         <p>
-          <b>Dzielnica:</b>
+          <b>{t('List of places.2')}</b>
           {place.district}
         </p>
       </div>
       <div className="place-date">
         <p>
-          <b>Ostatnia aktualizacja:</b>
+          <b>{t('List of places.16')}</b>
           {' '}
           {place.date.substring(0, 10)}
           {' '}
@@ -96,7 +98,7 @@ function ListPlaces() {
       </div>
       <div className="short-description">
         <p>
-          <b>Opis:</b>
+          <b>{t('List of places.17')}</b>
           <p>{place.shortDescription}</p>
         </p>
       </div>
@@ -113,43 +115,43 @@ function ListPlaces() {
 
   return (
     <div className="page-container">
-      <h1 className="page-header">Lista miejsc</h1>
+      <h1 className="page-header">{t('List of places.1')}</h1>
       <div className="filter">
         <form className="filters-form">
           <label htmlFor="district">
-            Dzielnica:
+            {t('List of places.2')}
             <select id="district" name="district" onChange={handleChange}>
-              <option value="">Wszystkie</option>
+              <option value="">{t('List of places.3')}</option>
               <option value="Bałuty">Bałuty</option>
               <option value="Śródmieście">Śródmieście</option>
               <option value="Widzew">Widzew</option>
               <option value="Polesie">Polesie</option>
               <option value="Górna">Górna</option>
-              <option value="inna">inna</option>
+              <option value="inna">{t('List of places.4')}</option>
             </select>
           </label>
           <label htmlFor="category">
-            Kategoria:
+            {t('List of places.5')}
             <select id="category" name="category" onChange={handleChange}>
-              <option value="">Wszystkie</option>
-              <option value="dzieci">dzieci</option>
-              <option value="zwierzeta">zwierzęta</option>
-              <option value="inwalidzi">inwalidzi</option>
-              <option value="uzaleznienia">uzależnienia</option>
-              <option value="emeryci">emeryci</option>
-              <option value="inne">inne</option>
+              <option value="">{t('List of places.3')}</option>
+              <option value="dzieci">{t('List of places.6')}</option>
+              <option value="zwierzeta">{t('List of places.7')}</option>
+              <option value="inwalidzi">{t('List of places.8')}</option>
+              <option value="uzaleznienia">{t('List of places.9')}</option>
+              <option value="emeryci">{t('List of places.10')}</option>
+              <option value="inne">{t('List of places.11')}</option>
             </select>
           </label>
           <label htmlFor="sort">
-            Sortuj:
+            {t('List of places.12')}
             <select id="sort" name="sort" onChange={handleChange}>
               <option value="-">--</option>
-              <option value="newest">najnowsze</option>
-              <option value="oldest">najstarsze</option>
+              <option value="newest">{t('List of places.13')}</option>
+              <option value="oldest">{t('List of places.14')}</option>
             </select>
           </label>
           <label>
-            Wyszukaj po nazwie:
+            {t('List of places.15')}
             <input type="text" name="search-name" onChange={handleChange} />
           </label>
         </form>

@@ -281,7 +281,6 @@ export async function getComments() {
     .then((resp) => resp.json())
     .catch((error) => {
       console.error(`${error.name}: ${error.message}`);
-      alert('Error retrieving data!');
     });
   return response;
 }

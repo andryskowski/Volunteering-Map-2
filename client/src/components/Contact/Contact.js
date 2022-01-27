@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import emailjs from 'emailjs-com';
+import { useTranslation } from 'react-i18next';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_contact.scss';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -8,6 +9,7 @@ function Contact() {
   const CURRENT_USER = useContext(CurrentUserContext);
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const { t } = useTranslation();
 
   const validation = () => {
     if (subject === '') { alert('Pole tematu nie moze byc puste.'); }
@@ -29,26 +31,26 @@ function Contact() {
   return (
     <div className="page-container contact-page">
       <div>
-        <h1 className="page-header">Kontakt</h1>
-        <h4 className="contact-header-2"><b>Masz pytanie? Zauważyłeś błąd na stronie? Za pomocą poniższego formularza możesz z łatwością skontaktować się z administratorem serwisu.</b></h4>
+        <h1 className="page-header">{t('Contact.1')}</h1>
+        <h4 className="contact-header-2"><b>{t('Contact.2')}</b></h4>
         <form onSubmit={sendEmail} className="form form-contact">
           <label htmlFor="name">
-            Nazwa użytkownika:
+            {t('Contact.3')}
             <input id="name" defaultValue={CURRENT_USER.userInfo.name} type="text" name="name" />
           </label>
           <label htmlFor="email">
-            Email:
+            {t('Contact.4')}
             <input id="email" defaultValue={CURRENT_USER.userInfo.email} type="text" name="email" />
           </label>
           <label htmlFor="subject">
-            Temat:
+            {t('Contact.5')}
             <input id="subject" onChange={(e) => setSubject(e.target.value)} type="text" name="subject" />
           </label>
           <label htmlFor="message">
-            Wiadomość:
+            {t('Contact.6')}
             <textarea onChange={(e) => setMessage(e.target.value)} id="message" type="text" name="message" className="message-input" />
           </label>
-          <input type="submit" value="Send Message" />
+          <input type="submit" value={t('Contact.7')} />
         </form>
       </div>
     </div>

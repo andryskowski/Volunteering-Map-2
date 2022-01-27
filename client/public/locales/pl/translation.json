@@ -11,5 +11,89 @@
         "9": "Wiadomości",
         "10": "Profil",
         "11": "Wyloguj się"
+    },
+    "List of places": {
+        "1": "Lista miejsc",
+        "2": "Dzielnica:",
+        "3": "Wszystkie",
+        "4": "inna",
+        "5": "Kategoria:",
+        "6": "dzieci",
+        "7": "zwierzęta",
+        "8": "inwalidzi",
+        "9": "uzależnienia",
+        "10": "emeryci",
+        "11": "inne",
+        "12": "Sortuj:",
+        "13": "najnowsze",
+        "14": "najstarsze",
+        "15": "Wyszukaj po nazwie:",
+        "16": "Ostatnia aktualizacja",
+        "17": "Opis:"
+    },
+    "Placeform": {
+        "1": "Dodaj miejsce",
+        "2": "Nazwa fundacji (lub miejsca pomocy):",
+        "3": "Strona internetowa:",
+        "4": "E-mail:",
+        "5": "Telefon:",
+        "6": "Miasto:",
+        "7": "Ulica:",
+        "8": "Numer domu:",
+        "9": "Kod pocztowy:",
+        "10": "Dzielnica:",
+        "11": "inna",
+        "12": "Link do zdjecia logo fundacji/miejsca pomocy:",
+        "13": "Kategoria:",
+        "14": "inne",
+        "15": "dzieci",
+        "16": "zwierzęta",
+        "17": "inwalidzi",
+        "18": "uzależnienia",
+        "19": "emeryci",
+        "20": "Krótki opis fundacji/miejsca pomocy:",
+        "21": "Opis:",
+        "22": "Wyślij"
+    },
+    "ViewPlaceform": {
+        "1": "Podgląd",
+        "2": "Nazwa fundacji (lub miejsca pomocy):",
+        "3": "Telefon:",
+        "4": "Strona internetowa:",
+        "5": "E-mail:",
+        "6": "Adres:",
+        "10": "Podgląd na mapie:",
+        "11": "Kategoria",
+        "12": "Opis:",
+        "13": "Wyślij",
+        "14": "Uwaga!",
+        "15": "Pamiętaj, że dodane przez Ciebie miejsce nie będzie od razu widoczne na mapie. Najpierw musi zostać zaakceptowane przez moderatora. W przypadku błędnego wyświetlania miejsca pomocy na mapie, bez obaw, każda lokalizacja zostaje potwierdzona przez moderatora."
+    },
+    "Contact": {
+        "1": "Kontakt",
+        "2": "Masz pytanie? Zauważyłeś błąd na stronie? Za pomocą poniższego formularza możesz z łatwością skontaktować się z administratorem serwisu.:",
+        "3": "Nazwa użytkownika:",
+        "4": "E-mail:",
+        "5": "Temat:",
+        "6": "Wiadomość:",
+        "7": "Wyślij wiadomość:"
+    },
+    "Comments": {
+        "1": "Komentarze:",
+        "2": "Temat:",
+        "3": "Wiadomość:",
+        "4": "Data dodania:"
+    },
+    "CommentsForm": {
+        "1": "Dodaj swój komentarz:",
+        "2": "Temat:",
+        "3": "Treść komentarza:",
+        "4": "Wyślij"
+    },
+    "LandingPage": {
+        "1": "Szukasz miejsca, w którym mógłbyś spędzić wspaniałe chwile, poznać nowych ludzi, a przy okazji nieść pomoc innym? Dobrze trafiłeś! 'Volunteering Map' ułatwi Ci znalezienie tego czego szukasz. Ta całkowicie darmowa aplikacja pozwala na znalezienie fundacji, schroniska, domu seniora czy jakiegokolwiek innego miejsca, w którym poszukiwani są wolontariusze. Sprawdź jakie placówki znajdują się w Twojej okolicy. Być może założenie konta na naszym portalu zmieni Twoje życie... Kto wie, może spotkasz tu przyjaciół na lata, którzy będą Twoją pomocną dłonią w trudniejszych chwilach?",
+        "2": "Przekonaj się sam!",
+        "3": "Zaloguj/Zarejestruj się",
+        "4": "Powrót"
     }
 }

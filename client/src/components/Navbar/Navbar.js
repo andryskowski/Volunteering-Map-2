@@ -14,7 +14,7 @@ function logOut() {
 }
 
 function Navbar() {
-  const CURRENT_USER = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   const xButton = useRef(null);
   const navbarList = useRef(null);
   const { t } = useTranslation();
@@ -36,18 +36,18 @@ function Navbar() {
           <Link to="/addplace"><li>{t('Navbar.3')}</li></Link>
           <Link to="/contact"><li>{t('Navbar.4')}</li></Link>
           <li>{t('Navbar.5')}</li>
-          {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
+          {currentUser.userInfo.role === 'admin' || currentUser.userInfo.role === 'admin'
             ? <Link to="/userspanel"><li>{t('Navbar.6')}</li></Link> : false}
-          {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
+          {currentUser.userInfo.role === 'admin' || currentUser.userInfo.role === 'admin'
             ? <Link to="/placespanel"><li>{t('Navbar.7')}</li></Link> : false}
-          {CURRENT_USER.userInfo.role === 'admin' || CURRENT_USER.userInfo.role === 'admin'
+          {currentUser.userInfo.role === 'admin' || currentUser.userInfo.role === 'admin'
             ? <Link to="/commentspanel"><li>{t('Navbar.8')}</li></Link> : false}
           <Link to="/messagespanel"><li>{t('Navbar.9')}</li></Link>
-          <Link to={`/edit/${CURRENT_USER.userInfo._id}/`}><li>{t('Navbar.10')}</li></Link>
+          <Link to={`/edit/${currentUser.userInfo._id}/`}><li>{t('Navbar.10')}</li></Link>
           <li onClick={logOut}>{t('Navbar.11')}</li>
           <div className="small-profilephoto-container">
             <div>
-              <img width="35px" height="35px" src={CURRENT_USER.userInfo.profilePhoto} alt="profile img" />
+              <img width="35px" height="35px" src={currentUser.userInfo.profilePhoto} alt="profile img" />
             </div>
           </div>
         </ul>

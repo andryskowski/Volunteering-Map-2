@@ -4,6 +4,13 @@
     
 }
 
+.accessible-interface{
+    font-size: 1.4em;
+    @media only screen and (max-width: 1400px) {
+        font-size: 1.2em;
+    }
+}
+
 .navbar{
     background-color: #03396c;
     color: white;

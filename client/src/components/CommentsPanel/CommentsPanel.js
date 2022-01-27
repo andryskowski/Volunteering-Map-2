@@ -1,12 +1,13 @@
 import React, {
-  useEffect, useState,  
+  useEffect, useState,
 } from 'react';
 import { getComments, removeComment } from '../../actions/FetchData';
 import Pagination from '../Pagination/Pagination';
 import '../../scss/base/_comments-panel.scss';
   
 function CommentsPanel() {
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(null);
+  const [error, setError] = useState('Error: cannot connect to Comments.');
   // pagination
   const [itemsPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,8 +16,8 @@ function CommentsPanel() {
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const commentsWithPagination = comments.slice(indexOfFirstItem, indexOfLastItem);
-  
+  const commentsWithPagination = comments?.slice(indexOfFirstItem, indexOfLastItem);
+
   useEffect(() => {
     const fetchMyData = async () => {
       const response = await getComments();
@@ -24,6 +25,12 @@ function CommentsPanel() {
     };
     fetchMyData();
   }, []);
+
+  useEffect(() => {
+    if (comments && Array.isArray(comments)) {
+      setError(null);
+    }
+  }, [comments]);
   
   const handleRemoveComment = (event) => {
     const removedCommentId = event.target.value;
@@ -39,7 +46,8 @@ function CommentsPanel() {
     <>
       <div className="page-container comments-panel">
         <h1>Panel komentarzy</h1>
-        {commentsWithPagination.map((comment) => (
+        {error && <p>{error}</p>}
+        {commentsWithPagination?.map((comment) => (
           <div className="comment-container">
             <h5>
               commentId:
@@ -84,7 +92,7 @@ function CommentsPanel() {
         ))}
         <Pagination
           itemsPerPage={itemsPerPage}
-          totalItems={comments.length}
+          totalItems={comments?.length}
           paginate={paginate}
         />
       </div>

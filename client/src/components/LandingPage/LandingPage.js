@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import '../../scss/base/_landing-page.scss';
@@ -6,10 +7,11 @@ import kids from '../../assets/kids.jpg';
 import vmlogo from '../../assets/vm-logo.png';
 import lodzlogo from '../../assets/lodz.svg';
 
-function ViewPlaceForm(props) {
+function ViewPlaceForm() {
   const refContextContainer1 = useRef(false);
   const refContextContainer2 = useRef(false);
   const [heading, setHeading] = useState('Zaloguj/Zarejestruj się');
+  const { t } = useTranslation();
 
   const changeView = () => {
     refContextContainer1.current.classList.toggle('display-none');
@@ -31,17 +33,10 @@ function ViewPlaceForm(props) {
               <h1>Volunteering Map</h1>
             </div>
             <p>
-              Szukasz miejsca, w którym mógłbyś spędzić wspaniałe chwile, poznać nowych ludzi, a
-              przy okazji nieść pomoc innym? Dobrze trafiłeś! &apos;Volunteering Map&apos; ułatwi Ci
-              znalezienie tego czego szukasz. Ta całkowicie darmowa aplikacja pozwala na znalezienie
-              fundacji, schroniska, domu seniora czy jakiegokolwiek innego miejsca, w którym
-              poszukiwani są wolontariusze. Sprawdź jakie placówki znajdują się w Twojej
-              okolicy. Być może założenie konta na naszym portalu zmieni Twoje życie... Kto wie,
-              może spotkasz tu przyjaciół na lata, którzy będą Twoją pomocną dłonią w trudniejszych
-              chwilach?
+              {t('LandingPage.1')}
             </p>
             <div className="see-for-yourself-header-container">
-              <h4 className="see-for-yourself-header">Przekonaj się sam!</h4>
+              <h4 className="see-for-yourself-header">{t('LandingPage.2')}</h4>
             </div>
             <div className="images-container">
               <div className="lodz-logo-container">
@@ -66,7 +61,7 @@ function ViewPlaceForm(props) {
                 changeView();
               }}
             >
-              {heading}
+              {heading === 'Zaloguj/Zarejestruj się' ? t('LandingPage.3') : t('LandingPage.4')}
             </a>
           </div>
         </div>

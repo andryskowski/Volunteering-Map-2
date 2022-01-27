@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getComments, getUser } from '../../actions/FetchData';
@@ -8,6 +9,7 @@ import CommentForm from './CommentForm/CommentForm';
 function Comments({ placeId }) {
   const [comments, setComments] = useState([]);
   const [commentsNumber, setNumberComments] = useState(0);
+  const { t } = useTranslation();
 
   const setRoleStyle = (role) => {
     if (role === 'moderator') return { color: 'blue' };
@@ -40,7 +42,7 @@ function Comments({ placeId }) {
   return (
     <>
       <h1>
-        Komentarze
+        {t('Comments.1')}
         {' '}
         <span>
           (
@@ -63,17 +65,17 @@ function Comments({ placeId }) {
               </Link>
             </b>
             <p>
-              <b>Temat:</b>
+              <b>{t('Comments.2')}</b>
               {' '}
               {comment.subject}
             </p>
             <p>
-              <b>Wiadomość:</b>
+              <b>{t('Comments.3')}</b>
               {' '}
               {comment.message}
             </p>
             <p>
-              <b>Data dodania:</b>
+              <b>{t('Comments.4')}</b>
               {' '}
               {comment.date.substring(0, 10)}
               {', o '}

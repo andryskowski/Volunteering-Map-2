@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
+import { useTranslation } from 'react-i18next';
 import 'react-quill/dist/quill.snow.css';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_place-form.scss';
 import ViewPlaceForm from './ViewPlaceForm/ViewPlaceForm';
+import { validationPlaceForm } from './ValidationPlaceForm';
 
 function PlaceForm() {
   const [placeName, setPlaceame] = useState('');
@@ -26,6 +28,7 @@ function PlaceForm() {
     placeName, phone, email, webPage, city, street, postalCode, houseNo, description, shortDescription, category, logo, district, latLng, smallMapOfPlace, statusPlace,
   };
   const [showPopUp, setShowPopUp] = useState(false);
+  const { t } = useTranslation();
 
   async function getPlaceCoordinates() {
     const URL = `https://www.mapquestapi.com/geocoding/v1/address?key=dYvAAN5PGJqo3AiKXCtuUoJpy7LUhwNs&inFormat=kvp&outFormat=json&location=${city}+${street}+${houseNo}+${postalCode}&thumbMaps=true&maxResults=1`;
@@ -69,27 +72,11 @@ function PlaceForm() {
     ],
   };
 
-  const validation = () => {
-    if (placeName === '') { alert('Pole z nazwa miejca nie moze byc puste'); }
-    else if (webPage === '') { alert('Pole strony internetowej nie moze byc puste'); }
-    else if (email === '') { alert('Pole email nie moze byc puste'); }
-    else if (phone === '') { alert('Pole telefon nie moze byc puste'); }
-    else if (city === '') { alert('Pole miasto nie moze byc puste'); }
-    else if (street === '') { alert('Pole ulica nie moze byc puste'); }
-    else if (postalCode === '') { alert('Pole kod pocztowy nie moze byc puste'); }
-    else if (houseNo === '') { alert('Pole numer domu nie moze byc puste'); }
-    else if (district === '') { alert('Pole dzielnica nie moze byc puste'); }
-    else if (logo === '') { alert('Pole zdjecia logo nie moze byc puste'); }
-    else if (category === '') { alert('Pole kategorii nie moze byc puste'); }
-    else if (shortDescription === '') { alert('Pole krotkiego opisu nie moze byc puste'); }
-    else return true;
-    return false;
-  };
-
   // eslint-disable-next-line no-unused-vars
   function handleSubmit(event) {
     event.preventDefault();
-    const isValidated = validation();
+    const isValidated = validationPlaceForm(placeName, webPage, email, phone, city, street, 
+      postalCode, houseNo, district, logo, category, shortDescription);
     if (isValidated === true) {
       getPlaceCoordinates();
       setStatusPlace('pending');
@@ -99,78 +86,78 @@ function PlaceForm() {
 
   return (
     <div className="page-container placeform-page">
-      <h1 className="page-header">Dodaj miejsce</h1>
+      <h1 className="page-header">{t('Placeform.1')}</h1>
       <form className="form">
         <label htmlFor="place-name">
-          Nazwa fundacji (lub miejsca pomocy):
+          {t('Placeform.2')}
           <input id="place-name" type="place-name" name="placeName" onChange={handleChange} />
         </label>
         <label htmlFor="web-page">
-          Strona internetowa:
+          {t('Placeform.3')}
           <input id="web-page" type="web-page" name="webPage" onChange={handleChange} />
         </label>
         <label htmlFor="email">
-          E-mail:
+          {t('Placeform.4')}
           <input id="email" type="email" name="email" onChange={handleChange} />
         </label>
         <label htmlFor="phone">
-          Telefon:
+          {t('Placeform.5')}
           <input id="phone" type="phone" name="phone" onChange={handleChange} />
         </label>
         <label htmlFor="city">
-          Miasto:
+          {t('Placeform.6')}
           <input id="city" type="city" name="city" onChange={handleChange} />
         </label>
         <label htmlFor="street">
-          Ulica:
+          {t('Placeform.7')}
           <input id="street" type="street" name="street" onChange={handleChange} />
         </label>
         <label htmlFor="house-no">
-          Numer domu:
+          {t('Placeform.8')}
           <input id="house-no" type="house-no" name="houseNo" onChange={handleChange} />
         </label>
         <label htmlFor="postal-code">
-          Kod pocztowy:
+          {t('Placeform.9')}
           <input id="postal-code" type="postal-code" name="postalCode" onChange={handleChange} />
         </label>
         <label htmlFor="district">
-          Dzielnica:
+          {t('Placeform.10')}
           <select id="district" name="district" onChange={handleChange}>
             <option value="Bałuty">Bałuty</option>
             <option value="Śródmieście">Śródmieście</option>
             <option value="Widzew">Widzew</option>
             <option value="Polesie">Polesie</option>
             <option value="Górna">Górna</option>
-            <option selected value="inna">inna</option>
+            <option selected value="inna">{t('Placeform.11')}</option>
           </select>
         </label>
         <label htmlFor="logo">
-          Link do zdjecia logo fundacji/miejsca pomocy:
+          {t('Placeform.12')}
           <input id="logo" type="logo" name="logo" onChange={handleChange} />
         </label>
         <label htmlFor="category">
-          Kategoria:
+          {t('Placeform.13')}
           <select id="category" name="category" onChange={handleChange}>
-            <option value="dzieci">dzieci</option>
-            <option value="zwierzeta">zwierzeta</option>
-            <option value="inwalidzi">inwalidzi</option>
-            <option value="uzaleznienia">uzaleznienia</option>
-            <option value="emeryci">emeryci</option>
-            <option selected value="inne">inne</option>
+            <option value="dzieci">{t('Placeform.15')}</option>
+            <option value="zwierzeta">{t('Placeform.16')}</option>
+            <option value="inwalidzi">{t('Placeform.17')}</option>
+            <option value="uzaleznienia">{t('Placeform.18')}</option>
+            <option value="emeryci">{t('Placeform.19')}</option>
+            <option selected value="inne">{t('Placeform.14')}</option>
           </select>
         </label>
         <label htmlFor="shortDescription">
-          Krótki opis fundacji/miejsca pomocy:
+          {t('Placeform.20')}
           <input id="shortDescription" type="text" name="shortDescription" onChange={handleChange} />
         </label>
         <label htmlFor="description">
-          Opis:
+          {t('Placeform.21')}
           <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} modules={modules} formats={formats} />
         </label>
         <input
           id="send"
           type="submit"
-          value="Wyślij"
+          value={t('Placeform.22')}
           className="submit submit-addplace"
           onClick={(event) => { handleSubmit(event); }}
         />
