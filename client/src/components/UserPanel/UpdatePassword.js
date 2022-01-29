@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function UpdatePassword() {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(window.localStorage.getItem('CURRENT_USER')),
   );
   const [newPassword, setNewPassword] = useState(currentUser.password);
+  const { t } = useTranslation();
 
   function handleChange(event) {
     setNewPassword(event.target.value);
@@ -41,17 +43,17 @@ function UpdatePassword() {
 
   return (
     <>
-      <h3>Zmień hasło</h3>
+      <h3>{t('UserPanel.12')}</h3>
       <form onSubmit={handleSubmit} className="form">
         <label htmlFor="username-password">
-          <b>Nowe hasło:</b>
+          <b>{t('UserPanel.13')}</b>
           <input id="username-password" type="password" name="password" onChange={handleChange} />
         </label>
         <input
           key="profilephoto-input"
           id="send"
           type="submit"
-          value="Wyślij"
+          value={t('UserPanel.16')}
           className="submit"
           onClick={handleSubmit}
         />

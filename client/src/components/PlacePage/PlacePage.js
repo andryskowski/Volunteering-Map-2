@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import '../../scss/base/_list-places.scss';
 import Parser from 'html-react-parser';
 import { PlacesContext } from '../../contexts/PlacesContext';
@@ -8,11 +9,14 @@ import Comments from '../Comments/Comments';
 function PlacePage(props) {
   const { placeId } = props;
   const PLACES = useContext(PlacesContext);
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="page-container placepage-placeinfo">
-        <h1>Strona miejsca pomocy</h1>
+        <h1>
+          {t('PlacePage.1')}
+        </h1>
         {PLACES
           .filter((place) => placeId === place._id)
           .map((place) => (
@@ -35,7 +39,7 @@ function PlacePage(props) {
               </div>
               <div className="place-address">
                 <h5>
-                  Adres:
+                  {t('PlacePage.2')}
                   {place.city}
                   ,
                   {place.street}
@@ -47,31 +51,31 @@ function PlacePage(props) {
               </div>
               <div className="place-category">
                 <p>
-                  <b>Kategoria:</b>
+                  <b>{t('PlacePage.3')}</b>
                   {place.category}
                 </p>
               </div>
               <div className="place-district">
                 <p>
-                  <b>Dzielnica:</b>
+                  <b>{t('PlacePage.4')}</b>
                   {place.district}
                 </p>
               </div>
               <div className="place-phone">
                 <p>
-                  <b>Telefon:</b>
+                  <b>{t('PlacePage.5')}</b>
                   {place.phone}
                 </p>
               </div>
               <div className="place-email">
                 <p>
-                  <b>Email:</b>
+                  <b>{t('PlacePage.6')}</b>
                   {place.email}
                 </p>
               </div>
               <div className="place-webpage">
                 <p>
-                  <b>Strona internetowa:</b>
+                  <b>{t('PlacePage.7')}</b>
                   <Link target="_blank" to={`//${place.webPage}`}>
                     {place.webPage}
                   </Link>
@@ -79,19 +83,19 @@ function PlacePage(props) {
               </div>
               <div className="place-addedby">
                 <p>
-                  <b>Dodano przez:</b>
+                  <b>{t('PlacePage.8')}</b>
                   {place.addedBy}
                 </p>
               </div>
               <div className="place-date">
                 <p>
-                  <b>Data dodania:</b>
+                  <b>{t('PlacePage.9')}</b>
                   {place.date}
                 </p>
               </div>
               <div className="place-description">
                 <p>
-                  <b>Opis:</b>
+                  <b>{t('PlacePage.10')}</b>
                   {Parser(place.description)}
                 </p>
               </div>

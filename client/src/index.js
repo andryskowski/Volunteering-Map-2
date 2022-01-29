@@ -6,21 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import 'leaflet/dist/leaflet.css';
 import { PlacesContextProvider } from './contexts/PlacesContext';
 import { UsersContextProvider } from './contexts/UsersContext';
+import { AccessibleInterfaceContextProvider } from './contexts/AccessibleInterfaceContext';
 import CurrentUserContext, { CURRENT_USER_FROM_CONTEXT } from './contexts/CurrentUserContext';
 import './i18next';
 
 ReactDOM.render(
-  <Suspense fallback={(<div>Loading ~~~~</div>)}>
-    <React.StrictMode>
-      <CurrentUserContext.Provider value={CURRENT_USER_FROM_CONTEXT}>
-        <PlacesContextProvider>
-          <UsersContextProvider>
+  <React.StrictMode>
+    <CurrentUserContext.Provider value={CURRENT_USER_FROM_CONTEXT}>
+      <PlacesContextProvider>
+        <UsersContextProvider>
+          <AccessibleInterfaceContextProvider>
             <App />
-          </UsersContextProvider>
-        </PlacesContextProvider>
-      </CurrentUserContext.Provider>
-    </React.StrictMode>
-  </Suspense>,
+          </AccessibleInterfaceContextProvider>
+        </UsersContextProvider>
+      </PlacesContextProvider>
+    </CurrentUserContext.Provider>
+  </React.StrictMode>,
   document.getElementById('root'),
 );
 

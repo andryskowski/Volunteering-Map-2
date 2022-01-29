@@ -152,14 +152,26 @@
         "5": ",o godzinie",
         "6": "E-mail",
         "7": "Opis użytkownika:",
-        "9": "Edytuj profil",
-        "10": "Link do nowego zdjęcia profilowego:",
-        "11": "Nowa nazwa użytkownika:",
-        "12": "Nowy email:",
-        "13": "Zmień hasło:",
-        "14": "Nowe hasło:",
-        "15": "Wyślij:",
-        "16": "Opis:",
-        "17": "Wyślij:"
+        "8": "Edytuj profil",
+        "9": "Link do nowego zdjęcia profilowego:",
+        "10": "Nowa nazwa użytkownika:",
+        "11": "Nowy email:",
+        "12": "Zmień hasło:",
+        "13": "Nowe hasło:",
+        "14": "Wyślij:",
+        "15": "Opis:",
+        "16": "Wyślij"
+    },
+    "PlacePage": {
+        "1": "Strona miejsca pomocy",
+        "2": "Adres: ",
+        "3": "Kategoria: ",
+        "4": "Dzielnica: ",
+        "5": "Telefon: ",
+        "6": "Email: ",
+        "7": "Strona internetowa: ",
+        "8": "Dodano przez: ",
+        "9": "Data dodania: ",
+        "10": "Opis"
     }
 }

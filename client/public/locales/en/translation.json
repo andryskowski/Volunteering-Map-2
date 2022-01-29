@@ -145,21 +145,34 @@
         "8": "Description"
     },
     "UserPanel": {
-        "1": "Panel użytkownika",
-        "2": "Rola:",
-        "3": "Nazwa użytkownika",
-        "4": "Dołączył dnia",
-        "5": ",o godzinie",
+        "1": "Profile",
+        "2": "Role:",
+        "3": "Username",
+        "4": "Joined",
+        "5": "at",
         "6": "E-mail",
-        "7": "Opis użytkownika:",
-        "8": "Edytuj profil",
-        "9": "Link do nowego zdjęcia profilowego:",
-        "10": "Nowa nazwa użytkownika:",
-        "11": "Nowy email:",
-        "12": "Zmień hasło:",
-        "13": "Nowe hasło:",
-        "14": "Wyślij:",
-        "15": "Opis:",
-        "16": "Wyślij:"
+        "7": "Description:",
+        "8": "Edit profile",
+        "9": "Link to the new avatar:",
+        "10": "New username:",
+        "11": "New email:",
+        "12": "Change password:",
+        "13": "New password",
+        "14": "Send:",
+        "15": "Description:",
+        "16": "Send"
+    },
+    "PlacePage": {
+        "1": "Page of place",
+        "2": "Address: ",
+        "3": "Category: ",
+        "4": "District: ",
+        "5": "Phone number: ",
+        "6": "Email: ",
+        "7": "Webpage: ",
+        "8": "Added by: ",
+        "9": "Date: ",
+        "10": "Description"
     }
+    
 }

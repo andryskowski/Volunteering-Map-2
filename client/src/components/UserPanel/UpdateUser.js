@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import ReactQuill from 'react-quill';
+import { useTranslation } from 'react-i18next';
 import { updateUser } from '../../actions/FetchData';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import UpdatePassword from './UpdatePassword';
@@ -12,7 +13,8 @@ function UserPanel() {
   const [newEmail, setNewEmail] = useState(CURRENT_USER.userInfo.email);
   const [description, setDescription] = useState('');
   const [updatePasswordPanelVisible, setUpdatePasswordPanelVisible] = useState(false);
-  
+  const { t } = useTranslation();
+
   function handleChange(event) {
     if (event.target.name === 'profilePhoto') {
       setNewProfilePhoto(event.target.value);
@@ -49,10 +51,10 @@ function UserPanel() {
 
   return (
     <>
-      <h3>Edytuj profil</h3>
+      <h3>{t('UserPanel.8')}</h3>
       <form onSubmit={handleSubmit} className="form">
         <label htmlFor="profilephoto-update">
-          <b>Link do nowego zdjęcia profilowego:</b>
+          <b>{t('UserPanel.9')}</b>
           <input
             id="profilephoto-update"
             defaultValue={CURRENT_USER.userInfo.profilePhoto}
@@ -62,7 +64,7 @@ function UserPanel() {
           />
         </label>
         <label htmlFor="username-update">
-          <b>Nowa nazwa użytkownika:</b>
+          <b>{t('UserPanel.10')}</b>
           <input
             id="username-update"
             defaultValue={CURRENT_USER.userInfo.name}
@@ -72,7 +74,7 @@ function UserPanel() {
           />
         </label>
         <label htmlFor="username-email">
-          <b>Nowy email:</b>
+          <b>{t('UserPanel.11')}</b>
           <input
             id="username-email"
             defaultValue={CURRENT_USER.userInfo.email}
@@ -84,14 +86,14 @@ function UserPanel() {
         <p className="update-password" onClick={() => { setUpdatePasswordPanelVisible(true); }}>Zmień hasło</p>
         {updatePasswordPanelVisible ? <UpdatePassword /> : false}
         <div htmlFor="description">
-          Opis:
+          {t('UserPanel.15')}
           <ReactQuill className="description-box" id="description" theme="snow" value={description} onChange={setDescription} modules={modules} formats={formats} />
         </div>
         <input
           key="profilephoto-input"
           id="send"
           type="submit"
-          value="Wyślij"
+          value={t('UserPanel.16')}
           className="submit"
           onClick={handleSubmit}
         />

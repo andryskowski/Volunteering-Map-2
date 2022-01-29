@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import i18next from 'i18next';
@@ -24,6 +25,7 @@ import Messages from './components/Messages/Messages';
 import MessagesPanel from './components/MessagesPanel/MessagesPanel';
 import CommentsPanel from './components/CommentsPanel/CommentsPanel';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import { AccessibleInterfaceContext } from './contexts/AccessibleInterfaceContext';
 
 const CURRENT_USER = JSON.parse(window.localStorage.getItem('CURRENT_USER'));
 const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
@@ -31,73 +33,98 @@ const CURRENT_USER_ID = CURRENT_USER ? CURRENT_USER._id : false;
 function App() {
   const PLACES = useContext(PlacesContext);
   const USERS = useContext(UsersContext);
+  const elementAccessibleInterface = useRef(null); 
+  const buttonChangeLanguage = useRef(null); 
+  const { isAccessibleInterface, setIsAccesibleInterface } = useContext(AccessibleInterfaceContext);
 
   const changeLang = () => {
     if (i18next.resolvedLanguage === 'en')
     {
       i18next.changeLanguage('pl');
+      buttonChangeLanguage.current.classList.add('flag-gb');
+      buttonChangeLanguage.current.classList.remove('flag-poland');
     }
     else if (i18next.resolvedLanguage === 'pl')
     {
       i18next.changeLanguage('en');
+      buttonChangeLanguage.current.classList.add('flag-poland');
+      buttonChangeLanguage.current.classList.remove('flag-gb');
     }
-    // i18next.changeLanguage('pl');
-    console.log(i18next);
+  };
+
+  const changeInterface = () => {
+    if (isAccessibleInterface === true) {
+      setIsAccesibleInterface(false);
+      elementAccessibleInterface.current.classList.remove('accessible-interface');
+    }
+    else
+    {
+      setIsAccesibleInterface(true);
+      elementAccessibleInterface.current.classList.add('accessible-interface');
+    }
   };
 
   return (
     <>
-      <Router>
-        <AnimatePresence exit={{ opacity: 0 }}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
-            <div className="container-button-changelang">
-              <button onClick={() => { changeLang(); }} className="button-changelang">PL</button>
-            </div>
-        
-            <ScrollToTop>
-              <Switch>
-                {CURRENT_USER_ID ? (
-                  <PrivateRoute exact path="/" component={MainPage} />
-                ) : (
-                  <Route exact path="/" component={LandingPage} />
-                )}
-                {CURRENT_USER_ID ? <PrivateRoute exact path="/messages" component={Messages} /> : false}
-                {CURRENT_USER_ID ? <PrivateRoute exact path="/messagespanel" component={MessagesPanel} /> : false}
-                {CURRENT_USER_ID ? <PrivateRoute exact path="/commentspanel" component={CommentsPanel} /> : false}
-                {CURRENT_USER_ID ? <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} /> : false}
-                {CURRENT_USER_ID ? <PrivateRoute exact path="/userProfile" component={UserProfile} /> : false}
-                {PLACES ? PLACES.map((place) => (
-                  <PrivateRoute
-                    exact
-                    path={`/${place._id}`}
-                    component={() => <PlacePage placeId={place._id} />}
-                  />
-                )) : false}
-                {USERS ? USERS.map((user) => (
-                  <PrivateRoute
-                    exact
-                    path={`/${user._id}`}
-                    component={() => <UserProfile userId={user._id} />}
-                  />
-                )) : false}
-                {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
-                {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
-                {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
-                {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
-                  ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
-                {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
-                  ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
-              </Switch>
-            </ScrollToTop>
-          </motion.div>
-        </AnimatePresence>
-      </Router>
+      <div ref={elementAccessibleInterface} className={isAccessibleInterface ? 'accessible-interface' : null}>
+        <Router>
+          <AnimatePresence exit={{ opacity: 0 }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {CURRENT_USER_ID ? <PrivateRoute path="/" component={Navbar} /> : false}
+
+              <div className="fixed-buttons">
+                <div className="container-button-changelang">
+                  <button ref={buttonChangeLanguage} onClick={() => { changeLang(); }} className="button-changelang" />
+                </div>
+                <div className="container-button-changeinterface">
+                  <button onClick={() => { changeInterface(); }} className="button-changeinterface" />
+                </div>
+              </div>
+
+              <ScrollToTop>
+                <Switch>
+                  {CURRENT_USER_ID ? (
+                    <PrivateRoute exact path="/" component={MainPage} />
+                  ) : (
+                    <Route exact path="/" component={LandingPage} />
+                  )}
+                  {CURRENT_USER_ID ? <PrivateRoute exact path="/messages" component={Messages} /> : false}
+                  {CURRENT_USER_ID ? <PrivateRoute exact path="/messagespanel" component={MessagesPanel} /> : false}
+                  {CURRENT_USER_ID ? <PrivateRoute exact path="/commentspanel" component={CommentsPanel} /> : false}
+                  {CURRENT_USER_ID ? <PrivateRoute exact path={`/edit/${CURRENT_USER_ID}`} component={UserPanel} /> : false}
+                  {CURRENT_USER_ID ? <PrivateRoute exact path="/userProfile" component={UserProfile} /> : false}
+                  {PLACES ? PLACES.map((place) => (
+                    <PrivateRoute
+                      exact
+                      path={`/${place._id}`}
+                      component={() => <PlacePage placeId={place._id} />}
+                    />
+                  )) : false}
+                  {USERS ? USERS.map((user) => (
+                    <PrivateRoute
+                      exact
+                      path={`/${user._id}`}
+                      component={() => <UserProfile userId={user._id} />}
+                    />
+                  )) : false}
+                  {CURRENT_USER_ID ? <PrivateRoute path="/contact" component={Contact} /> : false}
+                  {CURRENT_USER_ID ? <PrivateRoute path="/listplaces" component={ListPlaces} /> : false}
+                  {CURRENT_USER_ID ? <PrivateRoute path="/addplace" component={PlaceForm} /> : false}
+                  {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+                    ? <PrivateRoute path="/userspanel" component={UsersPanel} /> : false}
+                  {(CURRENT_USER_ID && CURRENT_USER.role === 'moderator') || (CURRENT_USER_ID && CURRENT_USER.role === 'admin')
+                    ? <PrivateRoute path="/placespanel" component={PlacesPanel} /> : false}
+                </Switch>
+              </ScrollToTop>
+            </motion.div>
+          </AnimatePresence>
+        </Router>
+      </div>
     </>
   );
 }

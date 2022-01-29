@@ -1,11 +1,12 @@
 import React, {
-  useContext, useEffect, useRef,
+  useContext, useRef,
 } from 'react';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_navbar.scss';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { AccessibleInterfaceContext } from '../../contexts/AccessibleInterfaceContext';
 
 function logOut() {
   window.localStorage.removeItem('CURRENT_USER');
@@ -17,6 +18,7 @@ function Navbar() {
   const currentUser = useContext(CurrentUserContext);
   const xButton = useRef(null);
   const navbarList = useRef(null);
+  const { isAccessibleInterface } = useContext(AccessibleInterfaceContext);
   const { t } = useTranslation();
 
   const toggleNavbarList = () => {
@@ -26,7 +28,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar">
+      <div className={isAccessibleInterface ? 'navbar accessible-interface-navbar' : 'navbar'}>
         <div className="button-x-navbar-conainer">
           <svg className="button-x-navbar" alt="button-navbar error" src="../../assets/burger_icon.svg" ref={xButton} onClick={toggleNavbarList} />
         </div>

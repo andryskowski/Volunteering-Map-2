@@ -4,8 +4,10 @@
     
 }
 
-.accessible-interface{
-    font-size: 1.4em;
+.accessible-interface-navbar{
+    font-size: 1.2em;
+    color: white !important;
+    background-color: navy !important;
     @media only screen and (max-width: 1400px) {
         font-size: 1.2em;
     }

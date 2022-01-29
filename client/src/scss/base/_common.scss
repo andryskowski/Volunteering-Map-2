@@ -1,11 +1,17 @@
 body{
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,700&display=swap');
 font-family: 'Lato', sans-serif;
-font-size: 1.3em;
+font-size: 1.1em;
 margin: 0;
 background-color: #d0efff;
 overflow-x: hidden;
 color: navy;
+}
+
+.accessible-interface{
+    font-size: 1.3em !important;
+    color: rgb(1, 1, 73) !important;
+    background-color: rgb(205, 234, 243) !important;
 }
 
 a{
@@ -173,9 +179,43 @@ input[type=submit]{
 
 }
 
-.container-button-changelang{
-    position: absolute;
-    top: 50px;
-    right: 50px;
+.fixed-buttons{
+    position: fixed;
+    top: 75px;
+    right: 55px;
     z-index: 99999999;
+    display: flex;
+    
+    & > * {
+        margin: 5px;
+        
+    }
+
+    .button-changelang{
+        background-image: url("../../assets/fixed-buttons/gb.svg");
+        width: 70px;
+        height: 35px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.4em;
+        border-color: rgb(255, 216, 157);
+    }
+
+    .button-changeinterface{
+        background-image: url("../../assets/fixed-buttons/eye.svg");
+        width: 70px;
+        height: 35px;
+        border-radius: 8px;
+        background-color: rgb(255, 235, 205);
+        border-color: rgb(255, 216, 157);
+    }
+
+}
+
+.flag-poland{
+    background-image: url("../../assets/fixed-buttons/pl.svg") !important;
+}
+
+.flag-gb{
+    background-image: url("../../assets/fixed-buttons/gb.svg") !important;
 }

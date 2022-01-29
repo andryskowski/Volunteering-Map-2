@@ -9,6 +9,7 @@ import yellowPin from '../../../assets/gps4.svg';
 import greenPin from '../../../assets/gps5.svg';
 import bluePin from '../../../assets/gps6.svg';
 import { PlacesContext } from '../../../contexts/PlacesContext';
+import { AccessibleInterfaceContext } from '../../../contexts/AccessibleInterfaceContext';
 
 const setPinColor = (place) => {
   if (place.category === 'zwierzeta') return purplePin;
@@ -21,9 +22,10 @@ const setPinColor = (place) => {
 };
 
 const MyIcon = (place) => {
+  const { isAccessibleInterface } = useContext(AccessibleInterfaceContext);
   const icon = L.icon({
     iconUrl: setPinColor(place),
-    iconSize: [40, 60],
+    iconSize: isAccessibleInterface ? [50, 70] : [40, 60],
     iconAnchor: [12.5, 41],
     popupAnchor: [0, -41],
   });
@@ -32,7 +34,7 @@ const MyIcon = (place) => {
 
 function MarkerComponent(props) {
   const PLACES = useContext(PlacesContext);
-
+  
   return (
     <>
       {PLACES.filter((place) => place.statusPlace === 'added').map((place) => (
