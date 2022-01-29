@@ -41,14 +41,14 @@ function App() {
     if (i18next.resolvedLanguage === 'en')
     {
       i18next.changeLanguage('pl');
-      buttonChangeLanguage.current.classList.add('flag-gb');
       buttonChangeLanguage.current.classList.remove('flag-poland');
+      buttonChangeLanguage.current.classList.add('flag-gb');
     }
     else if (i18next.resolvedLanguage === 'pl')
     {
       i18next.changeLanguage('en');
-      buttonChangeLanguage.current.classList.add('flag-poland');
       buttonChangeLanguage.current.classList.remove('flag-gb');
+      buttonChangeLanguage.current.classList.add('flag-poland');
     }
   };
 
@@ -79,7 +79,12 @@ function App() {
 
               <div className="fixed-buttons">
                 <div className="container-button-changelang">
-                  <button ref={buttonChangeLanguage} onClick={() => { changeLang(); }} className="button-changelang" />
+                  <button
+                    ref={buttonChangeLanguage}
+                    onClick={() => { changeLang(); }}
+                    className={i18next.resolvedLanguage === 'pl' ? 'button-changelang flag-gb'
+                      : 'button-changelang flag-poland'} 
+                  />
                 </div>
                 <div className="container-button-changeinterface">
                   <button onClick={() => { changeInterface(); }} className="button-changeinterface" />

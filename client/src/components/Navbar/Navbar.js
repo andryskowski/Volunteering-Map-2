@@ -47,11 +47,13 @@ function Navbar() {
           <Link to="/messagespanel"><li>{t('Navbar.9')}</li></Link>
           <Link to={`/edit/${currentUser.userInfo._id}/`}><li>{t('Navbar.10')}</li></Link>
           <li onClick={logOut}>{t('Navbar.11')}</li>
-          <div className="small-profilephoto-container">
-            <div>
-              <img width="35px" height="35px" src={currentUser.userInfo.profilePhoto} alt="profile img" />
+          {isAccessibleInterface ? null : (
+            <div className="small-profilephoto-container">
+              <div>
+                <img width="35px" height="35px" src={currentUser.userInfo.profilePhoto} alt="profile img" />
+              </div>
             </div>
-          </div>
+          )}
         </ul>
       </div>
     </>

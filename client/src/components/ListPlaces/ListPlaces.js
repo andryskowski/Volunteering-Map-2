@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useContext, useEffect } from 'react';
+import React, {
+  useState, useContext, useEffect, useRef, 
+} from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import '../../scss/base/_list-places.scss';
@@ -15,6 +17,8 @@ function ListPlaces() {
   const PLACES = useContext(PlacesContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
+  const refSelectSort = useRef(null);
+  const [sortBy, setSortBy] = useState('-');
   const [sortedPlaces, setSortedPlaces] = useState([...PLACES]);
   const { t } = useTranslation();
   
@@ -28,20 +32,6 @@ function ListPlaces() {
     if (event.target.name === 'search-name') {
       setFilteredName(event.target.value);
     }
-    if (event.target.name === 'sort') {
-      if (event.target.value === 'oldest') {
-        const sortedPlacesByOldest = PLACES?.sort((a, b) => new Date(a.date) - new Date(b.date));
-        setSortedPlaces(sortedPlacesByOldest);
-        console.log(sortedPlaces);
-      } else if (event.target.value === 'newest') {
-        const sortedPlacesByNewest = PLACES?.sort((a, b) => new Date(b.date) - new Date(a.date));
-        setSortedPlaces(sortedPlacesByNewest);
-        console.log(sortedPlaces);
-      } else if (event.target.value === '-') {
-        setSortedPlaces(PLACES);
-        console.log(sortedPlaces);
-      }
-    }
   }
 
   function changeFiltres() {
@@ -53,7 +43,17 @@ function ListPlaces() {
     return ((place) => place);
   }
 
-  const currentPlaces = sortedPlaces?.filter(changeFiltres()).map((place) => (
+  const sortPlaces = () => {
+    if (sortBy === 'oldest') {
+      return PLACES?.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } if (sortBy === 'newest') {
+      return PLACES?.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } if (sortBy === '-') {
+      return PLACES;
+    }
+  };
+
+  const currentPlaces = sortPlaces().filter(changeFiltres()).map((place) => (
     <div className="place-list-item" key={place._id}>
       <div>
         <Link to={place._id}><img className="place-img" src={place.img} alt="place-img" width="100" height="100" /></Link>
@@ -144,7 +144,7 @@ function ListPlaces() {
           </label>
           <label htmlFor="sort">
             {t('List of places.12')}
-            <select id="sort" name="sort" onChange={handleChange}>
+            <select onChange={(e) => setSortBy(e.target.value)} id="sort" name="sort">
               <option value="-">--</option>
               <option value="newest">{t('List of places.13')}</option>
               <option value="oldest">{t('List of places.14')}</option>
