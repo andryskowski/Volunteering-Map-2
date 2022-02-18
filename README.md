@@ -3,7 +3,7 @@ I create this app for my dyploma (it's still in progress)
 
 screenshots:
 
-Polish language version 🇵🇱 :
+• 🇵🇱 Polish language version:
 
 
 ![screen1](https://user-images.githubusercontent.com/52753339/148960332-17850b8a-bbdc-4408-8b64-0ab13bef8b86.PNG)
@@ -28,7 +28,7 @@ Polish language version 🇵🇱 :
 ![screen20](https://user-images.githubusercontent.com/52753339/148960417-060cd5c0-78be-4df5-a2dd-de7a86589c1a.PNG)
 ![screen21](https://user-images.githubusercontent.com/52753339/148960419-cc543bb2-d2fd-4cf3-9ca4-d260be373073.PNG)
 
-English language version 🇬🇧 :
+• 🇬🇧 English language version  :
 
 
 ![screen_1_eng](https://user-images.githubusercontent.com/52753339/154688095-6821c59f-443e-48ea-b5e4-5c0df2e3d44b.PNG)
