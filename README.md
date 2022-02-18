@@ -5,6 +5,7 @@ screenshots:
 
 Polish language version 🇵🇱 :
 
+
 ![screen1](https://user-images.githubusercontent.com/52753339/148960332-17850b8a-bbdc-4408-8b64-0ab13bef8b86.PNG)
 ![screen2](https://user-images.githubusercontent.com/52753339/148960336-c4fd28ab-d578-4206-812e-f15d63f1acd0.PNG)
 ![screen3](https://user-images.githubusercontent.com/52753339/148960341-8a39a9ae-7e3d-4d5b-aa35-d37020dfabed.PNG)
@@ -28,6 +29,7 @@ Polish language version 🇵🇱 :
 ![screen21](https://user-images.githubusercontent.com/52753339/148960419-cc543bb2-d2fd-4cf3-9ca4-d260be373073.PNG)
 
 English language version 🇬🇧 :
+
 
 ![screen_1_eng](https://user-images.githubusercontent.com/52753339/154688095-6821c59f-443e-48ea-b5e4-5c0df2e3d44b.PNG)
 ![screen_2_eng](https://user-images.githubusercontent.com/52753339/154688097-08f5d97c-b7f6-4ba7-884c-38a15f198899.PNG)
