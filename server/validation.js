@@ -19,7 +19,7 @@ const loginValidation = data => {
         email: Joi.string()
         .min(3)
         .required()
-        .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+        .email({ minDomainSegments: 2, tlds: { allow: false } }),
         password: Joi.string().min(6).required(),
     });
     return schema.validate(data);

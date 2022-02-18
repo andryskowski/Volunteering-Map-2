@@ -17,9 +17,7 @@ function ListPlaces() {
   const PLACES = useContext(PlacesContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
-  const refSelectSort = useRef(null);
   const [sortBy, setSortBy] = useState('-');
-  const [sortedPlaces, setSortedPlaces] = useState([...PLACES]);
   const { t } = useTranslation();
   
   function handleChange(event) {

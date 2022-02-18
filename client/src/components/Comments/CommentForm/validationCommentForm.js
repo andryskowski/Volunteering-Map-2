@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
 export const validationCommentForm = (subject, message) => {
-  console.log(subject, message);
   if (subject === '') { alert('Pole tematu nie moze byc puste.'); }
   else if (message === '') { alert('Pole wiadomosci nie moze byc puste.'); }
   else if (subject.length > 30) { alert('Temat komentarza nie moze byc dluzszy niz 30 znakow'); }

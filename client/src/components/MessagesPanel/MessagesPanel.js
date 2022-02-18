@@ -10,7 +10,7 @@ import '../../scss/base/_messages-panel.scss';
 import '../../scss/base/_common.scss';
 import Pagination from '../Pagination/Pagination';
 
-function MessagesPanel(props) {
+function MessagesPanel() {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
   const [conversationsFromDB, setConversationsFromDB] = useState(null);
@@ -110,7 +110,7 @@ function MessagesPanel(props) {
                   && unreadConversations
                     .filter((conv) => conv._id === conversation._id)
                     .some((conv) => conv.lastMessage.sender !== CURRENT_USER._id) ? (
-                      <h5 className="fontWeightBold">Nowe wiadomości</h5>
+                      <h5 className="fontWeightBold">{t('MessagesPanel.4')}</h5>
                     ) : (
                       <h5 className="text-no-newmessages">{t('MessagesPanel.3')}</h5>
                     )}

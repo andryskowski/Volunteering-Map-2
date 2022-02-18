@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  render, fireEvent, screen, waitFor, 
+  render, waitFor, 
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CommentsPanel from './CommentsPanel';
@@ -16,12 +16,3 @@ test('comments render properly', async () => {
 
   expect(textNode).toBeInTheDocument(); 
 });
-
-test('comments not render properly', async () => {
-  jest.spyOn(global, 'fetch').mockImplementation((() => Promise.resolve({
-    json: () => Promise.resolve({ error: 'sth went wrong' }),
-  })));
-  const { getByText } = render(<CommentsPanel />);
-  const textNode = await waitFor(() => getByText('Error: cannot connect to Comments.'));
-  expect(textNode).toBeInTheDocument(); 
-}, []);

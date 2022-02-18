@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import '../../scss/base/_common.scss';
 import '../../scss/base/_contact.scss';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { validation } from './validationContact';
 
 function Contact() {
   const CURRENT_USER = useContext(CurrentUserContext);
@@ -11,16 +12,9 @@ function Contact() {
   const [message, setMessage] = useState('');
   const { t } = useTranslation();
 
-  const validation = () => {
-    if (subject === '') { alert('Pole tematu nie moze byc puste.'); }
-    else if (message === '') { alert('Pole wiadomosci nie moze byc puste.'); }
-    else { return true; }
-    return false;
-  };
-
   function sendEmail(e) {
     e.preventDefault();
-    const isValidated = validation();
+    const isValidated = validation(subject, message);
     if (isValidated === true) {
       emailjs.sendForm('service_ht9ycji', 'template_s3vzm0j', e.target, 'user_sUt0KQRlhNXDQuf9BzGLr');
       alert('Wiadomosc zostala wyslana do administratora.');

@@ -62,12 +62,12 @@
         "4": "Strona internetowa:",
         "5": "E-mail:",
         "6": "Adres:",
-        "10": "Podgląd na mapie:",
-        "11": "Kategoria",
-        "12": "Opis:",
-        "13": "Wyślij",
-        "14": "Uwaga!",
-        "15": "Pamiętaj, że dodane przez Ciebie miejsce nie będzie od razu widoczne na mapie. Najpierw musi zostać zaakceptowane przez moderatora. W przypadku błędnego wyświetlania miejsca pomocy na mapie, bez obaw, każda lokalizacja zostaje potwierdzona przez moderatora."
+        "7": "Podgląd na mapie:",
+        "8": "Kategoria",
+        "9": "Opis:",
+        "10": "Wyślij",
+        "11": "Uwaga!",
+        "12": "Pamiętaj, że dodane przez Ciebie miejsce nie będzie od razu widoczne na mapie. Najpierw musi zostać zaakceptowane przez moderatora. W przypadku błędnego wyświetlania miejsca pomocy na mapie, bez obaw, każda lokalizacja zostaje potwierdzona przez moderatora."
     },
     "Contact": {
         "1": "Kontakt",
@@ -115,7 +115,7 @@
         "1": "Witaj"
     },
     "Legend": {
-        "1": "Legend",
+        "1": "Legenda",
         "2": "kategoria dzieci",
         "3": "kategoria zwierzęta",
         "4": "kategoria inwalidzi",
