@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { getComments, getUser } from '../../actions/FetchData';
 import '../../scss/base/_comments.scss';
 import CommentForm from './CommentForm/CommentForm';
+import '../../scss/base/_common.scss';
+import Loader from '../../assets/oval.svg';
 
 function Comments({ placeId }) {
   const [comments, setComments] = useState([]);
@@ -34,7 +36,8 @@ function Comments({ placeId }) {
       setComments(commentsFromDb);
 
       // get number of comments fot this place
-      comments.filter((comment) => comment.placeId === placeId)
+      comments
+        .filter((comment) => comment.placeId === placeId)
         .map((comment, index) => setNumberComments(index + 1));
     });
   }, [comments, placeId]);
@@ -43,46 +46,55 @@ function Comments({ placeId }) {
     <>
       <h1>
         {t('Comments.1')}
-        {' '}
-        <span>
-          (
-          {commentsNumber}
-          )
-        </span>
         :
       </h1>
       <div className="comments">
-        {comments.filter((comment) => comment.placeId === placeId).reverse().map((comment) => (
-          <div key={comment._id} className="comment">
-            <Link to={comment.authorId} userId={comment.authorId}>
-              <div className="profilephoto-container">
-                <img className="profilephoto-comment" src={comment.author.profilePhoto} width="100px" height="100px" alt="no profilePhoto" />
+        {comments.length !== 0 ? (
+          comments
+            .filter((comment) => comment.placeId === placeId)
+            .reverse()
+            .map((comment) => (
+              <div key={comment._id} className="comment">
+                <Link to={comment.authorId} userId={comment.authorId}>
+                  <div className="profilephoto-container">
+                    <img
+                      className="profilephoto-comment"
+                      src={comment.author.profilePhoto}
+                      width="100px"
+                      height="100px"
+                      alt="no profilePhoto"
+                    />
+                  </div>
+                </Link>
+                <b>
+                  <Link to={comment.authorId} userId={comment.authorId}>
+                    <p style={setRoleStyle(comment.author.role)}>{comment.author.name}</p>
+                  </Link>
+                </b>
+                <p>
+                  <b>{t('Comments.2')}</b> 
+                  {' '}
+                  {comment.subject}
+                </p>
+                <p>
+                  <b>{t('Comments.3')}</b> 
+                  {' '}
+                  {comment.message}
+                </p>
+                <p>
+                  <b>{t('Comments.4')}</b> 
+                  {' '}
+                  {comment.date.substring(0, 10)}
+                  {', o '}
+                  {comment.date.substring(11, 16)}
+                </p>
               </div>
-            </Link>
-            <b>
-              <Link to={comment.authorId} userId={comment.authorId}>
-                <p style={setRoleStyle(comment.author.role)}>{comment.author.name}</p>
-              </Link>
-            </b>
-            <p>
-              <b>{t('Comments.2')}</b>
-              {' '}
-              {comment.subject}
-            </p>
-            <p>
-              <b>{t('Comments.3')}</b>
-              {' '}
-              {comment.message}
-            </p>
-            <p>
-              <b>{t('Comments.4')}</b>
-              {' '}
-              {comment.date.substring(0, 10)}
-              {', o '}
-              {comment.date.substring(11, 16)}
-            </p>
+            ))
+        ) : (
+          <div className="loader-container">
+            <img src={Loader} alt="loader not found" />
           </div>
-        ))}
+        )}
       </div>
       <CommentForm placeId={placeId} />
     </>

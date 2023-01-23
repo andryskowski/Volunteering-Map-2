@@ -220,3 +220,10 @@ input[type=submit]{
 .flag-gb{
     background-image: url("../../assets/fixed-buttons/gb.svg") !important;
 }
+
+.loader-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}

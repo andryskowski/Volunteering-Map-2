@@ -1,5 +1,5 @@
 import React, {
-  useContext, useEffect, useState, useRef, 
+  useContext, useEffect, useState, useRef, lazy, Suspense, 
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -9,11 +9,12 @@ import { getConversations, getLastMessage } from '../../actions/FetchData';
 import '../../scss/base/_messages-panel.scss';
 import '../../scss/base/_common.scss';
 import Pagination from '../Pagination/Pagination';
+import Loader from '../../assets/oval.svg';
 
 function MessagesPanel() {
   const CURRENT_USER_CONTEXT = useContext(CurrentUserContext);
   const CURRENT_USER = CURRENT_USER_CONTEXT.userInfo;
-  const [conversationsFromDB, setConversationsFromDB] = useState(null);
+  const [conversationsFromDB, setConversationsFromDB] = useState([]);
   const [unreadConversations, setUnreadConversations] = useState(null);
   const USERS = useContext(UsersContext);
   const conversationBox = useRef(null);
@@ -54,7 +55,7 @@ function MessagesPanel() {
   // Get unread conversations
   useEffect(() => {
     const fetchMyData = async () => {
-      const unreadConvs = await conversationsFromDB?.filter(
+      const unreadConvs = conversationsFromDB?.filter(
         (conv) => conv.lastMessage.receiverHasRead === false,
       );
       setUnreadConversations(unreadConvs);
@@ -101,34 +102,42 @@ function MessagesPanel() {
       <div className="page-container">
         <h1>{t('MessagesPanel.1')}</h1>
         <div className="conversations-box">
-          {conversationsDefinitive?.map((conversation) => (
-            <div className="conversation-box" ref={conversationBox}>
-              {friendInfo(conversation)}
-              <div className="second-part">
-                <h6>
-                  {unreadConversations?.some((conv) => conv._id === conversation._id)
-                  && unreadConversations
-                    .filter((conv) => conv._id === conversation._id)
-                    .some((conv) => conv.lastMessage.sender !== CURRENT_USER._id) ? (
-                      <h5 className="fontWeightBold">{t('MessagesPanel.4')}</h5>
-                    ) : (
-                      <h5 className="text-no-newmessages">{t('MessagesPanel.3')}</h5>
-                    )}
-                  <h2>
-                    {t('MessagesPanel.5')}
-                    {' '}
-                    <span className="last-message">{conversation.lastMessage.text}</span>
-                  </h2>
-                  {' '}
-                  {t('MessagesPanel.6')} 
-                  {' '}
-                  {conversation.updatedAt.substring(0, 10)}
-                  {' '}
-                  {conversation.updatedAt.substring(11, 19)}
-                </h6>
+          <Suspense fallback={<div>Loading.....</div>}>
+            {conversationsFromDB.length !== 0 ? (
+              conversationsDefinitive?.map((conversation) => (
+                <div className="conversation-box" ref={conversationBox}>
+                  {friendInfo(conversation)}
+                  <div className="second-part">
+                    <h6>
+                      {unreadConversations?.some((conv) => conv._id === conversation._id)
+                      && unreadConversations
+                        .filter((conv) => conv._id === conversation._id)
+                        .some((conv) => conv.lastMessage.sender !== CURRENT_USER._id) ? (
+                          <h5 className="fontWeightBold">{t('MessagesPanel.4')}</h5>
+                        ) : (
+                          <h5 className="text-no-newmessages">{t('MessagesPanel.3')}</h5>
+                        )}
+                      <h2>
+                        {t('MessagesPanel.5')}
+                        {' '}
+                        <span className="last-message">{conversation.lastMessage.text}</span>
+                      </h2>
+                      {' '}
+                      {t('MessagesPanel.6')} 
+                      {' '}
+                      {conversation.updatedAt.substring(0, 10)}
+                      {' '}
+                      {conversation.updatedAt.substring(11, 19)}
+                    </h6>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="loader-container">
+                <img src={Loader} alt="loader not found" />
               </div>
-            </div>
-          ))}
+            )}
+          </Suspense>
         </div>
         <Pagination
           itemsPerPage={itemsPerPage}
