@@ -1,5 +1,5 @@
 # Volunteering-Map-2
-I create this app for my dyploma (it's still in progress)
+I created this app for my dyploma.
 
 screenshots:
 
